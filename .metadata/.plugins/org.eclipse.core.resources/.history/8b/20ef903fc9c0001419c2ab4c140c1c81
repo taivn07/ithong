@@ -1,0 +1,7 @@
+package com.example.ithonge.adapter;
+
+import android.widget.BaseAdapter;
+
+public class CustomGridViewAdapter extends BaseAdapter{
+
+}

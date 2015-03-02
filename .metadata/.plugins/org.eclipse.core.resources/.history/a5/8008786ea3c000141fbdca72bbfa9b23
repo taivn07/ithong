@@ -1,0 +1,35 @@
+package com.example.ithonge;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import android.widget.ListView;
+
+
+public class MainActivity extends Activity {
+	private DrawerLayout mDrawerLayout;
+	private ListView mListView;
+	private ActionBarDrawerToggle mActionBarDrawerToggle;
+	
+	private ArrayList<NavDrawerItem> mNavDrawerItems;
+	private NavDrawerListAdapter mNavDrawerListAdapter;
+	
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        //create sliding menu
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mListView = (ListView)findViewById(R.id.list_sliding_menu);
+        mNavDrawerItems = new ArrayList<NavDrawerItem>();
+        mNavDrawerItems.add(new NavDrawerItem("title1",R.drawable.ic_launcher));
+        mNavDrawerItems.add(new NavDrawerItem("title2",R.drawable.ic_launcher));
+        mNavDrawerItems.add(new NavDrawerItem("title3",R.drawable.ic_launcher));
+        mNavDrawerItems.add(new NavDrawerItem("title4",R.drawable.ic_launcher));
+    }
+}
