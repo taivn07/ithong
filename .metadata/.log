@@ -62,3 +62,6 @@ org.eclipse.core.internal.resources.ResourceException: Resource '/iThonge' alrea
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
 !SUBENTRY 1 org.eclipse.core.resources 4 374 2015-03-02 10:44:40.503
 !MESSAGE Resource '/iThonge' already exists.
+
+!ENTRY org.eclipse.ui 2 2 2015-03-02 10:53:02.610
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
