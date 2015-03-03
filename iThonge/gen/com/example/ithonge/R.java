@@ -77,22 +77,24 @@ public final class R {
         public static final int hv6=0x7f020020;
         public static final int hv7=0x7f020021;
         public static final int hv8=0x7f020022;
-        public static final int ic_launcher=0x7f020023;
-        public static final int ico_about=0x7f020024;
-        public static final int ico_bookmark=0x7f020025;
-        public static final int ico_bookmarked=0x7f020026;
-        public static final int ico_menu=0x7f020027;
-        public static final int ico_menubookmark=0x7f020028;
-        public static final int ico_search=0x7f020029;
-        public static final int ico_searchonlinex=0x7f02002a;
-        public static final int ico_setting=0x7f02002b;
-        public static final int ico_synchronize=0x7f02002c;
-        public static final int ico_tag=0x7f02002d;
-        public static final int ico_tutorial=0x7f02002e;
-        public static final int ico_update=0x7f02002f;
-        public static final int icon=0x7f020030;
-        public static final int loading=0x7f020031;
-        public static final int logo_menu=0x7f020032;
+        public static final int ic_action_main=0x7f020023;
+        public static final int ic_action_search=0x7f020024;
+        public static final int ic_launcher=0x7f020025;
+        public static final int ico_about=0x7f020026;
+        public static final int ico_bookmark=0x7f020027;
+        public static final int ico_bookmarked=0x7f020028;
+        public static final int ico_menu=0x7f020029;
+        public static final int ico_menubookmark=0x7f02002a;
+        public static final int ico_search=0x7f02002b;
+        public static final int ico_searchonlinex=0x7f02002c;
+        public static final int ico_setting=0x7f02002d;
+        public static final int ico_synchronize=0x7f02002e;
+        public static final int ico_tag=0x7f02002f;
+        public static final int ico_tutorial=0x7f020030;
+        public static final int ico_update=0x7f020031;
+        public static final int icon=0x7f020032;
+        public static final int loading=0x7f020033;
+        public static final int logo_menu=0x7f020034;
     }
     public static final class id {
         public static final int drawer_layout=0x7f090000;
@@ -103,6 +105,7 @@ public final class R {
         public static final int icon=0x7f090003;
         public static final int image=0x7f090008;
         public static final int list_sliding_menu=0x7f090002;
+        public static final int seach_icon=0x7f09000a;
         public static final int seard=0x7f090009;
         public static final int title=0x7f090004;
     }
@@ -120,14 +123,17 @@ public final class R {
     }
     public static final class menu {
         public static final int main=0x7f080000;
+        public static final int main_activity_action=0x7f080001;
     }
     public static final class string {
         public static final int action_settings=0x7f060002;
-        public static final int action_websearch=0x7f060005;
+        public static final int action_websearch=0x7f060007;
         public static final int app_name=0x7f060000;
-        public static final int app_not_available=0x7f060006;
-        public static final int drawer_close=0x7f060004;
-        public static final int drawer_open=0x7f060003;
+        public static final int app_not_available=0x7f060008;
+        public static final int choose=0x7f060004;
+        public static final int drawer_close=0x7f060006;
+        public static final int drawer_open=0x7f060005;
         public static final int hello_world=0x7f060001;
+        public static final int search_title=0x7f060003;
     }
 }

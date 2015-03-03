@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
 	private NavDrawerListAdapter mDAdapter;
 	private ArrayList<NavDrawerItem> listNavDrawerItems;
 
-	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mDrawerTitles;
 	// private TypedArray mDrawerIcons;
@@ -47,9 +46,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		mTitle = mDrawerTitle = getTitle();
+		mTitle = getTitle();
 		mDrawerTitles = getResources().getStringArray(R.array.drawer_titles);
-		mDrawerIcons = new int[] { R.drawable.ico_synchronize, R.drawable.ico_search, R.drawable.ico_tutorial, R.drawable.ico_about,
+		mDrawerIcons = new int[] { R.drawable.ic_action_main, R.drawable.ico_synchronize, R.drawable.ico_search, R.drawable.ico_tutorial, R.drawable.ico_about,
 				R.drawable.ico_bookmark };
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_sliding_menu);
@@ -88,7 +87,7 @@ public class MainActivity extends Activity {
 			}
 
 			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(mDrawerTitle);
+				getActionBar().setTitle(R.string.choose);
 				invalidateOptionsMenu(); // creates call to
 											// onPrepareOptionsMenu()
 			}
@@ -103,7 +102,7 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main, menu);
+		inflater.inflate(R.menu.main_activity_action, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -142,7 +141,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	/* The click listner for ListView in the navigation drawer */
+	/* The click listener for ListView in the navigation drawer */
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
