@@ -16,6 +16,16 @@
         <item>Giới thiệu</item>
         <item>Lưu trữ</item>
     </string-array>
+    <string-array name="list_action_item">
+        <item>Hệ thống báo hiệu</item>
+        <item>Người tham gia giao thông</item>
+        <item>Lưu thông dừng đỗ</item>
+        <item>Giấy tờ</item>
+        <item>Phương tiện</item>
+        <item>Tốc độ</item>
+        <item>Mũ bảo hiểm</item>
+        <item>Khác</item>
+    </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
