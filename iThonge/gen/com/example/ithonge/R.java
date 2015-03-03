@@ -99,27 +99,30 @@ public final class R {
     public static final class id {
         public static final int drawer_layout=0x7f090000;
         public static final int frame_container=0x7f090001;
-        public static final int grid_transport=0x7f090007;
-        public static final int hello=0x7f090005;
-        public static final int help1=0x7f090006;
-        public static final int icon=0x7f090003;
-        public static final int image=0x7f090008;
+        public static final int grid_transport=0x7f090009;
+        public static final int hello=0x7f090007;
+        public static final int help1=0x7f090008;
+        public static final int icon=0x7f090005;
+        public static final int image=0x7f09000a;
+        public static final int imageView1=0x7f090003;
         public static final int list_sliding_menu=0x7f090002;
-        public static final int seach_icon=0x7f09000a;
-        public static final int seard=0x7f090009;
-        public static final int title=0x7f090004;
+        public static final int seach_icon=0x7f09000c;
+        public static final int seard=0x7f09000b;
+        public static final int textView1=0x7f090004;
+        public static final int title=0x7f090006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_splash=0x7f030001;
-        public static final int drawer_list_item=0x7f030002;
-        public static final int fragment_about=0x7f030003;
-        public static final int fragment_bookmark=0x7f030004;
-        public static final int fragment_help=0x7f030005;
-        public static final int fragment_home=0x7f030006;
-        public static final int fragment_planet=0x7f030007;
-        public static final int fragment_search=0x7f030008;
-        public static final int fragment_sync=0x7f030009;
+        public static final int custom_row=0x7f030002;
+        public static final int drawer_list_item=0x7f030003;
+        public static final int fragment_about=0x7f030004;
+        public static final int fragment_bookmark=0x7f030005;
+        public static final int fragment_help=0x7f030006;
+        public static final int fragment_home=0x7f030007;
+        public static final int fragment_planet=0x7f030008;
+        public static final int fragment_search=0x7f030009;
+        public static final int fragment_sync=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f080000;
