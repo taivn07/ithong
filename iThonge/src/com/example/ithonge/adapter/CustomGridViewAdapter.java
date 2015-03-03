@@ -22,8 +22,8 @@ public class CustomGridViewAdapter extends BaseAdapter {
 		if (convertView == null) { // if it's not recycled, initialize some
 									// attributes
 			imageView = new ImageView(context);
-			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			//imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+			//imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageView.setPadding(8, 8, 8, 8);
 		} else {
 			imageView = (ImageView) convertView;

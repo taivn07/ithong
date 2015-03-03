@@ -1,6 +1,7 @@
 package com.example.ithonge.activity;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,15 +26,20 @@ public class HomeFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 		mGridView = (GridView) rootView.findViewById(R.id.grid_transport);
-		mThumn = new int[] { R.drawable.btn_oto, R.drawable.btn_xedap, R.drawable.btn_moto, R.drawable.btn_oto, R.drawable.btn_xedap,
-				R.drawable.btn_moto };
+		mThumn = new int[] { R.drawable.btn_oto, R.drawable.btn_xedap, R.drawable.btn_moto, R.drawable.btn_hanhlangduongbo,
+				R.drawable.btn_nguoidibo, R.drawable.btn_viphamkhac, R.drawable.btn_maykeo, R.drawable.btn_qtxp };
 		mGridView.setAdapter(new CustomGridViewAdapter(getActivity(), mThumn));
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+				startListItemAct(position);
 			}
 		});
 		return rootView;
+	}
+
+	private void startListItemAct(int position) {
+		Intent intent = new Intent(getActivity(), ListActionAct.class);
+		getActivity().startActivity(intent);
 	}
 }

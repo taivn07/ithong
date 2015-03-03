@@ -1,20 +1,16 @@
 package com.example.ithonge.activity;
 
 import java.util.ArrayList;
-import java.util.Locale;
-
-import com.example.ithonge.R;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,10 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.ithonge.R;
+import com.example.ithonge.adapter.NavDrawerListAdapter;
+import com.example.models.NavDrawerItem;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
@@ -46,6 +45,29 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		/**
+		 * dungna.bka edit navigarion overlay on action bar Tuesday, March 03,
+		 * 2015
+		 */
+		// Inflate the "decor.xml"
+		/*
+		 * comment by dungna.bka LayoutInflater inflater = (LayoutInflater)
+		 * getSystemService(Context.LAYOUT_INFLATER_SERVICE); DrawerLayout
+		 * drawer = (DrawerLayout) inflater.inflate(R.layout.decor, null); //
+		 * "null" is important.
+		 * 
+		 * // HACK: "steal" the first child of decor view ViewGroup decor =
+		 * (ViewGroup) getWindow().getDecorView(); View child =
+		 * decor.getChildAt(0); decor.removeView(child); FrameLayout container =
+		 * (FrameLayout) drawer.findViewById(R.id.drawer_content); // This is
+		 * the container we defined just now. container.addView(child);
+		 * 
+		 * // Make the drawer replace the first child decor.addView(drawer);
+		 */// endcoment
+		/**
+		 * end edit-----------------------------------------------------
+		 */
+
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerTitles = getResources().getStringArray(R.array.drawer_titles);
@@ -190,20 +212,6 @@ public class MainActivity extends Activity {
 			mDrawerLayout.closeDrawer(mDrawerList);
 
 		}
-		// update the main content by replacing fragments
-		// Fragment fragment = new PlanetFragment();
-		// Bundle args = new Bundle();
-		// args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-		// fragment.setArguments(args);
-		//
-		// FragmentManager fragmentManager = getFragmentManager();
-		// fragmentManager.beginTransaction().replace(R.id.frame_container,
-		// fragment).commit();
-		//
-		// // update selected item and title, then close the drawer
-		// mDrawerList.setItemChecked(position, true);
-		// setTitle(mDrawerTitles[position]);
-		// mDrawerLayout.closeDrawer(mDrawerList);
 	}
 
 	@Override
