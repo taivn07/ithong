@@ -145,7 +145,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public Cursor getAllFromTable(String tableName) {
-		String sql = "Select * from Groups";
+		String sql = "Select * from Violation_segments";
+		return mDatabase.rawQuery(sql, null);
+	}
+	
+	public Cursor getResultFromSQL(String sql){
 		return mDatabase.rawQuery(sql, null);
 	}
 
