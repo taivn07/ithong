@@ -6,7 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="search_title">Search Here</string>
     <string name="choose"> Menu</string>
-    
+    <!-- layout: list_action : -->
+    <string name="choose_action">Chọn hành vi</string>
 
     <string-array name="drawer_titles">
         <item>Chức năng chính</item>
@@ -15,6 +16,16 @@
         <item>Hướng dẫn sử dụng</item>
         <item>Giới thiệu</item>
         <item>Lưu trữ</item>
+    </string-array>
+    <string-array name="list_vehicles">
+        <item>ô tô</item>
+        <item>Xe máy</item>
+        <item>Xe chuyên dùng - máy kéo</item>
+        <item>Xe đạp - Xe thô sơ</item>
+        <item>Người đi bộ</item>
+        <item>Hành lang đường bộ</item>
+        <item>Vi phạm khác</item>
+        <item>Quy trình xử phạt</item>
     </string-array>
     <string-array name="list_action_item">
         <item>Hệ thống báo hiệu</item>
