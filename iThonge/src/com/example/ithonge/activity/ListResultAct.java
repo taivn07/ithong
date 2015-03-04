@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListResultAdapter;
@@ -26,12 +27,20 @@ public class ListResultAct extends Activity {
 	// Database/LogTag
 	public static final String LOG_TAG = "ListResultAct";
 	private DatabaseHelper mDatabaseHelper;
+	private int optionPosition;
+	private int vehiclePosition;
+	private TextView optiontitle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_result);
+		optiontitle = (TextView) findViewById(R.id.tv_result_count);
+		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
+		optiontitle.setText(getResources().getString(R.string.tv_muc)+":   "+getResources().getStringArray(R.array.list_action_item)[optionPosition]);
+		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
+		getActionBar().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
 		// init local variables
 		mListResultItems = new ArrayList<ListResultItem>();
 		try {

@@ -71,6 +71,7 @@ public class ListActionAct extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Intent intent = new Intent(ListActionAct.this, ListResultAct.class);
+			intent.putExtra(Variables.TAG_OPTION_POSITION, position);
 			startActivity(intent);
 		}
 	}
