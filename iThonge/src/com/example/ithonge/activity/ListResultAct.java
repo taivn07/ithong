@@ -31,6 +31,7 @@ public class ListResultAct extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_result);
+		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
 		// init local variables
 		mListResultItems = new ArrayList<ListResultItem>();
 		try {

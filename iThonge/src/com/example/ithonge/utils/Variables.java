@@ -1,6 +1,9 @@
 package com.example.ithonge.utils;
 
 public class Variables {
+	//for Activity
+	//Main
+	public static final String TAG_VEHICLE_POSITION = "vehicle_position";
 	// Tag for Database
 	// Violation Table
 	public static final String TAG_ROW_ID = "rowid";
@@ -15,7 +18,10 @@ public class Variables {
 	public static final String TAG_ADDITIONAL_PENALTIES = "rowid";
 	public static final String TAG_GROUP_VALUE = "Group_Value";
 	public static final String TAG_TYPE_VALUE = "Type_Value";
-	
-	//Group Table
-	
+
+	// Group Table
+	public static final String TAG_GROUP_ID = "Group_ID";
+	public static final String TAG_GROUP_NAME = "Group_Name";
+	// public static final String TAG_GROUP_VALUE = "Group_Value";
+	public static final String TAG_SORT_VALUE = "SortValue";
 }
