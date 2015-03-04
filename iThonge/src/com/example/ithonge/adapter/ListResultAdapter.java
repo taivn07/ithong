@@ -3,31 +3,33 @@ package com.example.ithonge.adapter;
 import java.util.ArrayList;
 
 import com.example.ithonge.R;
-import com.example.models.ListInfoItem;
+import com.example.models.ListActionItem;
+import com.example.models.ListResultItem;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListInfoAdapter extends BaseAdapter {
-	private ArrayList<ListInfoItem> listInfoItem;
-	private LayoutInflater inflater;
+public class ListResultAdapter extends BaseAdapter {
+	private ArrayList<ListResultItem> mListResultItems;
 	private Context context;
+	private LayoutInflater inflater;
 
-	public ListInfoAdapter(Context context, ArrayList<ListInfoItem> listInfo) {
+	public ListResultAdapter(Context context, ArrayList<ListResultItem> listItems) {
 		this.context = context;
-		this.listInfoItem = listInfo;
-		this.inflater = null;
+		this.mListResultItems = listItems;
+		inflater = null;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return listInfoItem.size();
+		return mListResultItems.size();
 	}
 
 	@Override
@@ -49,16 +51,16 @@ public class ListInfoAdapter extends BaseAdapter {
 			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.list_info_item, null);
+			convertView = inflater.inflate(R.layout.list_result_item, null);
 		}
-		
-		TextView tvpos = (TextView) convertView.findViewById(R.id.lv_list_info_pos);
-		tvpos.setText(""+(1+position));
-		ImageView imgIcon = (ImageView) convertView.findViewById(R.id.lv_list_info_icon);
-		imgIcon.setImageResource(listInfoItem.get(position).getIcon());
-		TextView tvTitle = (TextView) convertView.findViewById(R.id.lv_list_info_title);
-		tvTitle.setText(listInfoItem.get(position).getTitle());
+		TextView btt = (TextView) convertView.findViewById(R.id.tv_list_result_icon);
+		btt.setText(""+(position+1));
+		TextView tvTitle = (TextView) convertView.findViewById(R.id.tv_list_result_title);
+		tvTitle.setText(mListResultItems.get(position).getTitle());
+		TextView tvMessage = (TextView) convertView.findViewById(R.id.tv_list_result_message);
+		tvMessage.setText(mListResultItems.get(position).getMessage());
 
 		return convertView;
 	}
+
 }
