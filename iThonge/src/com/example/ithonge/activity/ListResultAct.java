@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
+
 import android.app.SearchManager;
 import android.content.Context;
+
+import android.content.Intent;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +42,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	private DatabaseHelper mDatabaseHelper;
 	private int optionPosition;
 	private int vehiclePosition;
+
 	private TextView tvResultCount;
 
 	// search menu
@@ -49,18 +54,26 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	private ArrayList<ListKeyWordItem> mListKeyWordItems;
 	private ListSearchAdapter mListViewSearchAdapter;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_result);
-		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
+//<<<<<<< HEAD
+//		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
+//		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
+//		// edit by superstramp date: Thursday, March 05 2015
+//		// tvResultCount.setText(getResources().getString(R.string.tv_muc)+":   "+getResources().getStringArray(R.array.list_action_item)[optionPosition]);
+//		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
+//		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
+//		getActionBar().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//=======
 		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
-		// edit by superstramp date: Thursday, March 05 2015
-		// tvResultCount.setText(getResources().getString(R.string.tv_muc)+":   "+getResources().getStringArray(R.array.list_action_item)[optionPosition]);
 		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
-		getActionBar().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]+"  >>  "+getResources().getStringArray(R.array.list_action_item)[optionPosition]);
 
 		// init local variables
 		mListResultItems = new ArrayList<ListResultItem>();
@@ -71,7 +84,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		}
 
 		// create listview
-		mListResultItems = getResultFromGroupId(optionPosition);
+		mListResultItems = getResultFromGroupId(optionPosition, vehiclePosition);
 		mListResult = (ListView) findViewById(R.id.lv_list_result);
 		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
 		mListResultAdapter = new ListResultAdapter(this, mListResultItems);
@@ -93,25 +106,34 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
-			Log.e("aaaa", "s");
+			Intent intent = new Intent(ListResultAct.this, ListResultDetailAct.class);
+			intent.putExtra(Variables.TAG_VIOLATIOID,mListResultItems.get(position).getVioID());
+			startActivity(intent);
 		}
 	}
 
 	// get result from position: group id(database: Groups table)
-	private ArrayList<ListResultItem> getResultFromGroupId(int groupId) {
+	private ArrayList<ListResultItem> getResultFromGroupId(int groupId, int vehicleID) {
 		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
 		int group_value = (int) Math.pow(2, groupId);
-		String sql = "Select * From Violation Where Group_Value = " + group_value;
+		int type_value = (int) Math.pow(2, vehicleID);
+		String sql = "Select * From Violation Where Group_Value = " +group_value + " and Type_Value = " + type_value ;
+		Log.e(LOG_TAG, sql);
 		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
 		// get result and save to mListResultItems
 		mResult.moveToFirst();
-		String strTitle = null;
+		String Violationame = null;
+		String Fine =null;
 		String strMessage = null;
+		long ViolationID = 0;
 		int count = 0;
+		if (mResult.getCount()!=0)
 		while (!mResult.isLast()) {
-			strTitle = mResult.getString(mResult.getColumnIndex("Object"));
-			strMessage = mResult.getString(mResult.getColumnIndex("Name"));
-			list.add(new ListResultItem(strTitle, strMessage));
+			Violationame = mResult.getString(mResult.getColumnIndex("Name"));
+			Fine = mResult.getString(mResult.getColumnIndex("Fines"));
+			strMessage = mResult.getString(mResult.getColumnIndex("Object"));
+			ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
+			list.add(new ListResultItem(Violationame, Fine, strMessage,ViolationID));
 			mResult.moveToNext();
 		}
 		return list;

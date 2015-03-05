@@ -12,6 +12,13 @@
     <string name="tv_muc">Mục</string>
     <string name="search">Tìm kiếm</string>
  <!-- layout: list_action : -->
+    <string name="tv_apdung">Áp dụng với: </string>
+    <string name="tv_chitiet">Chi tiết</string>
+    <string name="tv_hpbs">Hình phạt bổ sung: </string>
+    <string name="tv_hpbskhac">Bổ sung khác: </string>
+    <string name="tv_hpbt">Bồi thường: </string>
+    
+    <!-- layout: list_action : -->
     <string name="choose_action">Chọn hành vi</string>
 
     <string-array name="drawer_titles">

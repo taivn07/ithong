@@ -5,21 +5,45 @@ package com.example.models;
  * 
  * @author STramp // To save result
  */
+
+// An------------------------------------------------
+
+
+
 public class ListResultItem {
-	private String title;
+	private String violation;
+	private String fine;
 	private String message;
+	private long ViolationID;
 
-	public ListResultItem(String title, String message) {
-		this.title = title;
+	public ListResultItem(String violation,String fine, String message, long ViolationID) {
+		this.violation = violation;
+		this.fine =fine;
 		this.message = message;
+		this.ViolationID = ViolationID;
+	}
+	
+	public long getVioID() {
+		return ViolationID;
 	}
 
+	public void setVioID(long violationID) {
+		this.ViolationID = violationID;
+	}
 	public String getTitle() {
-		return title;
+		return violation;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTitle(String violation) {
+		this.violation = violation;
+	}
+	
+	public String getfine() {
+		return fine;
+	}
+
+	public void setfine(String fine) {
+		this.fine = fine;
 	}
 
 	public String getMessage() {

@@ -2,7 +2,107 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
+ 
+    <ScrollView 
+        android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="1"
+        >
+
+    <TextView
+        android:id="@+id/show_object"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"/>
     
+    <TextView
+        android:id="@+id/show_mess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/orange"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp" />
+    
+    <TextView
+        android:id="@+id/show_fine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:paddingLeft="10dp" />
+    
+    <TextView
+        android:id="@+id/show_additionPtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingTop="80dp"
+        android:paddingLeft="15dp"
+        android:text="@string/tv_hpbs" />
+    
+    <TextView
+        android:id="@+id/show_additionP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" />
+    
+    <TextView
+        android:id="@+id/show_additionPtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingTop="40dp"
+        android:paddingLeft="15dp"
+        android:text="@string/tv_hpbskhac" />
+    
+     <TextView
+        android:id="@+id/show_additionP2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" />
+    
+      <TextView
+        android:id="@+id/show_additionremretitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingLeft="15dp"
+        android:paddingTop="40dp"
+        android:text="@string/tv_hpbt" />
+      
+    <TextView
+        android:id="@+id/show_reme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp" />
+        </TableLayout>
+    </ScrollView>
 
 </LinearLayout>
