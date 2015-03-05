@@ -41,8 +41,13 @@ public class HomeFragment extends Fragment {
 	}
 
 	private void startListItemAct(int position) {
-		Intent intent = new Intent(getActivity(), ListActionAct.class);
-		intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
-		getActivity().startActivity(intent);
+		if (position == 7) {
+			Toast.makeText(getActivity(), "Hiển thị quy trình xử phạt.", Toast.LENGTH_LONG);
+		} else {
+			Intent intent = new Intent(getActivity(), ListActionAct.class);
+			intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
+			getActivity().startActivity(intent);
+		}
+
 	}
 }

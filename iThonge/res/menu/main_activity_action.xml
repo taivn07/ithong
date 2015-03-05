@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-   <item 
-       android:id="@+id/seach_icon"
-       android:title="@string/search_title"
-       android:icon="@drawable/ic_action_search"  
-       android:showAsAction="always"
-        
-    />
+
+    <item
+        android:id="@+id/action_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ico_setting"
+        android:showAsAction="always|collapseActionView"
+        android:title="@string/search_hint"/>
+
+    <!-- Location Found -->
+    <item
+        android:id="@+id/action_location_found"
+        android:icon="@drawable/ico_about"
+        android:showAsAction="ifRoom"
+        android:title="@string/search_label"/>
+
+    <!-- Refresh -->
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ico_bookmark"
+        android:showAsAction="ifRoom"
+        android:title="@string/search_title"/>
+
 </menu>

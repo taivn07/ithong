@@ -6,18 +6,26 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="drawer_content" key="selection"/>
+		<item value="ListKeyWordItem" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="drawer_content"/>
-			<item value="list_sliding_menu"/>
-			<item value="ic_lau"/>
-			<item value="icon"/>
+			<item value="User"/>
+			<item value="searchItemFilter"/>
+			<item value="mListViewSearchAdapter"/>
+			<item value="mSearchView"/>
+			<item value="mListSearch"/>
+			<item value="activity"/>
+			<item value="onquery"/>
+			<item value="optiontitle"/>
 		</list>
 		<list key="replacehistory">
+			<item value="ListKeyWordItem"/>
+			<item value="mListViewSearch"/>
+			<item value="context"/>
+			<item value="tvResultCount"/>
 			<item value="drawer"/>
 		</list>
 	</section>
@@ -25,7 +33,7 @@
 		<item value="257" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="380" key="DIALOG_HEIGHT"/>
-		<item value="563" key="DIALOG_X_ORIGIN"/>
-		<item value="119" key="DIALOG_Y_ORIGIN"/>
+		<item value="879" key="DIALOG_X_ORIGIN"/>
+		<item value="342" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

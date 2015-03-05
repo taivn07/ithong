@@ -70,8 +70,8 @@ public class MainActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		mTitle = getTitle();
 		mDrawerTitles = getResources().getStringArray(R.array.drawer_titles);
-		mDrawerIcons = new int[] { R.drawable.ic_action_main, R.drawable.ico_synchronize, R.drawable.ico_search, R.drawable.ico_tutorial, R.drawable.ico_about,
-				R.drawable.ico_bookmark };
+		mDrawerIcons = new int[] { R.drawable.ic_action_main, R.drawable.ico_synchronize, R.drawable.ico_search, R.drawable.ico_tutorial,
+				R.drawable.ico_about, R.drawable.ico_bookmark };
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_sliding_menu);
 
@@ -119,13 +119,6 @@ public class MainActivity extends Activity {
 		if (savedInstanceState == null) {
 			selectItem(0);
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main, menu);
-		return super.onCreateOptionsMenu(menu);
 	}
 
 	/* Called whenever we call invalidateOptionsMenu() */
