@@ -23,30 +23,7 @@
         android:id="@+id/lv_list_action"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_list_action" >
+        android:background="@color/bg_list_action">
     </ListView>
-
-    <!-- dungna: for test -->
-
-
-    <!-- <ScrollView -->
-    <!-- android:id="@+id/scrtest" -->
-    <!-- android:layout_width="fill_parent" -->
-    <!-- android:layout_height="wrap_content" > -->
-
-
-    <!-- <LinearLayout -->
-    <!-- android:id="@+id/linTest" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:orientation="vertical" > -->
-
-
-    <!-- <ImageView -->
-    <!-- android:id="@+id/imgvTest" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" /> -->
-    <!-- </LinearLayout> -->
-    <!-- </ScrollView> -->
 
 </LinearLayout>

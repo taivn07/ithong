@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="8dp"
-    android:background="@drawable/border_shape"
-    android:orientation="horizontal" >
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingLeft="8dp" >
 
-<TextView
-            android:id="@+id/tv_list_result_icon"
-            android:background="@drawable/bg_numofrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/red"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tv_list_result_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_numofrow"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -25,20 +25,35 @@
             android:id="@+id/tv_list_result_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:paddingLeft="10dp"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tv_list_result_fine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="7dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="7dp"
+            android:textColor="@color/black" />
+        
         <TextView
             android:id="@+id/tv_list_result_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:paddingTop="7dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="10dp" />
-    </LinearLayout>
+            android:paddingLeft="10dp"
+            android:paddingTop="7dp"
+            android:textColor="@color/black" />
 
-   
-
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="12dp"   
+            android:background="@color/actionbar_bg"
+            android:orientation="vertical" >
+    
+        </LinearLayout>
+     </LinearLayout>
 </LinearLayout>

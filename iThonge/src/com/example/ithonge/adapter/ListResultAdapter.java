@@ -57,8 +57,16 @@ public class ListResultAdapter extends BaseAdapter {
 		btt.setText(""+(position+1));
 		TextView tvTitle = (TextView) convertView.findViewById(R.id.tv_list_result_title);
 		tvTitle.setText(mListResultItems.get(position).getTitle());
+		TextView tvFine = (TextView) convertView.findViewById(R.id.tv_list_result_fine);
+		tvFine.setText(mListResultItems.get(position).getfine());
 		TextView tvMessage = (TextView) convertView.findViewById(R.id.tv_list_result_message);
-		tvMessage.setText(mListResultItems.get(position).getMessage());
+		if (mListResultItems.get(position).getMessage()!="")
+		{
+		  tvMessage.setText(context.getResources().getString(R.string.tv_apdung)+mListResultItems.get(position).getMessage());
+		}
+		else {
+			tvMessage.setText(null);
+		}
 
 		return convertView;
 	}

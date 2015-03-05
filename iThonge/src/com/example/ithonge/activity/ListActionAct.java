@@ -71,7 +71,8 @@ public class ListActionAct extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Intent intent = new Intent(ListActionAct.this, ListResultAct.class);
-			intent.putExtra(Variables.TAG_OPTION_POSITION, position);
+			intent.putExtra(Variables.TAG_OPTION_POSITION, mListActItems.get(position).getpos());
+			intent.putExtra(Variables.TAG_VEHICLE_POSITION, vehiclePosition);
 			startActivity(intent);
 		}
 	}
@@ -89,7 +90,7 @@ public class ListActionAct extends Activity {
 			int groupID = mResult.getInt(mResult.getColumnIndex("GroupID"));
 			Log.e("ListActionAct", "groupID: " + groupID);
 			if (groupID != 0) {
-				ListActionItem item = new ListActionItem(mListActIcons[groupID - 1], mListActTitles[groupID - 1]);
+				ListActionItem item = new ListActionItem(mListActIcons[groupID - 1], mListActTitles[groupID - 1], (groupID-1));
 				list.add(item);
 			}
 			mResult.moveToNext();

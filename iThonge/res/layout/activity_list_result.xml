@@ -17,8 +17,7 @@
     <ListView
         android:id="@+id/lv_list_result"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:listSelector="@color/orange" >
+        android:layout_height="wrap_content" >
     </ListView>
 
 </LinearLayout>

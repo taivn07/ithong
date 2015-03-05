@@ -53,10 +53,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ListResulDetailAct"
+            android:name=".activity.ListResultDetailAct"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.ListResulDetailAct" />
+                <action android:name="android.intent.action.ListResultDetailAct" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
