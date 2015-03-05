@@ -49,7 +49,7 @@ public class ListResultAct extends Activity {
 			Log.e(LOG_TAG, "Can't Create Database. Please check and try again. Error: " + e.getMessage());
 		}
 		// create listview
-		mListResultItems = getResultFromGroupId(1);
+		mListResultItems = getResultFromGroupId(optionPosition);
 		mListResult = (ListView) findViewById(R.id.lv_list_result);
 		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
 		mListResultAdapter = new ListResultAdapter(this, mListResultItems);
@@ -68,8 +68,8 @@ public class ListResultAct extends Activity {
 	// get result from position: group id(database: Groups table)
 	private ArrayList<ListResultItem> getResultFromGroupId(int groupId) {
 		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
-		int group_value = 2 ^ groupId;
-		String sql = "Select * From Violation Where Group_Value = 4";
+		int group_value = (int) Math.pow(2, groupId);
+		String sql = "Select * From Violation Where Group_Value = " +group_value;
 		Log.e(LOG_TAG, sql);
 		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
 		Log.e(LOG_TAG, "" + mResult.getCount());
