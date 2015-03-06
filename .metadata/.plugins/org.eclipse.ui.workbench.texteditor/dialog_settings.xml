@@ -6,12 +6,13 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="ListKeyWordItem" key="selection"/>
+		<item value="tvResultCount" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="tvResultCount"/>
 			<item value="User"/>
 			<item value="searchItemFilter"/>
 			<item value="mListViewSearchAdapter"/>
@@ -19,7 +20,6 @@
 			<item value="mListSearch"/>
 			<item value="activity"/>
 			<item value="onquery"/>
-			<item value="optiontitle"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ListKeyWordItem"/>

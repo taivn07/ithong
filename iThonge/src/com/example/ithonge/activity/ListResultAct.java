@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
-
 import android.app.SearchManager;
 import android.content.Context;
-
 import android.content.Intent;
-
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -54,28 +51,34 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	private ArrayList<ListKeyWordItem> mListKeyWordItems;
 	private ListSearchAdapter mListViewSearchAdapter;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_result);
-//<<<<<<< HEAD
-//		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
-//		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
-//		// edit by superstramp date: Thursday, March 05 2015
-//		// tvResultCount.setText(getResources().getString(R.string.tv_muc)+":   "+getResources().getStringArray(R.array.list_action_item)[optionPosition]);
-//		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
-//		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
-//		getActionBar().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
-//		getActionBar().setDisplayHomeAsUpEnabled(true);
-//
-//=======
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		// <<<<<<< HEAD
+		// tvResultCount = (TextView) findViewById(R.id.tv_result_count);
+		// optionPosition =
+		// getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
+		// // edit by superstramp date: Thursday, March 05 2015
+		// //
+		// tvResultCount.setText(getResources().getString(R.string.tv_muc)+":   "+getResources().getStringArray(R.array.list_action_item)[optionPosition]);
+		// vehiclePosition =
+		// getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
+		// getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
+		// getActionBar().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
+		// getActionBar().setDisplayHomeAsUpEnabled(true);
+		//
+		// =======
 		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
 		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
-		getActionBar().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]+"  >>  "+getResources().getStringArray(R.array.list_action_item)[optionPosition]);
-
+		getActionBar().setTitle(
+				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "
+						+ getResources().getStringArray(R.array.list_action_item)[optionPosition]);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		// init local variables
+		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
 		mListResultItems = new ArrayList<ListResultItem>();
 		try {
 			mDatabaseHelper = new DatabaseHelper(this);
@@ -95,21 +98,39 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		mListViewSearch = (ListView) findViewById(R.id.lv_list_search);
 		// mListViewSearch.setVisibility(View.VISIBLE);
 		mListKeyWordItems = getKeySearchFromDatabase();
-		Log.e("dungna", "onQueryTextChange: " + mListKeyWordItems.size());
 		mListViewSearchAdapter = new ListSearchAdapter(this, mListKeyWordItems);
 		mListViewSearch.setAdapter(mListViewSearchAdapter);
 		mListViewSearch.setTextFilterEnabled(true);
+		mListViewSearch.setOnItemClickListener(new ListKeyWordOnItemClickListener());
 	}
 
+	// when click list result item
 	private class ListResutlItemOnClickListener implements OnItemClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(ListResultAct.this, ListResultDetailAct.class);
-			intent.putExtra(Variables.TAG_VIOLATIOID,mListResultItems.get(position).getVioID());
+			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
 			startActivity(intent);
 		}
+	}
+
+	// when click list keyword item
+	private class ListKeyWordOnItemClickListener implements OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			// TODO Auto-generated method stub
+			mListViewSearch.setVisibility(View.INVISIBLE);
+			// SearchView searchView= (SearchView)
+			// findViewById(R.id.searchView1);
+			int tvid = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+			TextView textView = (TextView) mSearchView.findViewById(tvid);
+			ListKeyWordItem tempKey = (ListKeyWordItem) mListViewSearchAdapter.getItem(position);
+			textView.setText(tempKey.getName().toString());
+		}
+
 	}
 
 	// get result from position: group id(database: Groups table)
@@ -117,25 +138,28 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
 		int group_value = (int) Math.pow(2, groupId);
 		int type_value = (int) Math.pow(2, vehicleID);
-		String sql = "Select * From Violation Where Group_Value = " +group_value + " and Type_Value = " + type_value ;
+		group_value = 4;
+		type_value = 4;
+		String sql = "Select * From Violation Where Group_Value = " + group_value + " and Type_Value = " + type_value;
 		Log.e(LOG_TAG, sql);
 		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
 		// get result and save to mListResultItems
+		Log.e("dungna", "" + mResult.getCount());
 		mResult.moveToFirst();
 		String Violationame = null;
-		String Fine =null;
+		String Fine = null;
 		String strMessage = null;
 		long ViolationID = 0;
 		int count = 0;
-		if (mResult.getCount()!=0)
-		while (!mResult.isLast()) {
-			Violationame = mResult.getString(mResult.getColumnIndex("Name"));
-			Fine = mResult.getString(mResult.getColumnIndex("Fines"));
-			strMessage = mResult.getString(mResult.getColumnIndex("Object"));
-			ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-			list.add(new ListResultItem(Violationame, Fine, strMessage,ViolationID));
-			mResult.moveToNext();
-		}
+		if (mResult.getCount() != 0)
+			while (!mResult.isLast()) {
+				Violationame = mResult.getString(mResult.getColumnIndex("Name"));
+				Fine = mResult.getString(mResult.getColumnIndex("Fines"));
+				strMessage = mResult.getString(mResult.getColumnIndex("Object"));
+				ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
+				list.add(new ListResultItem(Violationame, Fine, strMessage, ViolationID));
+				mResult.moveToNext();
+			}
 		return list;
 	}
 
@@ -152,7 +176,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		while (!mResult.isAfterLast()) {
 			name = mResult.getString(mResult.getColumnIndex("Keyword_Name"));
 			nameEn = mResult.getString(mResult.getColumnIndex("Keyword_NameEN"));
-			list.add(new ListKeyWordItem(nameEn, nameEn));
+			list.add(new ListKeyWordItem(name, nameEn));
 			mResult.moveToNext();
 		}
 		return list;
@@ -179,13 +203,13 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
+		mListViewSearch.setVisibility(View.INVISIBLE);
 		return false;
 	}
 
 	@Override
 	public boolean onQueryTextChange(String newText) {
 		// mListResultItems.set(index, object)
-		Log.e("dungna", "onQueryTextChange");
 		mListViewSearchAdapter.getFilter().filter(newText);
 		Log.e("dungna", "1onQueryTextChange");
 		return false;
@@ -195,32 +219,12 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_search:
-			Log.e("dungna", "af75555tsdfhaksjfsdkl ------------------------------");
 			mListViewSearch.setVisibility(View.VISIBLE);
-			Log.e("dungna", "be5555tsdfhaksjfsdkl ------------------------------");
-			// onSearchRequested();
 			return true;
-		case R.id.action_refresh:
-			Log.e("dungna", "85555tsdfhaksjfsdkl ------------------------------");
-			// onSearchRequested();
-			return true;
-		case R.id.action_location_found:
-			Log.e("dungna", "95555tsdfhaksjfsdkl ------------------------------");
-			// onSearchRequested();
-			return true;
-
-		case android.R.id.button1:
-			Log.e("dungna", "51555tsdfhaksjfsdkl ------------------------------");
-			// onSearchRequested();
-			return true;
-		case android.R.id.button2:
-			Log.e("dungna", "52555tsdfhaksjfsdkl ------------------------------");
-			// onSearchRequested();
-			return true;
-		case android.R.id.button3:
-			Log.e("dungna", "53555tsdfhaksjfsdkl ------------------------------");
-			// onSearchRequested();
-			return true;
+			// case R.id.action_refresh:
+			// return true;
+			// case R.id.action_location_found:
+			// return true;
 
 		default:
 			return super.onOptionsItemSelected(item);

@@ -235,7 +235,7 @@ public class ListSearchAdapter extends BaseAdapter implements Filterable {
 
 		// bind text with view holder content view for efficient use
 		// holder.iconText.setText("#");
-		holder.name.setText(filteredList.get(position).getNameEN());
+		holder.name.setText(filteredList.get(position).getName());
 		// view.setBackgroundResource(R.drawable.friend_list_selector);
 
 		return view;

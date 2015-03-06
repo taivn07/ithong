@@ -9,6 +9,7 @@
     <item name="bg_choose_action_2" type="color">#f3f6f8</item>
     <item name="bg_list_action" type="color">#ffffff</item>
     <item name="bg_list_key_search" type="color">#f2832f</item>
+    <item name="bg_actionbar" type="color">#ff6d01</item>
 
     <!-- gfd -->
     <item name="blue" type="color">#FF33B5E5</item>
