@@ -25,7 +25,7 @@
             android:layout_width="240dp"
             android:layout_height="fill_parent"
             android:layout_gravity="start"
-            android:background="@color/listdrawer_bg"
+            android:background="@color/bg_list_key_search"
             android:choiceMode="singleChoice" >
         </ListView>
     </android.support.v4.widget.DrawerLayout>

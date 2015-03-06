@@ -19,26 +19,27 @@ public final class R {
         /**  my custom colors 
          */
         public static final int actionbar_bg=0x7f050000;
+        public static final int bg_actionbar=0x7f050007;
         public static final int bg_choose_action=0x7f050003;
         public static final int bg_choose_action_2=0x7f050004;
         public static final int bg_list_action=0x7f050005;
         public static final int bg_list_key_search=0x7f050006;
-        public static final int black=0x7f050012;
+        public static final int black=0x7f050013;
         /**  gfd 
          */
-        public static final int blue=0x7f050007;
-        public static final int darkblue=0x7f05000c;
-        public static final int darkgreen=0x7f05000e;
-        public static final int darkorange=0x7f05000f;
-        public static final int darkpurple=0x7f05000d;
-        public static final int darkred=0x7f050010;
+        public static final int blue=0x7f050008;
+        public static final int darkblue=0x7f05000d;
+        public static final int darkgreen=0x7f05000f;
+        public static final int darkorange=0x7f050010;
+        public static final int darkpurple=0x7f05000e;
+        public static final int darkred=0x7f050011;
         public static final int fragment_home_bg=0x7f050002;
-        public static final int green=0x7f050009;
+        public static final int green=0x7f05000a;
         public static final int listdrawer_bg=0x7f050001;
-        public static final int orange=0x7f05000a;
-        public static final int purple=0x7f050008;
-        public static final int red=0x7f05000b;
-        public static final int white=0x7f050011;
+        public static final int orange=0x7f05000b;
+        public static final int purple=0x7f050009;
+        public static final int red=0x7f05000c;
+        public static final int white=0x7f050012;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -104,28 +105,29 @@ public final class R {
         public static final int ico_tutorial=0x7f020031;
         public static final int ico_update=0x7f020032;
         public static final int icon=0x7f020033;
-        public static final int loading=0x7f020034;
-        public static final int logo_menu=0x7f020035;
+        public static final int list_action_item_selector=0x7f020034;
+        public static final int list_drawer_item_selector=0x7f020035;
+        public static final int list_result_item_selector=0x7f020036;
+        public static final int loading=0x7f020037;
+        public static final int logo_menu=0x7f020038;
     }
     public static final class id {
         public static final int action_bookmark=0x7f0b002a;
-        public static final int action_location_found=0x7f0b002d;
-        public static final int action_refresh=0x7f0b002e;
         public static final int action_search=0x7f0b002c;
         public static final int drawer_contentaaaa=0x7f0b0017;
         public static final int drawer_layout=0x7f0b000f;
         public static final int drawer_layoutaaaa=0x7f0b0016;
         public static final int draweraaaa=0x7f0b0018;
         public static final int frame_container=0x7f0b0010;
-        public static final int grid_transport=0x7f0b001d;
-        public static final int help1=0x7f0b001c;
-        public static final int icon=0x7f0b0019;
+        public static final int grid_transport=0x7f0b001b;
+        public static final int help1=0x7f0b001a;
+        public static final int icon=0x7f0b001f;
         public static final int imageView1=0x7f0b0014;
         public static final int list_sliding_menu=0x7f0b0011;
         public static final int lv_list_action=0x7f0b0001;
-        public static final int lv_list_action_icon=0x7f0b001f;
-        public static final int lv_list_action_title=0x7f0b0020;
-        public static final int lv_list_bookmark_result=0x7f0b001b;
+        public static final int lv_list_action_icon=0x7f0b001d;
+        public static final int lv_list_action_title=0x7f0b001e;
+        public static final int lv_list_bookmark_result=0x7f0b0019;
         public static final int lv_list_info_icon=0x7f0b0022;
         public static final int lv_list_info_pos=0x7f0b0021;
         public static final int lv_list_info_title=0x7f0b0023;
@@ -134,7 +136,7 @@ public final class R {
         public static final int main_content=0x7f0b0029;
         public static final int pgbar_load_data=0x7f0b0013;
         public static final int search=0x7f0b002b;
-        public static final int seard=0x7f0b001e;
+        public static final int seard=0x7f0b001c;
         public static final int show_additionP=0x7f0b0009;
         public static final int show_additionP2=0x7f0b000b;
         public static final int show_additionPtitle=0x7f0b0008;
@@ -145,7 +147,7 @@ public final class R {
         public static final int show_object=0x7f0b0005;
         public static final int show_reme=0x7f0b000d;
         public static final int textView1=0x7f0b0015;
-        public static final int title=0x7f0b001a;
+        public static final int title=0x7f0b0020;
         public static final int tv_list_action_title=0x7f0b0000;
         public static final int tv_list_result_fine=0x7f0b0026;
         public static final int tv_list_result_icon=0x7f0b0024;
@@ -165,14 +167,14 @@ public final class R {
         public static final int activity_splash=0x7f030005;
         public static final int custom_row=0x7f030006;
         public static final int decor=0x7f030007;
-        public static final int drawer_list_item=0x7f030008;
-        public static final int fragment_about=0x7f030009;
-        public static final int fragment_bookmark=0x7f03000a;
-        public static final int fragment_help=0x7f03000b;
-        public static final int fragment_home=0x7f03000c;
-        public static final int fragment_search=0x7f03000d;
-        public static final int fragment_sync=0x7f03000e;
-        public static final int list_action_item=0x7f03000f;
+        public static final int fragment_about=0x7f030008;
+        public static final int fragment_bookmark=0x7f030009;
+        public static final int fragment_help=0x7f03000a;
+        public static final int fragment_home=0x7f03000b;
+        public static final int fragment_search=0x7f03000c;
+        public static final int fragment_sync=0x7f03000d;
+        public static final int list_action_item=0x7f03000e;
+        public static final int list_drawer_item=0x7f03000f;
         public static final int list_info_item=0x7f030010;
         public static final int list_result_item=0x7f030011;
         public static final int list_search_item=0x7f030012;

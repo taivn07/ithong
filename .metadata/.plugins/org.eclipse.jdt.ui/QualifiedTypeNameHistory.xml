@@ -5,14 +5,12 @@
 <fullyQualifiedTypeName name="android.app.Notification.Action"/>
 <fullyQualifiedTypeName name="android.app.Activity"/>
 <fullyQualifiedTypeName name="android.content.DialogInterface.OnClickListener"/>
-<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
 <fullyQualifiedTypeName name="com.example.ithonge.activity.ListResultAct.listResutlItemOnClickListener"/>
 <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 <fullyQualifiedTypeName name="com.example.ithonge.R.drawable"/>
 <fullyQualifiedTypeName name="com.example.models.ListResultItem"/>
 <fullyQualifiedTypeName name="com.example.ithonge.adapter.ListResultAdapter"/>
 <fullyQualifiedTypeName name="com.example.ithonge.activity.ListResultAct"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.widget.ProgressBar"/>
 <fullyQualifiedTypeName name="android.os.CountDownTimer"/>
 <fullyQualifiedTypeName name="android.view.View"/>
@@ -57,7 +55,9 @@
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="com.example.ithonge.R.id"/>
 <fullyQualifiedTypeName name="com.example.ithonge.R.color"/>
-<fullyQualifiedTypeName name="com.example.models.ListKeyWordItem"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="com.example.ithonge.R"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
+<fullyQualifiedTypeName name="com.example.models.ListKeyWordItem"/>
 </qualifiedTypeNameHistroy>
