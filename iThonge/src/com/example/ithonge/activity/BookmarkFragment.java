@@ -1,20 +1,97 @@
 package com.example.ithonge.activity;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import com.example.ithonge.R;
+import com.example.ithonge.adapter.ListResultAdapter;
+import com.example.ithonge.utils.Variables;
+import com.example.models.DatabaseHelper;
+import com.example.models.ListResultItem;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class BookmarkFragment extends Fragment{
-	public BookmarkFragment() {
-		// TODO Auto-generated constructor stub
+	
+	private ListView mListResult;
+	private ListResultAdapter mListResultAdapter;
+	private DatabaseHelper mDatabaseHelper;
+	private ArrayList<ListResultItem> mListResultItems;
+	
+	public BookmarkFragment(DatabaseHelper databaseHelper) {
+		this.mDatabaseHelper = databaseHelper;
 	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+		
+		View rootView = inflater.inflate(R.layout.fragment_bookmark, container, false);
+		
+		mListResultItems = new ArrayList<ListResultItem>();
+
+		// create listview
+		mListResultItems = getListBookmarkFromDB();
+		
+		mListResult = (ListView) rootView.findViewById(R.id.lv_list_bookmark_result);
+		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
+		mListResultAdapter = new ListResultAdapter(getActivity(), mListResultItems);
+		mListResult.setAdapter(mListResultAdapter);
+		
 		return rootView;
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		mListResultItems = getListBookmarkFromDB();
+	
+		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
+		mListResultAdapter = new ListResultAdapter(getActivity(), mListResultItems);
+		mListResult.setAdapter(mListResultAdapter);
+	};
+	
+	private class ListResutlItemOnClickListener implements OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent(getActivity(), ListResultDetailAct.class);
+			intent.putExtra(Variables.TAG_VIOLATIOID,mListResultItems.get(position).getVioID());
+			getActivity().startActivity(intent);
+		}
+	}
+	
+	private ArrayList<ListResultItem> getListBookmarkFromDB() {
+		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
+		String sql = "Select Violation.* From Violation,LuuTru Where LuuTru.Violation_ID = Violation.ID";
+
+		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
+
+		mResult.moveToFirst();
+		String Violationame = null;
+		String Fine =null;
+		String strMessage = null;
+		long ViolationID = 0;
+
+		if (mResult.getCount()!=0)
+		while (!mResult.isAfterLast()) {
+			Violationame = mResult.getString(mResult.getColumnIndex("Name"));
+			Fine = mResult.getString(mResult.getColumnIndex("Fines"));
+			strMessage = mResult.getString(mResult.getColumnIndex("Object"));
+			ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
+			list.add(new ListResultItem(Violationame, Fine, strMessage,ViolationID));
+			mResult.moveToNext();
+		}
+		return list;
 	}
 }

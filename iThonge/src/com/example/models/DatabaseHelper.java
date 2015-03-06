@@ -114,43 +114,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	// Xay dung cac phuong thuc lam viec voi database
-	public void insertDB(String name, int phone) {
-		ContentValues values = new ContentValues();
-		values.put("name", name);
-		values.put("phone", phone);
-		// db.insert(TB_NAME, null, values);
-	}
 
-	public void updateDB(int id, String name, int phone) {
-		ContentValues values = new ContentValues();
-		values.put("name", name);
-		values.put("phone", phone);
-		// db.update(TB_NAME, values, "_id=" + id, null);
-	}
-
-	// update co dieu kien
-	public void updateDBCondition(String name, int phone, String selectArg) {
-		ContentValues values = new ContentValues();
-		values.put("name", name);
-		values.put("phone", phone);
-		// db.update(TB_NAME, values, "_id > ?", new String[] { selectArg });
-	}
-
-	public void DeleteDB(int id) {
-		// db.delete(TB_NAME, "_id=" + id, null);
+	public void deleteFromTableLuuTru(long value) {
+		String sql = "DELETE FROM LuuTru WHERE Violation_ID ="+value;
+	    mDatabase.execSQL(sql);
 	}
 	
-	public void delDB()
-	{
-	    
+	public void insertintoTableLuuTru(long value) {
+		String sql = "INSERT INTO LuuTru (Violation_ID) Values " + "('" +value+"')";
+	    mDatabase.execSQL(sql);
 	}
-	public Cursor get_all() {
-		// return db.query(TB_NAME, null, null, null, null, null, null);
-		return null;
-	}
-
+	
 	public Cursor getAllFromTable(String tableName) {
-		String sql = "Select * from Violation_segments";
+		String sql = "Select * from "+tableName;
 		return mDatabase.rawQuery(sql, null);
 	}
 	

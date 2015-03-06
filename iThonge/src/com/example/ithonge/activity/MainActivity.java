@@ -1,5 +1,6 @@
 package com.example.ithonge.activity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.NavDrawerListAdapter;
+import com.example.models.DatabaseHelper;
 import com.example.models.NavDrawerItem;
 
 public class MainActivity extends Activity {
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
 	private ActionBarDrawerToggle mDrawerToggle;
 	private NavDrawerListAdapter mDAdapter;
 	private ArrayList<NavDrawerItem> listNavDrawerItems;
+	private DatabaseHelper mDatabaseHelper;
 
 	private CharSequence mTitle;
 	private String[] mDrawerTitles;
@@ -67,6 +70,13 @@ public class MainActivity extends Activity {
 		 * end edit-----------------------------------------------------
 		 */
 
+		try {
+			mDatabaseHelper = new DatabaseHelper(this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		mTitle = getTitle();
 		mDrawerTitles = getResources().getStringArray(R.array.drawer_titles);
@@ -188,7 +198,7 @@ public class MainActivity extends Activity {
 
 			break;
 		case 5:
-			fragment = new BookmarkFragment();
+			fragment = new BookmarkFragment(mDatabaseHelper);
 
 			break;
 
