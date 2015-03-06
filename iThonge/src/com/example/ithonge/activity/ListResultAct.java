@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor.OnCloseListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MenuItem.OnActionExpandListener;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -127,8 +131,6 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
 		int group_value = (int) Math.pow(2, groupId);
 		int type_value = (int) Math.pow(2, vehicleID);
-		group_value = 4;
-		type_value = 4;
 		String sql = "Select * From Violation Where Group_Value = " + group_value + " and Type_Value = " + type_value;
 		Log.e(LOG_TAG, sql);
 		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
@@ -173,10 +175,37 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main_act_menu_search, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+		inflater.inflate(R.menu.main_activity_action, menu);
+		
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		searchMenuItem = menu.findItem(R.id.action_search);
+		mSearchView = (SearchView) searchMenuItem.getActionView();
 
+		mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+		mSearchView.setSubmitButtonEnabled(true);
+		mSearchView.setOnQueryTextListener(this);
+
+	  
+	       searchMenuItem.setOnActionExpandListener(new OnActionExpandListener()
+	        {
+
+	            @Override
+	            public boolean onMenuItemActionCollapse(MenuItem item)
+	            {
+	            	mListViewSearch.setVisibility(View.INVISIBLE);  
+	                return true; // Return true to collapse action view
+	            }
+
+	            @Override
+	            public boolean onMenuItemActionExpand(MenuItem item)
+	            {	            
+	                // TODO Auto-generated method stub
+	                return true;
+	            }
+	        });
+	        
+		return true;
+	}
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
@@ -190,7 +219,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		mListViewSearchAdapter.getFilter().filter(newText);
 		Log.e("dungna", "1onQueryTextChange");
 		return false;
-	}
+	}	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
