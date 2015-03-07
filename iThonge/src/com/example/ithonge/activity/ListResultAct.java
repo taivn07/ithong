@@ -8,6 +8,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor.OnCloseListener;
 import android.util.Log;
@@ -62,6 +63,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		
 		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
 		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
+		getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
 		getActionBar().setTitle(
 				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "

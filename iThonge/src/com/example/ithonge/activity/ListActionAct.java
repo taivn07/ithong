@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +48,7 @@ public class ListActionAct extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
+		getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 		getActionBar().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
 		// init local variable
 		try {

@@ -8,6 +8,7 @@ import com.example.models.DatabaseHelper;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,7 @@ public class ListResultDetailAct extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_result_detail);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
 		getActionBar().setTitle(R.string.tv_chitiet);
 		
