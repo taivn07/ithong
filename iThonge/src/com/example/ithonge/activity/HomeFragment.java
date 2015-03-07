@@ -3,6 +3,7 @@ package com.example.ithonge.activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,12 +43,16 @@ public class HomeFragment extends Fragment {
 
 	private void startListItemAct(int position) {
 		if (position == 7) {
-			Toast.makeText(getActivity(), "Hiển thị quy trình xử phạt.", Toast.LENGTH_LONG);
+			Log.w("check","ok");
+			Intent intent = new Intent(getActivity(), QTXPAct.class);
+			intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
+			getActivity().startActivity(intent);
 		} else {
 			Intent intent = new Intent(getActivity(), ListActionAct.class);
 			intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
 			getActivity().startActivity(intent);
 		}
-
+		
 	}
+	
 }
