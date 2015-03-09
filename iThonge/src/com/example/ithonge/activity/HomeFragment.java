@@ -43,11 +43,18 @@ public class HomeFragment extends Fragment {
 
 	private void startListItemAct(int position) {
 		if (position == 7) {
-			Log.w("check","ok");
 			Intent intent = new Intent(getActivity(), QTXPAct.class);
-			intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
 			getActivity().startActivity(intent);
-		} else {
+		} else 
+		if (position ==6)
+		{
+			Intent intent = new Intent(getActivity(), ListResultAct.class);
+			intent.putExtra(Variables.TAG_OPTION_POSITION, 6);
+			intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
+			startActivity(intent);
+		}
+		else
+		{
 			Intent intent = new Intent(getActivity(), ListActionAct.class);
 			intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
 			getActivity().startActivity(intent);

@@ -53,6 +53,10 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	private ListView mListViewSearch;
 	private ArrayList<ListKeyWordItem> mListKeyWordItems;
 	private ListSearchAdapter mListViewSearchAdapter;
+	private int group_value;
+	private int type_value;
+	private int[] Mahoa_Type = new int[] {64,32,16,8,4,2,1};
+	private int[] Mahoa_Group = new int[] {128,64,32,16,8,4,2,1};
 
 
 	@Override
@@ -68,7 +72,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		getActionBar().setTitle(
 				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "
 						+ getResources().getStringArray(R.array.list_action_item)[optionPosition]);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(false);
 		// init local variables
 		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
 		
@@ -97,6 +101,22 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		mListViewSearch.setTextFilterEnabled(true);
 		mListViewSearch.setOnItemClickListener(new ListKeyWordOnItemClickListener());
 
+	}
+	
+	// Lua chon tim kiem tu co so du lieu
+	 private void SetData(int groupId, int vehicleID)
+	{
+		 switch (vehicleID)
+		 {
+		 case 6:
+			 group_value = 0;
+		     type_value = 64;
+		     break;
+		 default:
+			 group_value = (int) Math.pow(2, groupId);
+			 type_value = (int) Math.pow(2, vehicleID);
+			 break;
+		 }
 	}
 
 	// when click list result item
@@ -128,12 +148,60 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 
 	}
 
+	
+	private boolean Check_Group(int AgroupId)
+	{
+		if (group_value ==0)
+			return true;
+		if (AgroupId !=0)
+		for (int i=0; i<Mahoa_Group.length;i++)
+		{
+			if (AgroupId >= Mahoa_Group[i])
+			{
+				AgroupId -= Mahoa_Group[i];
+				if (Mahoa_Group[i] == group_value)
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean Check_Type(int AvehicleID)
+	{
+		if (AvehicleID !=0)
+		for (int i=0; i<Mahoa_Type.length;i++)
+		{
+			if (AvehicleID >= Mahoa_Type[i])
+			{
+				AvehicleID -= Mahoa_Type[i];
+				if (Mahoa_Type[i] == type_value)
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	// Name String filter
+	private String ReNameFilter(String Name)
+	{
+		String FName = Name;
+		int i = FName.length();
+		if (FName.charAt(i-1)==')')
+		{
+		while (FName.charAt(i-1)!='(')
+		{
+			i--;
+		}
+		FName = FName.substring(0, i-1);
+		}
+		return FName;
+	}
+	
 	// get result from position: group id(database: Groups table)
 	private ArrayList<ListResultItem> getResultFromGroupId(int groupId, int vehicleID) {
 		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
-		int group_value = (int) Math.pow(2, groupId);
-		int type_value = (int) Math.pow(2, vehicleID);
-		String sql = "Select * From Violation Where Group_Value = " + group_value + " and Type_Value = " + type_value;
+        SetData(groupId, vehicleID);
+		String sql = "Select * From Violation";
 		Log.e(LOG_TAG, sql);
 		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
 		// get result and save to mListResultItems
@@ -143,13 +211,20 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		String Fine = null;
 		String strMessage = null;
 		long ViolationID = 0;
+		int AgroupID = 0;
+		int AvehicleID =0;
 		if (mResult.getCount()!=0)
 		while (!mResult.isAfterLast()) {
-			Violationame = mResult.getString(mResult.getColumnIndex("Name"));
+			AgroupID = mResult.getInt(mResult.getColumnIndex("Group_Value"));
+			AvehicleID =mResult.getInt(mResult.getColumnIndex("Type_Value"));
+			if (Check_Type(AvehicleID) && Check_Group(AgroupID))
+			{
+			Violationame = ReNameFilter(mResult.getString(mResult.getColumnIndex("Name")));
 			Fine = mResult.getString(mResult.getColumnIndex("Fines"));
 			strMessage = mResult.getString(mResult.getColumnIndex("Object"));
 			ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
 			list.add(new ListResultItem(Violationame, Fine, strMessage,ViolationID));
+			}
 			mResult.moveToNext();
 		}
 		return list;
@@ -219,7 +294,6 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	public boolean onQueryTextChange(String newText) {
 		// mListResultItems.set(index, object)
 		mListViewSearchAdapter.getFilter().filter(newText);
-		Log.e("dungna", "1onQueryTextChange");
 		return false;
 	}	
 
