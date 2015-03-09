@@ -1,7 +1,5 @@
 package com.example.ithonge.activity;
 
-import com.example.ithonge.R;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.Display;
@@ -10,20 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.ithonge.R;
+
 public class HelpFragment extends Fragment {
 	WebView mWebview;
+
 	public HelpFragment() {
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.activity_webview, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.activity_webview, container,
+				false);
 		mWebview = (WebView) rootView.findViewById(R.id.webview_view);
-		
+
 		WebViewClient viewClient = new WebViewClient();
 		WebChromeClient chromeClient = new WebChromeClient();
 		mWebview.setWebViewClient(viewClient);
@@ -35,12 +38,13 @@ public class HelpFragment extends Fragment {
 		mWebview.loadUrl("file:///android_asset/help.html");
 		return rootView;
 	}
-	
-	private int getScale(){
-	    Display display = ((WindowManager) getActivity().getSystemService(getActivity().WINDOW_SERVICE)).getDefaultDisplay(); 
-	    int width = display.getWidth(); 
-	    Double val = new Double(width)/new Double(651);
-	    val = val * 100d;
-	    return val.intValue();
+
+	private int getScale() {
+		Display display = ((WindowManager) getActivity().getSystemService(
+				getActivity().WINDOW_SERVICE)).getDefaultDisplay();
+		int width = display.getWidth();
+		Double val = new Double(width) / new Double(651);
+		val = val * 100d;
+		return val.intValue();
 	}
 }

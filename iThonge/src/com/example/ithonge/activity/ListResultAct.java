@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor.OnCloseListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,12 +26,14 @@ import android.widget.TextView;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListResultAdapter;
 import com.example.ithonge.adapter.ListSearchAdapter;
+import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 import com.example.models.DatabaseHelper;
 import com.example.models.ListKeyWordItem;
 import com.example.models.ListResultItem;
 
-public class ListResultAct extends Activity implements SearchView.OnQueryTextListener{
+public class ListResultAct extends Activity implements
+		SearchView.OnQueryTextListener {
 	// ListView Result
 	private ListView mListResult;
 	private ListResultAdapter mListResultAdapter;
@@ -46,8 +47,6 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	private TextView tvResultCount;
 
 	// search menu
-	private String[] items;
-	private Menu menu;
 	private SearchView mSearchView;
 	private MenuItem searchMenuItem;
 	private ListView mListViewSearch;
@@ -55,42 +54,54 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	private ListSearchAdapter mListViewSearchAdapter;
 	private int group_value;
 	private int type_value;
-	private int[] Mahoa_Type = new int[] {64,32,16,8,4,2,1};
-	private int[] Mahoa_Group = new int[] {128,64,32,16,8,4,2,1};
-
+	private int[] Mahoa_Type = new int[] { 64, 32, 16, 8, 4, 2, 1 };
+	private int[] Mahoa_Group = new int[] { 128, 64, 32, 16, 8, 4, 2, 1 };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_result);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
-		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
-		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
-		getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
-		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
-		getActionBar().setTitle(
-				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "
-						+ getResources().getStringArray(R.array.list_action_item)[optionPosition]);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		optionPosition = getIntent().getExtras().getInt(
+				Variables.TAG_OPTION_POSITION);
+		vehiclePosition = getIntent().getExtras().getInt(
+				Variables.TAG_VEHICLE_POSITION);
+		getActionBar().setIcon(
+				new ColorDrawable(getResources().getColor(
+						android.R.color.transparent)));
+		getActionBar().setBackgroundDrawable(
+				getResources().getDrawable(R.color.actionbar_bg));
+		getActionBar()
+				.setTitle(
+						getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]
+								+ "  >>  "
+								+ getResources().getStringArray(
+										R.array.list_action_item)[optionPosition]);
 		getActionBar().setDisplayHomeAsUpEnabled(false);
 		// init local variables
 		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
-		
+
 		mListResultItems = new ArrayList<ListResultItem>();
 		try {
 			mDatabaseHelper = new DatabaseHelper(this);
 		} catch (IOException e) {
-			Log.e(LOG_TAG, "Can't Create Database. Please check and try again. Error: " + e.getMessage());
+			Log.e(LOG_TAG,
+					"Can't Create Database. Please check and try again. Error: "
+							+ e.getMessage());
 		}
 
 		// create listview
-		mListResultItems = getResultFromGroupId(optionPosition, vehiclePosition);
+		mListResultItems = getResultFromViolation(optionPosition,
+				vehiclePosition);
 		mListResult = (ListView) findViewById(R.id.lv_list_result);
 		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
 		mListResultAdapter = new ListResultAdapter(this, mListResultItems);
 		mListResult.setAdapter(mListResultAdapter);
 
-		tvResultCount.setText("Có " + mListResultItems.size() + " kết quả được tìm thấy.");
+		tvResultCount.setText("Có " + mListResultItems.size()
+				+ " kết quả được tìm thấy.");
 
 		// Create List Search
 		mListViewSearch = (ListView) findViewById(R.id.lv_list_search);
@@ -99,34 +110,36 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		mListViewSearchAdapter = new ListSearchAdapter(this, mListKeyWordItems);
 		mListViewSearch.setAdapter(mListViewSearchAdapter);
 		mListViewSearch.setTextFilterEnabled(true);
-		mListViewSearch.setOnItemClickListener(new ListKeyWordOnItemClickListener());
+		mListViewSearch
+				.setOnItemClickListener(new ListKeyWordOnItemClickListener());
 
 	}
-	
+
 	// Lua chon tim kiem tu co so du lieu
-	 private void SetData(int groupId, int vehicleID)
-	{
-		 switch (vehicleID)
-		 {
-		 case 6:
-			 group_value = 0;
-		     type_value = 64;
-		     break;
-		 default:
-			 group_value = (int) Math.pow(2, groupId);
-			 type_value = (int) Math.pow(2, vehicleID);
-			 break;
-		 }
+	private void SetData(int groupId, int vehicleID) {
+		switch (vehicleID) {
+		case 6:
+			group_value = 0;
+			type_value = 64;
+			break;
+		default:
+			group_value = (int) Math.pow(2, groupId);
+			type_value = (int) Math.pow(2, vehicleID);
+			break;
+		}
 	}
 
 	// when click list result item
 	private class ListResutlItemOnClickListener implements OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(ListResultAct.this, ListResultDetailAct.class);
-			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
+			Intent intent = new Intent(ListResultAct.this,
+					ListResultDetailAct.class);
+			intent.putExtra(Variables.TAG_VIOLATIOID,
+					mListResultItems.get(position).getVioID());
 			startActivity(intent);
 		}
 	}
@@ -135,103 +148,88 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	private class ListKeyWordOnItemClickListener implements OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
 			// TODO Auto-generated method stub
 			mListViewSearch.setVisibility(View.INVISIBLE);
 			// SearchView searchView= (SearchView)
 			// findViewById(R.id.searchView1);
-			int tvid = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+			int tvid = mSearchView.getContext().getResources()
+					.getIdentifier("android:id/search_src_text", null, null);
 			TextView textView = (TextView) mSearchView.findViewById(tvid);
-			ListKeyWordItem tempKey = (ListKeyWordItem) mListViewSearchAdapter.getItem(position);
+			ListKeyWordItem tempKey = (ListKeyWordItem) mListViewSearchAdapter
+					.getItem(position);
 			textView.setText(tempKey.getName().toString());
 		}
 
 	}
 
-	
-	private boolean Check_Group(int AgroupId)
-	{
-		if (group_value ==0)
+	private boolean Check_Group(int AgroupId) {
+		if (group_value == 0)
 			return true;
-		if (AgroupId !=0)
-		for (int i=0; i<Mahoa_Group.length;i++)
-		{
-			if (AgroupId >= Mahoa_Group[i])
-			{
-				AgroupId -= Mahoa_Group[i];
-				if (Mahoa_Group[i] == group_value)
-					return true;
+		if (AgroupId != 0)
+			for (int i = 0; i < Mahoa_Group.length; i++) {
+				if (AgroupId >= Mahoa_Group[i]) {
+					AgroupId -= Mahoa_Group[i];
+					if (Mahoa_Group[i] == group_value)
+						return true;
+				}
 			}
-		}
 		return false;
 	}
-	
-	private boolean Check_Type(int AvehicleID)
-	{
-		if (AvehicleID !=0)
-		for (int i=0; i<Mahoa_Type.length;i++)
-		{
-			if (AvehicleID >= Mahoa_Type[i])
-			{
-				AvehicleID -= Mahoa_Type[i];
-				if (Mahoa_Type[i] == type_value)
-					return true;
+
+	private boolean Check_Type(int AvehicleID) {
+		if (AvehicleID != 0)
+			for (int i = 0; i < Mahoa_Type.length; i++) {
+				if (AvehicleID >= Mahoa_Type[i]) {
+					AvehicleID -= Mahoa_Type[i];
+					if (Mahoa_Type[i] == type_value)
+						return true;
+				}
 			}
-		}
 		return false;
 	}
-	
+
 	// Name String filter
-	private String ReNameFilter(String Name)
-	{
-		String FName = Name;
-		int i = FName.length();
-		if (FName.charAt(i-1)==')')
-		{
-		while (FName.charAt(i-1)!='(')
-		{
-			i--;
-		}
-		FName = FName.substring(0, i-1);
-		}
-		return FName;
-	}
-	
+
 	// get result from position: group id(database: Groups table)
-	private ArrayList<ListResultItem> getResultFromGroupId(int groupId, int vehicleID) {
+	private ArrayList<ListResultItem> getResultFromViolation(int groupId,
+			int vehicleID) {
 		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
-        SetData(groupId, vehicleID);
+		SetData(groupId, vehicleID);
 		String sql = "Select * From Violation";
-		Log.e(LOG_TAG, sql);
+
 		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
 		// get result and save to mListResultItems
-		Log.e("dungna", "" + mResult.getCount());
 		mResult.moveToFirst();
 		String Violationame = null;
 		String Fine = null;
 		String strMessage = null;
 		long ViolationID = 0;
 		int AgroupID = 0;
-		int AvehicleID =0;
-		if (mResult.getCount()!=0)
-		while (!mResult.isAfterLast()) {
-			AgroupID = mResult.getInt(mResult.getColumnIndex("Group_Value"));
-			AvehicleID =mResult.getInt(mResult.getColumnIndex("Type_Value"));
-			if (Check_Type(AvehicleID) && Check_Group(AgroupID))
-			{
-			Violationame = ReNameFilter(mResult.getString(mResult.getColumnIndex("Name")));
-			Fine = mResult.getString(mResult.getColumnIndex("Fines"));
-			strMessage = mResult.getString(mResult.getColumnIndex("Object"));
-			ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-			list.add(new ListResultItem(Violationame, Fine, strMessage,ViolationID));
+		int AvehicleID = 0;
+		if (mResult.getCount() != 0)
+			while (!mResult.isAfterLast()) {
+				AgroupID = mResult
+						.getInt(mResult.getColumnIndex("Group_Value"));
+				AvehicleID = mResult.getInt(mResult
+						.getColumnIndex("Type_Value"));
+				if (Check_Type(AvehicleID) && Check_Group(AgroupID)) {
+					Violationame = Utils.ReNameFilter(mResult.getString(mResult
+							.getColumnIndex("Name")));
+					Fine = mResult.getString(mResult.getColumnIndex("Fines"));
+					strMessage = mResult.getString(mResult
+							.getColumnIndex("Object"));
+					ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
+					list.add(new ListResultItem(Violationame, Fine, strMessage,
+							ViolationID));
+				}
+				mResult.moveToNext();
 			}
-			mResult.moveToNext();
-		}
 		return list;
 	}
 
-
-// get all key search (database: Keyword table)
+	// get all key search (database: Keyword table)
 	private ArrayList<ListKeyWordItem> getKeySearchFromDatabase() {
 		ArrayList<ListKeyWordItem> list = new ArrayList<ListKeyWordItem>();
 		String sql = "Select * From Keywords";
@@ -242,7 +240,8 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		String nameEn = null;
 		while (!mResult.isAfterLast()) {
 			name = mResult.getString(mResult.getColumnIndex("Keyword_Name"));
-			nameEn = mResult.getString(mResult.getColumnIndex("Keyword_NameEN"));
+			nameEn = mResult
+					.getString(mResult.getColumnIndex("Keyword_NameEN"));
 			list.add(new ListKeyWordItem(name, nameEn));
 			mResult.moveToNext();
 		}
@@ -253,34 +252,31 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main_activity_action, menu);
-		
+
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 		searchMenuItem = menu.findItem(R.id.action_search);
 		mSearchView = (SearchView) searchMenuItem.getActionView();
 
-		mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+		mSearchView.setSearchableInfo(searchManager
+				.getSearchableInfo(getComponentName()));
 		mSearchView.setSubmitButtonEnabled(true);
 		mSearchView.setOnQueryTextListener(this);
 
-	  
-	       searchMenuItem.setOnActionExpandListener(new OnActionExpandListener()
-	        {
+		searchMenuItem.setOnActionExpandListener(new OnActionExpandListener() {
 
-	            @Override
-	            public boolean onMenuItemActionCollapse(MenuItem item)
-	            {
-	            	mListViewSearch.setVisibility(View.INVISIBLE);  
-	                return true; // Return true to collapse action view
-	            }
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				mListViewSearch.setVisibility(View.INVISIBLE);
+				return true; // Return true to collapse action view
+			}
 
-	            @Override
-	            public boolean onMenuItemActionExpand(MenuItem item)
-	            {	            
-	                // TODO Auto-generated method stub
-	                return true;
-	            }
-	        });
-	        
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
+				// TODO Auto-generated method stub
+				return true;
+			}
+		});
+
 		return true;
 	}
 
@@ -295,7 +291,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		// mListResultItems.set(index, object)
 		mListViewSearchAdapter.getFilter().filter(newText);
 		return false;
-	}	
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

@@ -8,21 +8,20 @@ package com.example.models;
 
 // An------------------------------------------------
 
-
-
 public class ListResultItem {
 	private String violation;
 	private String fine;
 	private String message;
 	private long ViolationID;
 
-	public ListResultItem(String violation,String fine, String message, long ViolationID) {
+	public ListResultItem(String violation, String fine, String message,
+			long ViolationID) {
 		this.violation = violation;
-		this.fine =fine;
+		this.fine = fine;
 		this.message = message;
 		this.ViolationID = ViolationID;
 	}
-	
+
 	public long getVioID() {
 		return ViolationID;
 	}
@@ -30,6 +29,7 @@ public class ListResultItem {
 	public void setVioID(long violationID) {
 		this.ViolationID = violationID;
 	}
+
 	public String getTitle() {
 		return violation;
 	}
@@ -37,7 +37,7 @@ public class ListResultItem {
 	public void setTitle(String violation) {
 		this.violation = violation;
 	}
-	
+
 	public String getfine() {
 		return fine;
 	}

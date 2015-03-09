@@ -8,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SearchFragment extends Fragment{
-public SearchFragment() {
-	// TODO Auto-generated constructor stub
-}
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-	return rootView;
+public class SearchFragment extends Fragment {
+	public SearchFragment() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_home, container,
+				false);
+		return rootView;
 	}
 }

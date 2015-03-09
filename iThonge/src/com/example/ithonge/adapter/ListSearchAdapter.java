@@ -154,7 +154,8 @@ public class ListSearchAdapter extends BaseAdapter implements Filterable {
 	 * @param friendList
 	 *            friend list
 	 */
-	public ListSearchAdapter(Context context, ArrayList<ListKeyWordItem> friendList) {
+	public ListSearchAdapter(Context context,
+			ArrayList<ListKeyWordItem> friendList) {
 		this.context = context;
 		this.friendList = friendList;
 		this.filteredList = friendList;
@@ -218,11 +219,14 @@ public class ListSearchAdapter extends BaseAdapter implements Filterable {
 		final ListKeyWordItem ListKeyWordItem = (ListKeyWordItem) getItem(position);
 
 		if (view == null) {
-			LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = layoutInflater.inflate(R.layout.list_search_item, parent, false);
+			LayoutInflater layoutInflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = layoutInflater.inflate(R.layout.list_search_item, parent,
+					false);
 			holder = new ViewHolder();
 			// holder.iconText = (TextView) view.findViewById(R.id.icon_text);
-			holder.name = (TextView) view.findViewById(R.id.tv_list_search_item);
+			holder.name = (TextView) view
+					.findViewById(R.id.tv_list_search_item);
 			// holder.iconText.setTypeface(typeface, Typeface.BOLD);
 			// holder.iconText.setTextColor(context.getResources().getColor(R.color.white));
 			// holder.name.setTypeface(typeface, Typeface.NORMAL);
@@ -277,7 +281,8 @@ public class ListSearchAdapter extends BaseAdapter implements Filterable {
 
 				// search content in friend list
 				for (ListKeyWordItem item : friendList) {
-					if (item.getNameEN().toLowerCase().contains(constraint.toString().toLowerCase())) {
+					if (item.getNameEN().toLowerCase()
+							.contains(constraint.toString().toLowerCase())) {
 						tempList.add(item);
 					}
 				}
@@ -302,7 +307,8 @@ public class ListSearchAdapter extends BaseAdapter implements Filterable {
 		 */
 		@SuppressWarnings("unchecked")
 		@Override
-		protected void publishResults(CharSequence constraint, FilterResults results) {
+		protected void publishResults(CharSequence constraint,
+				FilterResults results) {
 			filteredList = (ArrayList<ListKeyWordItem>) results.values;
 			notifyDataSetChanged();
 		}

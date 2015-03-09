@@ -7,22 +7,17 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -77,12 +72,15 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		mTitle = getTitle();
 		mDrawerTitles = getResources().getStringArray(R.array.drawer_titles);
-		mDrawerIcons = new int[] { R.drawable.ic_action_main, R.drawable.ico_synchronize, R.drawable.ico_search, R.drawable.ico_tutorial,
-				R.drawable.ico_about, R.drawable.ico_bookmark };
+		mDrawerIcons = new int[] { R.drawable.ic_action_main,
+				R.drawable.ico_synchronize, R.drawable.ico_search,
+				R.drawable.ico_tutorial, R.drawable.ico_about,
+				R.drawable.ico_bookmark };
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_sliding_menu);
 
@@ -93,7 +91,8 @@ public class MainActivity extends Activity {
 		// set up the drawer's list view with items and click listener
 		listNavDrawerItems = new ArrayList<NavDrawerItem>();
 		for (int i = 0; i < mDrawerTitles.length; i++) {
-			listNavDrawerItems.add(new NavDrawerItem(mDrawerTitles[i], mDrawerIcons[i]));
+			listNavDrawerItems.add(new NavDrawerItem(mDrawerTitles[i],
+					mDrawerIcons[i]));
 		}
 		mDAdapter = new NavDrawerListAdapter(this, listNavDrawerItems);
 		mDrawerList.setAdapter(mDAdapter);
@@ -102,8 +101,11 @@ public class MainActivity extends Activity {
 		// enable ActionBar app icon to behave as action to toggle nav drawer
 		getActionBar().setDisplayHomeAsUpEnabled(false);
 		getActionBar().setHomeButtonEnabled(true);
-		getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
-		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
+		getActionBar().setIcon(
+				new ColorDrawable(getResources().getColor(
+						android.R.color.transparent)));
+		getActionBar().setBackgroundDrawable(
+				getResources().getDrawable(R.color.actionbar_bg));
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// ActionBarDrawerToggle ties together the the proper interactions
@@ -160,7 +162,8 @@ public class MainActivity extends Activity {
 			if (intent.resolveActivity(getPackageManager()) != null) {
 				startActivity(intent);
 			} else {
-				Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
+				Toast.makeText(this, R.string.app_not_available,
+						Toast.LENGTH_LONG).show();
 			}
 			return true;
 		default:
@@ -169,9 +172,11 @@ public class MainActivity extends Activity {
 	}
 
 	/* The click listener for ListView in the navigation drawer */
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+	private class DrawerItemClickListener implements
+			ListView.OnItemClickListener {
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
 			selectItem(position);
 		}
 	}
@@ -209,7 +214,8 @@ public class MainActivity extends Activity {
 		}
 		if (fragment != null) {
 			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+			fragmentManager.beginTransaction()
+					.replace(R.id.frame_container, fragment).commit();
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
 			setTitle(mDrawerTitles[position]);

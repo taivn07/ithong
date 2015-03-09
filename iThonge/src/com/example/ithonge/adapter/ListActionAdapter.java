@@ -46,14 +46,17 @@ public class ListActionAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		if (inflater == null) {
-			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.list_action_item, null);
 		}
-		ImageView imgIcon = (ImageView) convertView.findViewById(R.id.lv_list_action_icon);
+		ImageView imgIcon = (ImageView) convertView
+				.findViewById(R.id.lv_list_action_icon);
 		imgIcon.setImageResource(listActionItems.get(position).getIcon());
-		TextView tvTitle = (TextView) convertView.findViewById(R.id.lv_list_action_title);
+		TextView tvTitle = (TextView) convertView
+				.findViewById(R.id.lv_list_action_title);
 		tvTitle.setText(listActionItems.get(position).getTitle());
 
 		return convertView;
