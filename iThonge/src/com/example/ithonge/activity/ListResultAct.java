@@ -192,7 +192,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 				AgroupID = mResult.getInt(mResult.getColumnIndex("Group_Value"));
 				AvehicleID = mResult.getInt(mResult.getColumnIndex("Type_Value"));
 				if (Check_Type(AvehicleID) && Check_Group(AgroupID)) {
-					ViolatioName = mResult.getString(mResult.getColumnIndex("Name"));
+					ViolatioName = Utils.ReNameFilter(mResult.getString(mResult.getColumnIndex("Name")));
 					violationNameEn = mResult.getString(mResult.getColumnIndex("NameEN"));
 					Fine = mResult.getString(mResult.getColumnIndex("Fines"));
 					strMessage = mResult.getString(mResult.getColumnIndex("Object"));
