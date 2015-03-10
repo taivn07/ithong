@@ -39,6 +39,10 @@ public class ListResultItem {
 		this.violationName = violation;
 	}
 
+	public String getTitle() {
+		return violationName;
+	}
+
 	public String getVioNameEn() {
 		return violationNameEn;
 	}

@@ -7,6 +7,7 @@
     <string name="search_hint">Search hint</string>
     <string name="search_label">Search label</string>
      <string name="search_title">Search title</string>
+     <string name="bookmark_title">Bookmark title</string>
     
     <string name="choose">Menu</string>
     <string name="tv_muc">Mục</string>
@@ -17,6 +18,7 @@
     <string name="tv_hpbs">Hình phạt bổ sung: </string>
     <string name="tv_hpbskhac">Bổ sung khác: </string>
     <string name="tv_hpbt">Bồi thường: </string>
+    <string name="tv_hvlq">Hành vi liên quan: </string>
     
     <!-- layout: list_action : -->
     <string name="choose_action">Chọn hành vi</string>

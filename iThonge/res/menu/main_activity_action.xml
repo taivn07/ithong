@@ -8,6 +8,7 @@
         android:showAsAction="always|collapseActionView"
         android:title="@string/search_hint"/>
 
+<!-- <<<<<<< HEAD -->
     <!-- Location Found -->
     <!-- <item -->
     <!-- android:id="@+id/action_location_found" -->
@@ -23,4 +24,6 @@
     <!-- android:showAsAction="ifRoom" -->
     <!-- android:title="@string/search_title"/>android:showAsAction="always|collapseActionView" -->
 
+<!-- ======= -->
+<!-- >>>>>>> 57341c21b942bb0d91392cfb2bea1d772d9b9417 -->
 </menu>

@@ -47,6 +47,7 @@ public class SearchResultAct extends Activity {
 	private ListView mListViewSearch;
 	private ArrayList<ListKeyWordItem> mListKeyWordItems;
 	private ListSearchAdapter mListViewSearchAdapter;
+	private TextView txtQuery;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class SearchResultAct extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
-		//Variables.currentTitle = getActionBar().getTitle().toString();
+		// Variables.currentTitle = getActionBar().getTitle().toString();
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		// init local variables
 		tvResultCount = (TextView) findViewById(R.id.tv_search_result_count);
@@ -128,5 +129,6 @@ public class SearchResultAct extends Activity {
 				tvResultCount.setText("Không tìm thấy kết quả nào.");
 			}
 		}
+
 	}
 }

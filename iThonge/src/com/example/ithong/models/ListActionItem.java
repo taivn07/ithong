@@ -18,7 +18,7 @@ public class ListActionItem {
 	public void setIcon(int icon) {
 		this.icon = icon;
 	}
-	
+
 	public int getpos() {
 		return position;
 	}
