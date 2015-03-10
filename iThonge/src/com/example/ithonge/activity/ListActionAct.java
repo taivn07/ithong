@@ -19,11 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.ithong.models.DatabaseHelper;
+import com.example.ithong.models.ListActionItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListActionAdapter;
 import com.example.ithonge.utils.Variables;
-import com.example.models.DatabaseHelper;
-import com.example.models.ListActionItem;
 
 public class ListActionAct extends Activity {
 	private ListView mListAct;

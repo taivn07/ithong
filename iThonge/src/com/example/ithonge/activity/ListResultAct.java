@@ -21,13 +21,13 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.example.ithong.models.DatabaseHelper;
+import com.example.ithong.models.ListKeyWordItem;
+import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListResultAdapter;
 import com.example.ithonge.adapter.ListSearchAdapter;
 import com.example.ithonge.utils.Variables;
-import com.example.models.DatabaseHelper;
-import com.example.models.ListKeyWordItem;
-import com.example.models.ListResultItem;
 
 public class ListResultAct extends Activity implements SearchView.OnQueryTextListener {
 	// ListView Result
@@ -56,6 +56,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_result);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		handleIntent(getIntent());
 		// <<<<<<< HEAD
 		// tvResultCount = (TextView) findViewById(R.id.tv_result_count);
 		// optionPosition =
@@ -76,6 +77,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		getActionBar().setTitle(
 				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "
 						+ getResources().getStringArray(R.array.list_action_item)[optionPosition]);
+		Variables.currentTitle = getActionBar().getTitle().toString();
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		// init local variables
 		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
@@ -128,7 +130,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 			int tvid = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
 			TextView textView = (TextView) mSearchView.findViewById(tvid);
 			ListKeyWordItem tempKey = (ListKeyWordItem) mListViewSearchAdapter.getItem(position);
-			textView.setText(tempKey.getName().toString());
+			textView.setText(tempKey.getNameEN().toString());
 		}
 
 	}
@@ -146,18 +148,20 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		// get result and save to mListResultItems
 		Log.e("dungna", "" + mResult.getCount());
 		mResult.moveToFirst();
-		String Violationame = null;
+		String ViolatioName = null;
 		String Fine = null;
 		String strMessage = null;
+		String violationNameEn = null;
 		long ViolationID = 0;
 		int count = 0;
 		if (mResult.getCount() != 0)
 			while (!mResult.isLast()) {
-				Violationame = mResult.getString(mResult.getColumnIndex("Name"));
+				ViolatioName = mResult.getString(mResult.getColumnIndex("Name"));
+				violationNameEn = mResult.getString(mResult.getColumnIndex("NameEN"));
 				Fine = mResult.getString(mResult.getColumnIndex("Fines"));
 				strMessage = mResult.getString(mResult.getColumnIndex("Object"));
 				ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-				list.add(new ListResultItem(Violationame, Fine, strMessage, ViolationID));
+				list.add(new ListResultItem(ViolatioName, violationNameEn, Fine, strMessage, ViolationID));
 				mResult.moveToNext();
 			}
 		return list;
@@ -204,13 +208,25 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		mListViewSearch.setVisibility(View.INVISIBLE);
+		ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
+		temp = getResultByTextInput(query);
+		if ((temp != null) && (temp.size() != 0)) {
+			mListResultItems.clear();
+			mListResultItems.addAll(temp);
+			mListResultAdapter.notifyDataSetChanged();
+			Log.e("Dungna", "not null");
+		}
+		Log.e("Dungna", "OnqueryTextsubmit");
 		return false;
 	}
 
 	@Override
 	public boolean onQueryTextChange(String newText) {
 		// mListResultItems.set(index, object)
+		mListViewSearch.setVisibility(View.VISIBLE);
 		mListViewSearchAdapter.getFilter().filter(newText);
+		Variables.currentListResultItems.clear();
+		Variables.currentListResultItems.addAll(mListResultItems);
 		Log.e("dungna", "1onQueryTextChange");
 		return false;
 	}
@@ -230,4 +246,47 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+	// input text and search result from mListResult item
+	private ArrayList<ListResultItem> getResultByTextInput(String textInput) {
+		Log.e("Dungna", "11");
+		ArrayList<ListResultItem> tempList = new ArrayList<ListResultItem>();
+		for (ListResultItem item : mListResultItems) {
+			if (item.getVioNameEn().toLowerCase().contains(textInput.toString().toLowerCase())) {
+				tempList.add(item);
+			}
+		}
+		Log.e("Dungna", "11: " + tempList.size());
+		return tempList;
+	}
+
+	// comment by dungna, date: 03/10/2015
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		Log.e("Dungna", "not null");
+		setIntent(intent);
+		handleIntent(intent);
+	}
+
+	private void handleIntent(Intent intent) {
+		Log.e("Dungna", "1not null");
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			String query = intent.getStringExtra(SearchManager.QUERY);
+			Log.e("Dungna", "2not null");
+			ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
+			temp = getResultByTextInput(query);
+			if ((temp != null) && (temp.size() != 0)) {
+				mListResultItems = temp;
+				mListResultAdapter.notifyDataSetChanged();
+				tvResultCount.setText("Có " + mListResultItems.size() + " kết quả được tìm thấy.");
+				Log.e("Dungna", "not null");
+			}
+
+		}
+	}
+
+	// Read more:
+	// http://www.androidhub4you.com/2014/04/android-action-bar-search-inside.html#ixzz3TwqGjDtQ
+	// end commnet
 }

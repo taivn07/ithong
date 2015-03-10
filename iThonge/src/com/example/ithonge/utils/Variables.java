@@ -1,11 +1,18 @@
 package com.example.ithonge.utils;
 
+import java.util.ArrayList;
+
+import com.example.ithong.models.ListResultItem;
+
 public class Variables {
-	//for Activity
-	//Main
+	// Global variables
+	public static  String currentTitle = "";
+	public static ArrayList<ListResultItem> currentListResultItems = new ArrayList<ListResultItem>();
+	// for Activity
+	// Main
 	public static final String TAG_VEHICLE_POSITION = "vehicle_position";
 	public static final String TAG_OPTION_POSITION = "option_position";
-	public static final String TAG_VIOLATIOID ="ViolationID";
+	public static final String TAG_VIOLATIOID = "ViolationID";
 	// Tag for Database
 	// Violation Table
 	public static final String TAG_ROW_ID = "rowid";

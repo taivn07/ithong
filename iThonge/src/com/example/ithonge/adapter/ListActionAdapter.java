@@ -2,8 +2,8 @@ package com.example.ithonge.adapter;
 
 import java.util.ArrayList;
 
+import com.example.ithong.models.ListActionItem;
 import com.example.ithonge.R;
-import com.example.models.ListActionItem;
 
 import android.content.Context;
 import android.view.LayoutInflater;

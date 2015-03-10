@@ -1,7 +1,0 @@
-package com.example.ithonge.adapter;
-
-import android.widget.BaseAdapter;
-
-public class ListActionAdapter extends BaseAdapter {
-
-}

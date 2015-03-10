@@ -24,9 +24,9 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.ithong.models.NavDrawerItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.NavDrawerListAdapter;
-import com.example.models.NavDrawerItem;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;

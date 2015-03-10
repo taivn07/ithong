@@ -2,9 +2,9 @@ package com.example.ithonge.activity;
 
 import java.io.IOException;
 
+import com.example.ithong.models.DatabaseHelper;
 import com.example.ithonge.R;
 import com.example.ithonge.utils.Variables;
-import com.example.models.DatabaseHelper;
 
 import android.app.Activity;
 import android.content.Intent;

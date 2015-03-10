@@ -2,9 +2,9 @@ package com.example.ithonge.adapter;
 
 import java.util.ArrayList;
 
+import com.example.ithong.models.ListActionItem;
+import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
-import com.example.models.ListActionItem;
-import com.example.models.ListResultItem;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -54,17 +54,15 @@ public class ListResultAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.list_result_item, null);
 		}
 		TextView btt = (TextView) convertView.findViewById(R.id.tv_list_result_icon);
-		btt.setText(""+(position+1));
+		btt.setText("" + (position + 1));
 		TextView tvTitle = (TextView) convertView.findViewById(R.id.tv_list_result_title);
-		tvTitle.setText(mListResultItems.get(position).getTitle());
+		tvTitle.setText(mListResultItems.get(position).getVioName());
 		TextView tvFine = (TextView) convertView.findViewById(R.id.tv_list_result_fine);
 		tvFine.setText(mListResultItems.get(position).getfine());
 		TextView tvMessage = (TextView) convertView.findViewById(R.id.tv_list_result_message);
-		if (mListResultItems.get(position).getMessage()!="")
-		{
-		  tvMessage.setText(context.getResources().getString(R.string.tv_apdung)+mListResultItems.get(position).getMessage());
-		}
-		else {
+		if (mListResultItems.get(position).getMessage() != "") {
+			tvMessage.setText(context.getResources().getString(R.string.tv_apdung) + mListResultItems.get(position).getMessage());
+		} else {
 			tvMessage.setText(null);
 		}
 

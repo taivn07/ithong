@@ -21,6 +21,6 @@
     <!-- android:id="@+id/action_refresh" -->
     <!-- android:icon="@drawable/ico_bookmark" -->
     <!-- android:showAsAction="ifRoom" -->
-    <!-- android:title="@string/search_title"/> -->
+    <!-- android:title="@string/search_title"/>android:showAsAction="always|collapseActionView" -->
 
 </menu>

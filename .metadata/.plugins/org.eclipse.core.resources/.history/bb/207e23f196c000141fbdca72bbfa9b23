@@ -1,7 +1,0 @@
-package com.example.ithonge;
-
-import android.app.Activity;
-
-public class SplashAct extends Activity{
-
-}

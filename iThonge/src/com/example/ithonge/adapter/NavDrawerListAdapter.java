@@ -3,8 +3,8 @@ package com.example.ithonge.adapter;
  
 import java.util.ArrayList;
 
+import com.example.ithong.models.NavDrawerItem;
 import com.example.ithonge.R;
-import com.example.models.NavDrawerItem;
 
 
 import android.app.Activity;
