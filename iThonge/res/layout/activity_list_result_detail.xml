@@ -4,129 +4,147 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical" >
- 
-    <ScrollView 
+
+    <ScrollView
         android:id="@+id/show_result"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/show_object"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
-    
-    <TextView
-        android:id="@+id/show_mess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/orange"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp" />
-    
-    <TextView
-        android:id="@+id/show_fine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:paddingLeft="10dp" />
-    
-    <TextView
-        android:id="@+id/show_additionPtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:paddingTop="50dp"
-        android:paddingLeft="15dp"
-        android:text="@string/tv_hpbs" />
-    
-    <TextView
-        android:id="@+id/show_additionP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp" />
-    
-    <TextView
-        android:id="@+id/show_additionPtitle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:paddingTop="20dp"
-        android:paddingLeft="15dp"
-        android:text="@string/tv_hpbskhac" />
-    
-     <TextView
-        android:id="@+id/show_additionP2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp" />
-    
-      <TextView
-        android:id="@+id/show_additionremretitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:paddingLeft="15dp"
-        android:paddingTop="20dp"
-        android:text="@string/tv_hpbt" />
-      
-    <TextView
-        android:id="@+id/show_reme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp" />
-    
-    <TextView
-        android:id="@+id/show_hanhvilienquan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:background="@color/darkorange"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:paddingLeft="15dp"
-        android:paddingTop="20dp"
-        android:text="@string/tv_hvlq" />
-    
-    <com.example.ithonge.utils.ExpandableHeightListView
-        android:id="@+id/lv_list_hvlq"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg_list_key_search"
-        android:clickable="true"
-        android:visibility="visible" >
-    </com.example.ithonge.utils.ExpandableHeightListView>
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/show_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/green"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:text="@string/tv_noidungchinh"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/show_object"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/show_mess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/orange"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/show_fine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/show_additionPtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:text="@string/tv_hpbs"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/show_additionP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/show_additionPtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:text="@string/tv_hpbskhac"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/show_additionP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/show_additionremretitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:text="@string/tv_hpbt"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/show_reme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/show_hanhvilienquan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/darkorange"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:text="@string/tv_hvlq"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.example.ithonge.utils.ExpandableHeightListView
+                android:id="@+id/lv_list_hvlq"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_list_key_search"
+                android:clickable="true"
+                android:visibility="visible" >
+            </com.example.ithonge.utils.ExpandableHeightListView>
         </TableLayout>
-    
     </ScrollView>
-    
 
 </LinearLayout>

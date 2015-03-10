@@ -1,10 +1,8 @@
 package com.example.ithonge.activity;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,28 +10,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.ithong.models.DatabaseHelper;
-import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
-import com.example.ithonge.adapter.ListResultAdapter;
-import com.example.ithonge.utils.ExpandableHeightListView;
-import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
 public class ListResultDetailAct extends Activity {
 	private DatabaseHelper mDataBaseHelper;
 	private long VioID;
-	private ExpandableHeightListView mListView;
 	private ScrollView mScrollView;
-	private ArrayList<ListResultItem> mListResultItems;
-	private ListResultAdapter mListResultAdapter;
 	private TextView ObjText;
 	private TextView MessText;
 	private TextView FineText;
@@ -107,56 +95,10 @@ public class ListResultDetailAct extends Activity {
 		mScrollView = (ScrollView) findViewById(R.id.show_result);
 		mScrollView.fullScroll(ScrollView.FOCUS_UP);
 		mScrollView.smoothScrollTo(0, 0);
-		mListView = (ExpandableHeightListView) findViewById(R.id.lv_list_hvlq);
-		mListView.setExpanded(true);
-		mListResultItems = getResultFromViolation(VioID);
-		mListResultAdapter = new ListResultAdapter(this, mListResultItems);
-		mListView.setOnItemClickListener(new ListResutlItemOnClickListener());
-		mListView.setAdapter(mListResultAdapter);
+		
+		MakeListViewTask mk = new MakeListViewTask(this, VioID);
+		mk.execute();
 
-	}
-
-	private class ListResutlItemOnClickListener implements OnItemClickListener {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			// TODO Auto-generated method stub
-			Intent intent = new Intent(ListResultDetailAct.this, ListResultDetailAct.class);
-			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());	
-			startActivity(intent);
-			finish();
-		}
-	}
-
-	
-	private ArrayList<ListResultItem> getResultFromViolation(long VioID) {
-		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
-
-		String sql = "Select Violation.* From Violation,Relations Where Relations.Violation_ID ="+VioID+" and Relations.R_Violation_ID = Violation.ID";
-		Cursor mResult = mDataBaseHelper.getResultFromSQL(sql);
-		// get result and save to mListResultItems
-		Log.e("SQL-----", "" + mResult.getCount());
-		mResult.moveToFirst();
-		String Violationame = null;
-		String Fine = null;
-		String strMessage = null;
-		long ViolationID = 0;
-		if (mResult.getCount() != 0)
-			while (!mResult.isAfterLast()) {
-
-				Violationame = Utils.ReNameFilter(mResult.getString(mResult
-						.getColumnIndex("Name")));
-				Fine = mResult.getString(mResult.getColumnIndex("Fines"));
-				strMessage = mResult
-						.getString(mResult.getColumnIndex("Object"));
-				ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-				list.add(new ListResultItem(Violationame,null, Fine, strMessage,
-						ViolationID));
-
-				mResult.moveToNext();
-			}
-		return list;
 	}
 
 	private boolean Checkbookmarked() {
