@@ -1,7 +1,0 @@
-package com.example.ithonge;
-
-public class BookmarkFragment {
-	public BookmarkFragment() {
-		// TODO Auto-generated constructor stub
-	}
-}

@@ -23,17 +23,16 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.example.ithong.models.DatabaseHelper;
+import com.example.ithong.models.ListKeyWordItem;
+import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListResultAdapter;
 import com.example.ithonge.adapter.ListSearchAdapter;
 import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
-import com.example.models.DatabaseHelper;
-import com.example.models.ListKeyWordItem;
-import com.example.models.ListResultItem;
 
-public class ListResultAct extends Activity implements
-		SearchView.OnQueryTextListener {
+public class ListResultAct extends Activity implements SearchView.OnQueryTextListener {
 	// ListView Result
 	private ListView mListResult;
 	private ListResultAdapter mListResultAdapter;
@@ -61,24 +60,15 @@ public class ListResultAct extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_result);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		optionPosition = getIntent().getExtras().getInt(
-				Variables.TAG_OPTION_POSITION);
-		vehiclePosition = getIntent().getExtras().getInt(
-				Variables.TAG_VEHICLE_POSITION);
-		getActionBar().setIcon(
-				new ColorDrawable(getResources().getColor(
-						android.R.color.transparent)));
-		getActionBar().setBackgroundDrawable(
-				getResources().getDrawable(R.color.actionbar_bg));
-		getActionBar()
-				.setTitle(
-						getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]
-								+ "  >>  "
-								+ getResources().getStringArray(
-										R.array.list_action_item)[optionPosition]);
+		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
+		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
+		getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
+		getActionBar().setTitle(
+				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "
+						+ getResources().getStringArray(R.array.list_action_item)[optionPosition]);
 		getActionBar().setDisplayHomeAsUpEnabled(false);
 		// init local variables
 		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
@@ -87,21 +77,17 @@ public class ListResultAct extends Activity implements
 		try {
 			mDatabaseHelper = new DatabaseHelper(this);
 		} catch (IOException e) {
-			Log.e(LOG_TAG,
-					"Can't Create Database. Please check and try again. Error: "
-							+ e.getMessage());
+			Log.e(LOG_TAG, "Can't Create Database. Please check and try again. Error: " + e.getMessage());
 		}
 
 		// create listview
-		mListResultItems = getResultFromViolation(optionPosition,
-				vehiclePosition);
+		mListResultItems = getResultFromViolation(optionPosition, vehiclePosition);
 		mListResult = (ListView) findViewById(R.id.lv_list_result);
 		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
 		mListResultAdapter = new ListResultAdapter(this, mListResultItems);
 		mListResult.setAdapter(mListResultAdapter);
 
-		tvResultCount.setText("Có " + mListResultItems.size()
-				+ " kết quả được tìm thấy.");
+		tvResultCount.setText("Có " + mListResultItems.size() + " kết quả được tìm thấy.");
 
 		// Create List Search
 		mListViewSearch = (ListView) findViewById(R.id.lv_list_search);
@@ -110,8 +96,7 @@ public class ListResultAct extends Activity implements
 		mListViewSearchAdapter = new ListSearchAdapter(this, mListKeyWordItems);
 		mListViewSearch.setAdapter(mListViewSearchAdapter);
 		mListViewSearch.setTextFilterEnabled(true);
-		mListViewSearch
-				.setOnItemClickListener(new ListKeyWordOnItemClickListener());
+		mListViewSearch.setOnItemClickListener(new ListKeyWordOnItemClickListener());
 
 	}
 
@@ -133,13 +118,10 @@ public class ListResultAct extends Activity implements
 	private class ListResutlItemOnClickListener implements OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(ListResultAct.this,
-					ListResultDetailAct.class);
-			intent.putExtra(Variables.TAG_VIOLATIOID,
-					mListResultItems.get(position).getVioID());
+			Intent intent = new Intent(ListResultAct.this, ListResultDetailAct.class);
+			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
 			startActivity(intent);
 		}
 	}
@@ -148,18 +130,15 @@ public class ListResultAct extends Activity implements
 	private class ListKeyWordOnItemClickListener implements OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
 			mListViewSearch.setVisibility(View.INVISIBLE);
 			// SearchView searchView= (SearchView)
 			// findViewById(R.id.searchView1);
-			int tvid = mSearchView.getContext().getResources()
-					.getIdentifier("android:id/search_src_text", null, null);
+			int tvid = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
 			TextView textView = (TextView) mSearchView.findViewById(tvid);
-			ListKeyWordItem tempKey = (ListKeyWordItem) mListViewSearchAdapter
-					.getItem(position);
-			textView.setText(tempKey.getName().toString());
+			ListKeyWordItem tempKey = (ListKeyWordItem) mListViewSearchAdapter.getItem(position);
+			textView.setText(tempKey.getNameEN().toString());
 		}
 
 	}
@@ -193,8 +172,7 @@ public class ListResultAct extends Activity implements
 	// Name String filter
 
 	// get result from position: group id(database: Groups table)
-	private ArrayList<ListResultItem> getResultFromViolation(int groupId,
-			int vehicleID) {
+	private ArrayList<ListResultItem> getResultFromViolation(int groupId, int vehicleID) {
 		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
 		SetData(groupId, vehicleID);
 		String sql = "Select * From Violation";
@@ -202,27 +180,24 @@ public class ListResultAct extends Activity implements
 		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
 		// get result and save to mListResultItems
 		mResult.moveToFirst();
-		String Violationame = null;
+		String ViolatioName = null;
 		String Fine = null;
 		String strMessage = null;
+		String violationNameEn = null;
 		long ViolationID = 0;
 		int AgroupID = 0;
 		int AvehicleID = 0;
 		if (mResult.getCount() != 0)
 			while (!mResult.isAfterLast()) {
-				AgroupID = mResult
-						.getInt(mResult.getColumnIndex("Group_Value"));
-				AvehicleID = mResult.getInt(mResult
-						.getColumnIndex("Type_Value"));
+				AgroupID = mResult.getInt(mResult.getColumnIndex("Group_Value"));
+				AvehicleID = mResult.getInt(mResult.getColumnIndex("Type_Value"));
 				if (Check_Type(AvehicleID) && Check_Group(AgroupID)) {
-					Violationame = Utils.ReNameFilter(mResult.getString(mResult
-							.getColumnIndex("Name")));
+					ViolatioName = mResult.getString(mResult.getColumnIndex("Name"));
+					violationNameEn = mResult.getString(mResult.getColumnIndex("NameEN"));
 					Fine = mResult.getString(mResult.getColumnIndex("Fines"));
-					strMessage = mResult.getString(mResult
-							.getColumnIndex("Object"));
+					strMessage = mResult.getString(mResult.getColumnIndex("Object"));
 					ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-					list.add(new ListResultItem(Violationame, Fine, strMessage,
-							ViolationID));
+					list.add(new ListResultItem(ViolatioName, violationNameEn, Fine, strMessage, ViolationID));
 				}
 				mResult.moveToNext();
 			}
@@ -240,8 +215,7 @@ public class ListResultAct extends Activity implements
 		String nameEn = null;
 		while (!mResult.isAfterLast()) {
 			name = mResult.getString(mResult.getColumnIndex("Keyword_Name"));
-			nameEn = mResult
-					.getString(mResult.getColumnIndex("Keyword_NameEN"));
+			nameEn = mResult.getString(mResult.getColumnIndex("Keyword_NameEN"));
 			list.add(new ListKeyWordItem(name, nameEn));
 			mResult.moveToNext();
 		}
@@ -257,8 +231,7 @@ public class ListResultAct extends Activity implements
 		searchMenuItem = menu.findItem(R.id.action_search);
 		mSearchView = (SearchView) searchMenuItem.getActionView();
 
-		mSearchView.setSearchableInfo(searchManager
-				.getSearchableInfo(getComponentName()));
+		mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		mSearchView.setSubmitButtonEnabled(true);
 		mSearchView.setOnQueryTextListener(this);
 
@@ -283,13 +256,26 @@ public class ListResultAct extends Activity implements
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		mListViewSearch.setVisibility(View.INVISIBLE);
+		ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
+		temp = getResultByTextInput(query);
+		if ((temp != null) && (temp.size() != 0)) {
+			mListResultItems.clear();
+			mListResultItems.addAll(temp);
+			mListResultAdapter.notifyDataSetChanged();
+			Log.e("Dungna", "not null");
+		}
+		Log.e("Dungna", "OnqueryTextsubmit");
 		return false;
 	}
 
 	@Override
 	public boolean onQueryTextChange(String newText) {
 		// mListResultItems.set(index, object)
+		mListViewSearch.setVisibility(View.VISIBLE);
 		mListViewSearchAdapter.getFilter().filter(newText);
+		Variables.currentListResultItems.clear();
+		Variables.currentListResultItems.addAll(mListResultItems);
+		Log.e("dungna", "1onQueryTextChange");
 		return false;
 	}
 
@@ -309,4 +295,46 @@ public class ListResultAct extends Activity implements
 		}
 	}
 
+	// input text and search result from mListResult item
+	private ArrayList<ListResultItem> getResultByTextInput(String textInput) {
+		Log.e("Dungna", "11");
+		ArrayList<ListResultItem> tempList = new ArrayList<ListResultItem>();
+		for (ListResultItem item : mListResultItems) {
+			if (item.getVioNameEn().toLowerCase().contains(textInput.toString().toLowerCase())) {
+				tempList.add(item);
+			}
+		}
+		Log.e("Dungna", "11: " + tempList.size());
+		return tempList;
+	}
+
+	// comment by dungna, date: 03/10/2015
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		Log.e("Dungna", "not null");
+		setIntent(intent);
+		handleIntent(intent);
+	}
+
+	private void handleIntent(Intent intent) {
+		Log.e("Dungna", "1not null");
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			String query = intent.getStringExtra(SearchManager.QUERY);
+			Log.e("Dungna", "2not null");
+			ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
+			temp = getResultByTextInput(query);
+			if ((temp != null) && (temp.size() != 0)) {
+				mListResultItems = temp;
+				mListResultAdapter.notifyDataSetChanged();
+				tvResultCount.setText("Có " + mListResultItems.size() + " kết quả được tìm thấy.");
+				Log.e("Dungna", "not null");
+			}
+
+		}
+	}
+
+	// Read more:
+	// http://www.androidhub4you.com/2014/04/android-action-bar-search-inside.html#ixzz3TwqGjDtQ
+	// end commnet
 }

@@ -130,8 +130,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.example.ithong.models.ListKeyWordItem;
 import com.example.ithonge.R;
-import com.example.models.ListKeyWordItem;
 
 /**
  * Display friend list

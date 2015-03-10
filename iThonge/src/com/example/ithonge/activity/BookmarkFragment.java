@@ -13,11 +13,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.example.ithong.models.DatabaseHelper;
+import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListResultAdapter;
 import com.example.ithonge.utils.Variables;
-import com.example.models.DatabaseHelper;
-import com.example.models.ListResultItem;
 
 public class BookmarkFragment extends Fragment {
 
@@ -31,22 +31,18 @@ public class BookmarkFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.fragment_bookmark, container,
-				false);
+		View rootView = inflater.inflate(R.layout.fragment_bookmark, container, false);
 
 		mListResultItems = new ArrayList<ListResultItem>();
 
 		// create listview
 		mListResultItems = getListBookmarkFromDB();
 
-		mListResult = (ListView) rootView
-				.findViewById(R.id.lv_list_bookmark_result);
+		mListResult = (ListView) rootView.findViewById(R.id.lv_list_bookmark_result);
 		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
-		mListResultAdapter = new ListResultAdapter(getActivity(),
-				mListResultItems);
+		mListResultAdapter = new ListResultAdapter(getActivity(), mListResultItems);
 		mListResult.setAdapter(mListResultAdapter);
 
 		return rootView;
@@ -58,20 +54,17 @@ public class BookmarkFragment extends Fragment {
 		mListResultItems = getListBookmarkFromDB();
 
 		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
-		mListResultAdapter = new ListResultAdapter(getActivity(),
-				mListResultItems);
+		mListResultAdapter = new ListResultAdapter(getActivity(), mListResultItems);
 		mListResult.setAdapter(mListResultAdapter);
 	};
 
 	private class ListResutlItemOnClickListener implements OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(getActivity(), ListResultDetailAct.class);
-			intent.putExtra(Variables.TAG_VIOLATIOID,
-					mListResultItems.get(position).getVioID());
+			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
 			getActivity().startActivity(intent);
 		}
 	}
@@ -84,20 +77,19 @@ public class BookmarkFragment extends Fragment {
 
 		mResult.moveToFirst();
 		String Violationame = null;
+		String ViolationNameEn = null;
 		String Fine = null;
 		String strMessage = null;
 		long ViolationID = 0;
 
 		if (mResult.getCount() != 0)
 			while (!mResult.isAfterLast()) {
-				Violationame = mResult
-						.getString(mResult.getColumnIndex("Name"));
+				Violationame = mResult.getString(mResult.getColumnIndex("Name"));
+				ViolationNameEn = mResult.getString(mResult.getColumnIndex("NameEN"));
 				Fine = mResult.getString(mResult.getColumnIndex("Fines"));
-				strMessage = mResult
-						.getString(mResult.getColumnIndex("Object"));
+				strMessage = mResult.getString(mResult.getColumnIndex("Object"));
 				ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-				list.add(new ListResultItem(Violationame, Fine, strMessage,
-						ViolationID));
+				list.add(new ListResultItem(Violationame, ViolationNameEn, Fine, strMessage, ViolationID));
 				mResult.moveToNext();
 			}
 		return list;

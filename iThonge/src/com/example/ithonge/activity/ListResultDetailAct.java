@@ -20,13 +20,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.ithong.models.DatabaseHelper;
+import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListResultAdapter;
 import com.example.ithonge.utils.ExpandableHeightListView;
 import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
-import com.example.models.DatabaseHelper;
-import com.example.models.ListResultItem;
 
 public class ListResultDetailAct extends Activity {
 	private DatabaseHelper mDataBaseHelper;
@@ -140,6 +140,7 @@ Log.e("VioID", ""+VioID);
 		Log.e("SQL-----", "" + mResult.getCount());
 		mResult.moveToFirst();
 		String Violationame = null;
+		String ViolationNameEn = null;
 		String Fine = null;
 		String strMessage = null;
 		long ViolationID = 0;
@@ -148,11 +149,13 @@ Log.e("VioID", ""+VioID);
 
 				Violationame = Utils.ReNameFilter(mResult.getString(mResult
 						.getColumnIndex("Name")));
+				Violationame = Utils.ReNameFilter(mResult.getString(mResult
+						.getColumnIndex("NameEN")));
 				Fine = mResult.getString(mResult.getColumnIndex("Fines"));
 				strMessage = mResult
 						.getString(mResult.getColumnIndex("Object"));
 				ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-				list.add(new ListResultItem(Violationame, Fine, strMessage,
+				list.add(new ListResultItem(Violationame,ViolationNameEn, Fine, strMessage,
 						ViolationID));
 
 				mResult.moveToNext();

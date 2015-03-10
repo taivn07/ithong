@@ -1,5 +1,0 @@
-package com.example.ithonge;
-
-public class SplashAct extends Activity{
-
-}

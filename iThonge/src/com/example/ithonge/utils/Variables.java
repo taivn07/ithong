@@ -1,6 +1,13 @@
 package com.example.ithonge.utils;
 
+import java.util.ArrayList;
+
+import com.example.ithong.models.ListResultItem;
+
 public class Variables {
+	// Global variables
+	public static  String currentTitle = "";
+	public static ArrayList<ListResultItem> currentListResultItems = new ArrayList<ListResultItem>();
 	// for Activity
 	// Main
 	public static final String TAG_VEHICLE_POSITION = "vehicle_position";
