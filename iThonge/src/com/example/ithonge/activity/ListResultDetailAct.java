@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
@@ -71,7 +70,7 @@ public class ListResultDetailAct extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-Log.e("VioID", ""+VioID);
+		Log.e("VioID", ""+VioID);
 		 SetView(VioID);
 
 	}
@@ -140,7 +139,6 @@ Log.e("VioID", ""+VioID);
 		Log.e("SQL-----", "" + mResult.getCount());
 		mResult.moveToFirst();
 		String Violationame = null;
-		String ViolationNameEn = null;
 		String Fine = null;
 		String strMessage = null;
 		long ViolationID = 0;
@@ -149,13 +147,11 @@ Log.e("VioID", ""+VioID);
 
 				Violationame = Utils.ReNameFilter(mResult.getString(mResult
 						.getColumnIndex("Name")));
-				Violationame = Utils.ReNameFilter(mResult.getString(mResult
-						.getColumnIndex("NameEN")));
 				Fine = mResult.getString(mResult.getColumnIndex("Fines"));
 				strMessage = mResult
 						.getString(mResult.getColumnIndex("Object"));
 				ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-				list.add(new ListResultItem(Violationame,ViolationNameEn, Fine, strMessage,
+				list.add(new ListResultItem(Violationame,null, Fine, strMessage,
 						ViolationID));
 
 				mResult.moveToNext();
