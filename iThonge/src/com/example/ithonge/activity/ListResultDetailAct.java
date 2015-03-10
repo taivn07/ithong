@@ -3,15 +3,8 @@ package com.example.ithonge.activity;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.example.ithonge.R;
-import com.example.ithonge.adapter.ListResultAdapter;
-import com.example.ithonge.utils.ExpandableHeightListView;
-import com.example.ithonge.utils.Utils;
-import com.example.ithonge.utils.Variables;
-import com.example.models.DatabaseHelper;
-import com.example.models.ListResultItem;
-
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
@@ -20,14 +13,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.example.ithonge.R;
+import com.example.ithonge.adapter.ListResultAdapter;
+import com.example.ithonge.utils.ExpandableHeightListView;
+import com.example.ithonge.utils.Utils;
+import com.example.ithonge.utils.Variables;
+import com.example.models.DatabaseHelper;
+import com.example.models.ListResultItem;
 
 public class ListResultDetailAct extends Activity {
 	private DatabaseHelper mDataBaseHelper;
@@ -72,8 +71,8 @@ public class ListResultDetailAct extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	   SetView(VioID);
+Log.e("VioID", ""+VioID);
+		 SetView(VioID);
 
 	}
 
@@ -82,6 +81,8 @@ public class ListResultDetailAct extends Activity {
 		String sql = "Select * From Violation Where ID = " + VioID;
 		Cursor mResult = mDataBaseHelper.getResultFromSQL(sql);
 		mResult.moveToFirst();
+		Log.e("SQl", ""+sql);
+		Log.e("cc", ""+mResult.getCount());
 
 		if (mResult.getCount() != 0) {
 			ObjText.setText(mResult.getString(mResult.getColumnIndex("Object")));
@@ -122,8 +123,10 @@ public class ListResultDetailAct extends Activity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
-			VioID = mListResultItems.get(position).getVioID();
-			SetView(VioID);
+			Intent intent = new Intent(ListResultDetailAct.this, ListResultDetailAct.class);
+			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());	
+			startActivity(intent);
+			finish();
 		}
 	}
 
@@ -131,7 +134,7 @@ public class ListResultDetailAct extends Activity {
 	private ArrayList<ListResultItem> getResultFromViolation(long VioID) {
 		ArrayList<ListResultItem> list = new ArrayList<ListResultItem>();
 
-		String sql = "Select * From Violation,Relations Where Relations.Violation_ID ="+VioID+" and Relations.Violation_ID = Violation.ID";
+		String sql = "Select Violation.* From Violation,Relations Where Relations.Violation_ID ="+VioID+" and Relations.R_Violation_ID = Violation.ID";
 		Cursor mResult = mDataBaseHelper.getResultFromSQL(sql);
 		// get result and save to mListResultItems
 		Log.e("SQL-----", "" + mResult.getCount());
@@ -181,6 +184,7 @@ public class ListResultDetailAct extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection

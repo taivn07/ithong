@@ -28,10 +28,6 @@ public class QTXPAct extends FragmentActivity {
 		WebChromeClient chromeClient = new WebChromeClient();
 		mWebview.setWebViewClient(viewClient);
 		mWebview.setWebChromeClient(chromeClient);
-		mWebview.setInitialScale(1);
-		mWebview.getSettings().setLoadWithOverviewMode(true);
-		mWebview.getSettings().setUseWideViewPort(true);
-		mWebview.getSettings().setJavaScriptEnabled(true);
 		mWebview.loadUrl("file:///android_asset/qtxp.htm");
 
 	}
