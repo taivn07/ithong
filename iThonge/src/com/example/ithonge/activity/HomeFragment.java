@@ -1,6 +1,8 @@
 package com.example.ithonge.activity;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -46,17 +48,33 @@ public class HomeFragment extends Fragment {
 
 	private void startListItemAct(int position) {
 		if (position == 7) {
-			Intent intent = new Intent(getActivity(), QTXPAct.class);
-			getActivity().startActivity(intent);
+			QTXPFragment fragment2 = new QTXPFragment();
+		    FragmentManager fragmentManager = getFragmentManager();
+		    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		    fragmentTransaction.replace(R.id.frame_container, fragment2);
+		    fragmentTransaction.addToBackStack(null);
+		    fragmentTransaction.commit();
 		} else if (position == 6) {
-			Intent intent = new Intent(getActivity(), ListResultAct.class);
-			intent.putExtra(Variables.TAG_OPTION_POSITION, 6);
-			intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
-			startActivity(intent);
+			ListResultFragment fragment2 = new ListResultFragment();
+			Bundle bundle =new Bundle(); 
+			bundle.putInt(Variables.TAG_VEHICLE_POSITION, position); 
+			bundle.putInt(Variables.TAG_OPTION_POSITION, 0); 
+			fragment2.setArguments(bundle);
+		    FragmentManager fragmentManager = getFragmentManager();
+		    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		    fragmentTransaction.replace(R.id.frame_container, fragment2);
+		    fragmentTransaction.addToBackStack(null);
+		    fragmentTransaction.commit();
 		} else {
-			Intent intent = new Intent(getActivity(), ListActionAct.class);
-			intent.putExtra(Variables.TAG_VEHICLE_POSITION, position);
-			getActivity().startActivity(intent);
+			ListActionFragment fragment2 = new ListActionFragment();
+			Bundle bundle =new Bundle(); 
+			bundle.putInt(Variables.TAG_VEHICLE_POSITION, position); 
+			fragment2.setArguments(bundle);
+		    FragmentManager fragmentManager = getFragmentManager();
+		    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		    fragmentTransaction.replace(R.id.frame_container, fragment2);
+		    fragmentTransaction.addToBackStack(null);
+		    fragmentTransaction.commit();
 		}
 
 	}

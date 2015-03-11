@@ -31,6 +31,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".activity.SearchResultAct" />
         </activity>
         <activity
             android:name=".activity.ListActionAct"
@@ -45,10 +48,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.ListResultAct" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".activity.SearchResultAct" />
         </activity>
         <activity
             android:name=".activity.ListResultDetailAct"
@@ -59,17 +58,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-<!-- <<<<<<< HEAD -->
 
-<!--         test -->
-<!-- ======= -->
    <activity
             android:name=".activity.QTXPAct"
             android:label="@string/app_name" >
            
         </activity>
-        <!-- fdfg -->
-<!-- >>>>>>> 57341c21b942bb0d91392cfb2bea1d772d9b9417 -->
+
 
         <activity
             android:name=".activity.SearchResultAct"

@@ -28,6 +28,7 @@ public class ListResultDetailAct extends Activity {
 	private TextView AddPtext;
 	private TextView AddP2text;
 	private TextView Remetext;
+	private boolean mainbookmarked, bookmarked;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,24 +120,39 @@ public class ListResultDetailAct extends Activity {
 		MenuItem item = menu.getItem(0);
 		if (Checkbookmarked()) {
 			item.setIcon(R.drawable.ico_bookmarked);
+			mainbookmarked =true;
 		} else {
 			item.setIcon(R.drawable.ico_bookmark);
+			mainbookmarked=false;
 		}
+		bookmarked = mainbookmarked;
 		return super.onCreateOptionsMenu(menu);
 	}
 
+@Override
+public void onBackPressed() {
+	if (bookmarked!=mainbookmarked) {
+		  if (mainbookmarked)	
+			mDataBaseHelper.deleteFromTableLuuTru(VioID);
+		  if (!mainbookmarked)
+			mDataBaseHelper.insertintoTableLuuTru(VioID);
+		} 	
+	super.onBackPressed();
+}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_bookmark:
-			if (Checkbookmarked()) {
-				item.setIcon(R.drawable.ico_bookmark);
-				mDataBaseHelper.deleteFromTableLuuTru(VioID);
-			} else {
-				item.setIcon(R.drawable.ico_bookmarked);
-				mDataBaseHelper.insertintoTableLuuTru(VioID);
+			bookmarked= !bookmarked;
+			if (!bookmarked)
+			{
+			item.setIcon(R.drawable.ico_bookmark);
+			}
+			else
+			{
+			item.setIcon(R.drawable.ico_bookmarked);
 			}
 			return true;
 		default:

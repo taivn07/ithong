@@ -52,7 +52,6 @@ public class BookmarkFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		mListResultItems = getListBookmarkFromDB();
-
 		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
 		mListResultAdapter = new ListResultAdapter(getActivity(), mListResultItems);
 		mListResult.setAdapter(mListResultAdapter);

@@ -3,18 +3,22 @@ package com.example.ithonge.activity;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.ithong.models.DatabaseHelper;
 import com.example.ithong.models.ListActionItem;
@@ -22,42 +26,45 @@ import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListActionAdapter;
 import com.example.ithonge.utils.Variables;
 
-public class ListActionAct extends Activity {
+public class ListActionFragment extends Fragment {
 	private ListView mListAct;
 	private ListActionAdapter mListActAdapter;
 	private ArrayList<ListActionItem> mListActItems;
 	private int[] mListActIcons;
 	private String[] mListActTitles;
 	public Context context;
-
-	// test - dungna.bka
 	private DatabaseHelper mDatabaseHelper;
 	private int vehiclePosition;
-
+	
+	public ListActionFragment() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_list_action);
-
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.activity_list_action, container,
+				false);
+		getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		vehiclePosition = getIntent().getExtras().getInt(
+		
+		Bundle bundle =this.getArguments(); 
+		vehiclePosition = bundle.getInt(
 				Variables.TAG_VEHICLE_POSITION);
-		getActionBar().setBackgroundDrawable(
+		getActivity().getActionBar().setBackgroundDrawable(
 				getResources().getDrawable(R.color.actionbar_bg));
-		getActionBar().setIcon(
+		getActivity().getActionBar().setIcon(
 				new ColorDrawable(getResources().getColor(
 						android.R.color.transparent)));
-		getActionBar()
-				.setTitle(
+		getActivity().setTitle(
 						getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
 		// init local variable
 		try {
-			mDatabaseHelper = new DatabaseHelper(this);
+			mDatabaseHelper = new DatabaseHelper(getActivity());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		mListAct = (ListView) findViewById(R.id.lv_list_action);
+		mListAct = (ListView) rootView.findViewById(R.id.lv_list_action);
 		mListActIcons = new int[] { R.drawable.hv1, R.drawable.hv2,
 				R.drawable.hv3, R.drawable.hv4, R.drawable.hv5, R.drawable.hv6,
 				R.drawable.hv7, R.drawable.hv8 };
@@ -67,23 +74,12 @@ public class ListActionAct extends Activity {
 		mListActItems = new ArrayList<ListActionItem>();
 		// get list Action from Database and create listview
 		mListActItems = getListActionFromDB(vehiclePosition + 1);
-		mListActAdapter = new ListActionAdapter(this, mListActItems);
+		mListActAdapter = new ListActionAdapter(getActivity(), mListActItems);
 		mListAct.setAdapter(mListActAdapter);
+		return rootView;
 	}
-
-	private class ListActOnItemClickListener implements OnItemClickListener {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			Intent intent = new Intent(ListActionAct.this, ListResultAct.class);
-			intent.putExtra(Variables.TAG_OPTION_POSITION,
-					mListActItems.get(position).getpos());
-			intent.putExtra(Variables.TAG_VEHICLE_POSITION, vehiclePosition);
-			startActivity(intent);
-		}
-	}
-
+	
+	
 	private ArrayList<ListActionItem> getListActionFromDB(int vehicleID) {
 		ArrayList<ListActionItem> list = new ArrayList<ListActionItem>();
 		String sql = "Select * From Group_Type Where TransportID = "
@@ -105,5 +101,23 @@ public class ListActionAct extends Activity {
 		} while (!mResult.isAfterLast());
 
 		return list;
+	}
+	
+	private class ListActOnItemClickListener implements OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			ListResultFragment fragment2 = new ListResultFragment();
+			Bundle bundle =new Bundle(); 
+			bundle.putInt(Variables.TAG_VEHICLE_POSITION, vehiclePosition); 
+			bundle.putInt(Variables.TAG_OPTION_POSITION, position); 
+			fragment2.setArguments(bundle);
+		    FragmentManager fragmentManager = getFragmentManager();
+		    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		    fragmentTransaction.replace(R.id.frame_container, fragment2);
+		    fragmentTransaction.addToBackStack(null);
+		    fragmentTransaction.commit();
+		}
 	}
 }

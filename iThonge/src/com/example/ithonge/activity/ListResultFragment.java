@@ -3,26 +3,6 @@ package com.example.ithonge.activity;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MenuItem.OnActionExpandListener;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TextView;
-
 import com.example.ithong.models.DatabaseHelper;
 import com.example.ithong.models.ListKeyWordItem;
 import com.example.ithong.models.ListResultItem;
@@ -32,74 +12,118 @@ import com.example.ithonge.adapter.ListSearchAdapter;
 import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
-public class ListResultAct extends Activity implements SearchView.OnQueryTextListener {
+import android.app.Fragment;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.MenuItem.OnActionExpandListener;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+
+public class ListResultFragment extends Fragment implements SearchView.OnQueryTextListener{
 	// ListView Result
-	private ListView mListResult;
-	private ListResultAdapter mListResultAdapter;
-	private ArrayList<ListResultItem> mListResultItems;
-	// Database/LogTag
-	public static final String LOG_TAG = "ListResultAct";
-	private DatabaseHelper mDatabaseHelper;
-	private int optionPosition;
-	private int vehiclePosition;
+		private ListView mListResult;
+		private ListResultAdapter mListResultAdapter;
+		private ArrayList<ListResultItem> mListResultItems;
+		// Database/LogTag
+		public static final String LOG_TAG = "ListResultAct";
+		private DatabaseHelper mDatabaseHelper;
+		private int optionPosition;
+		private int vehiclePosition;
 
-	private TextView tvResultCount;
+		private TextView tvResultCount;
 
-	// search menu
-	private SearchView mSearchView;
-	private MenuItem searchMenuItem;
-	private ListView mListViewSearch;
-	private ArrayList<ListKeyWordItem> mListKeyWordItems;
-	private ListSearchAdapter mListViewSearchAdapter;
-	private int group_value;
-	private int type_value;
-	private int[] Mahoa_Type = new int[] { 64, 32, 16, 8, 4, 2, 1 };
-	private int[] Mahoa_Group = new int[] { 128, 64, 32, 16, 8, 4, 2, 1 };
+		// search menu
+		private SearchView mSearchView;
+		private MenuItem searchMenuItem;
+		private ListView mListViewSearch;
+		private ArrayList<ListKeyWordItem> mListKeyWordItems;
+		private ListSearchAdapter mListViewSearchAdapter;
+		private int group_value;
+		private int type_value;
+		private int[] Mahoa_Type = new int[] { 64, 32, 16, 8, 4, 2, 1 };
+		private int[] Mahoa_Group = new int[] { 128, 64, 32, 16, 8, 4, 2, 1 };
 
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_list_result);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setHasOptionsMenu(true);
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.activity_list_result, container,
+				false);
+		
+		
+		getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		optionPosition = getIntent().getExtras().getInt(Variables.TAG_OPTION_POSITION);
-		vehiclePosition = getIntent().getExtras().getInt(Variables.TAG_VEHICLE_POSITION);
-		getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
-		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
-		getActionBar().setTitle(
+		Bundle bundle = this.getArguments();
+		optionPosition = bundle.getInt(Variables.TAG_OPTION_POSITION);
+		vehiclePosition = bundle.getInt(Variables.TAG_VEHICLE_POSITION);
+		getActivity().getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+		getActivity().getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
+		if (vehiclePosition<6)
+		{
+		getActivity().setTitle(
 				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "
 						+ getResources().getStringArray(R.array.list_action_item)[optionPosition]);
-		getActionBar().setDisplayHomeAsUpEnabled(false);
+		}
+		else
+		{
+		getActivity().setTitle(
+				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
+		}
+		
 		// init local variables
-		tvResultCount = (TextView) findViewById(R.id.tv_result_count);
+		tvResultCount = (TextView) rootView.findViewById(R.id.tv_result_count);
 
 		mListResultItems = new ArrayList<ListResultItem>();
 		try {
-			mDatabaseHelper = new DatabaseHelper(this);
+			mDatabaseHelper = new DatabaseHelper(getActivity());
 		} catch (IOException e) {
 			Log.e(LOG_TAG, "Can't Create Database. Please check and try again. Error: " + e.getMessage());
 		}
 
 		// create listview
 		mListResultItems = getResultFromViolation(optionPosition, vehiclePosition);
-		mListResult = (ListView) findViewById(R.id.lv_list_result);
+		mListResult = (ListView) rootView.findViewById(R.id.lv_list_result);
 		mListResult.setOnItemClickListener(new ListResutlItemOnClickListener());
-		mListResultAdapter = new ListResultAdapter(this, mListResultItems);
+		mListResultAdapter = new ListResultAdapter(getActivity(), mListResultItems);
 		mListResult.setAdapter(mListResultAdapter);
 
 		tvResultCount.setText("Có " + mListResultItems.size() + " kết quả được tìm thấy.");
 
 		// Create List Search
-		mListViewSearch = (ListView) findViewById(R.id.lv_list_search);
+		mListViewSearch = (ListView) rootView.findViewById(R.id.lv_list_search);
 		// mListViewSearch.setVisibility(View.VISIBLE);
 		mListKeyWordItems = getKeySearchFromDatabase();
-		mListViewSearchAdapter = new ListSearchAdapter(this, mListKeyWordItems);
+		mListViewSearchAdapter = new ListSearchAdapter(getActivity(), mListKeyWordItems);
 		mListViewSearch.setAdapter(mListViewSearchAdapter);
 		mListViewSearch.setTextFilterEnabled(true);
 		mListViewSearch.setOnItemClickListener(new ListKeyWordOnItemClickListener());
-
+		
+		
+		return rootView;
 	}
-
+	
 	// Lua chon tim kiem tu co so du lieu
 	private void SetData(int groupId, int vehicleID) {
 		switch (vehicleID) {
@@ -120,7 +144,7 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(ListResultAct.this, ListResultDetailAct.class);
+			Intent intent = new Intent(getActivity(), ListResultDetailAct.class);
 			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
 			startActivity(intent);
 		}
@@ -223,15 +247,15 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater = getActivity().getMenuInflater();
 		inflater.inflate(R.menu.main_activity_action, menu);
 
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
 		searchMenuItem = menu.findItem(R.id.action_search);
 		mSearchView = (SearchView) searchMenuItem.getActionView();
 
-		mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+		mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 		mSearchView.setSubmitButtonEnabled(true);
 		mSearchView.setOnQueryTextListener(this);
 
@@ -250,27 +274,17 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 			}
 		});
 
-		return true;
+	super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		mListViewSearch.setVisibility(View.INVISIBLE);
-		ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
-		temp = getResultByTextInput(query);
-		if ((temp != null) && (temp.size() != 0)) {
-			mListResultItems.clear();
-			mListResultItems.addAll(temp);
-			mListResultAdapter.notifyDataSetChanged();
-			Log.e("Dungna", "not null");
-		}
-		Log.e("Dungna", "OnqueryTextsubmit");
 		return false;
 	}
 
 	@Override
 	public boolean onQueryTextChange(String newText) {
-		// mListResultItems.set(index, object)
 		mListViewSearch.setVisibility(View.VISIBLE);
 		mListViewSearchAdapter.getFilter().filter(newText);
 		Variables.currentListResultItems.clear();
@@ -285,56 +299,9 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 		case R.id.action_search:
 			mListViewSearch.setVisibility(View.VISIBLE);
 			return true;
-			// case R.id.action_refresh:
-			// return true;
-			// case R.id.action_location_found:
-			// return true;
 
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
-	// input text and search result from mListResult item
-	private ArrayList<ListResultItem> getResultByTextInput(String textInput) {
-		Log.e("Dungna", "11");
-		ArrayList<ListResultItem> tempList = new ArrayList<ListResultItem>();
-		for (ListResultItem item : mListResultItems) {
-			if (item.getVioNameEn().toLowerCase().contains(textInput.toString().toLowerCase())) {
-				tempList.add(item);
-			}
-		}
-		Log.e("Dungna", "11: " + tempList.size());
-		return tempList;
-	}
-
-	// comment by dungna, date: 03/10/2015
-	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
-		Log.e("Dungna", "not null");
-		setIntent(intent);
-		handleIntent(intent);
-	}
-
-	private void handleIntent(Intent intent) {
-		Log.e("Dungna", "1not null");
-		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-			String query = intent.getStringExtra(SearchManager.QUERY);
-			Log.e("Dungna", "2not null");
-			ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
-			temp = getResultByTextInput(query);
-			if ((temp != null) && (temp.size() != 0)) {
-				mListResultItems = temp;
-				mListResultAdapter.notifyDataSetChanged();
-				tvResultCount.setText("Có " + mListResultItems.size() + " kết quả được tìm thấy.");
-				Log.e("Dungna", "not null");
-			}
-
-		}
-	}
-
-	// Read more:
-	// http://www.androidhub4you.com/2014/04/android-action-bar-search-inside.html#ixzz3TwqGjDtQ
-	// end commnet
 }

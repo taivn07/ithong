@@ -31,6 +31,7 @@
         <item>Hướng dẫn sử dụng</item>
         <item>Giới thiệu</item>
         <item>Lưu trữ</item>
+        <item>Thoát</item>
     </string-array>
     <string-array name="list_vehicles">
         <item>Ô tô</item>
