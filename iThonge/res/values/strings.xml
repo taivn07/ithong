@@ -15,10 +15,10 @@
  <!-- layout: list_action : -->
     <string name="tv_apdung">Áp dụng với: </string>
     <string name="tv_chitiet">Chi tiết</string>
-    <string name="tv_hpbs">Hình phạt bổ sung: </string>
-    <string name="tv_hpbskhac">Bổ sung khác </string>
-    <string name="tv_hpbt">Bồi thường </string>
-    <string name="tv_hvlq">Hành vi liên quan </string>
+    <string name="tv_hpbs">Hình phạt bổ sung</string>
+    <string name="tv_hpbskhac">Bổ sung khác</string>
+    <string name="tv_hpbt">Bồi thường</string>
+    <string name="tv_hvlq">Hành vi liên quan</string>
     <string name="tv_noidungchinh">Nội dung chính </string>
     
     <!-- layout: list_action : -->

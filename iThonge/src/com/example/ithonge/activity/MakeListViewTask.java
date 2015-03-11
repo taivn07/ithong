@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ProgressBar;
 
 public class MakeListViewTask extends AsyncTask<Void, Void, Void> {
 
@@ -26,6 +27,7 @@ public class MakeListViewTask extends AsyncTask<Void, Void, Void> {
 	private ExpandableHeightListView mkListView;
 	private ArrayList<ListResultItem> mkListResultItems;
 	private ListResultAdapter mkListResultAdapter;
+	private ProgressBar mkProgressBar;
 	private DatabaseHelper mkDatabaseHelper;
 	private long VioID;
 	
@@ -33,6 +35,8 @@ public class MakeListViewTask extends AsyncTask<Void, Void, Void> {
 		this.context = context;
 		this.VioID = VioID;
 	    mkListView = (ExpandableHeightListView) this.context.findViewById(R.id.lv_list_hvlq);
+	    mkProgressBar = (ProgressBar) this.context.findViewById(R.id.progressBar1);
+	    mkProgressBar.setVisibility(View.VISIBLE);
 		try {
 			mkDatabaseHelper = new DatabaseHelper(this.context);
 		} catch (IOException e) {
@@ -96,6 +100,7 @@ public class MakeListViewTask extends AsyncTask<Void, Void, Void> {
 		mkListResultAdapter = new ListResultAdapter(context, mkListResultItems);
 		mkListView.setOnItemClickListener(new ListResutlItemOnClickListener());
 		mkListView.setAdapter(mkListResultAdapter);
+		mkProgressBar.setVisibility(View.GONE);
 		super.onPostExecute(result);
 	}
 	
