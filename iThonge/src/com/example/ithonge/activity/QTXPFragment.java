@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.RelativeLayout;
 
 public class QTXPFragment extends Fragment {
 	WebView mWebview;
+	RelativeLayout relativeLayout;
 
 	public QTXPFragment() {
 		// TODO Auto-generated constructor stub
@@ -25,7 +27,8 @@ public class QTXPFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.activity_webview, container,
 				false);
-		mWebview = (WebView) rootView.findViewById(R.id.webview_view);
+		relativeLayout = (RelativeLayout) rootView.findViewById(R.id.web_view);
+		mWebview = new WebView(getActivity());
 		getActivity().getActionBar().setBackgroundDrawable(
 				getResources().getDrawable(R.color.actionbar_bg));
 		getActivity().getActionBar().setIcon(
@@ -38,6 +41,10 @@ public class QTXPFragment extends Fragment {
 		mWebview.setWebViewClient(viewClient);
 		mWebview.setWebChromeClient(chromeClient);
 		mWebview.loadUrl("file:///android_asset/qtxp.htm");
+		mWebview.setLayoutParams(new ViewGroup.LayoutParams(
+		        ViewGroup.LayoutParams.FILL_PARENT,
+		        ViewGroup.LayoutParams.FILL_PARENT));
+		relativeLayout.addView(mWebview);
 		return rootView;
 	}
 	

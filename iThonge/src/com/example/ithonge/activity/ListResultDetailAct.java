@@ -43,7 +43,6 @@ public class ListResultDetailAct extends Activity {
 	private TextView Remetext;
 	private TextView TestAddText;
 	private LinearLayout tableresultaddLayout;
-	private String Bookmarkname;
 	private boolean mainbookmarked, bookmarked;
 
 	@Override
@@ -106,7 +105,7 @@ public class ListResultDetailAct extends Activity {
 		return TitleMake;
 	}
 	
-	private Button MakeButtonViewMore(long VioID, int Type)
+	private void MakeButtonViewMore(long VioID, int Type)
 	{
 		Button ViewmoreBtt;
 		ViewmoreBtt = new Button(this);
@@ -123,7 +122,7 @@ public class ListResultDetailAct extends Activity {
 		);
 		params.setMargins(30, 0, 0, 10);
 		ViewmoreBtt.setLayoutParams(params);
-		
+		String Bookmarkname="";
 		String sql = "Select * From Bookmark_Detail Where Violation_ID = " + VioID+ " and Type_ID ="+ Type;
 		Cursor mResult = mDataBaseHelper.getResultFromSQL(sql);
 		mResult.moveToFirst();
@@ -131,8 +130,11 @@ public class ListResultDetailAct extends Activity {
 			Bookmarkname = mResult.getString(mResult.getColumnIndex("Bookmark_Code"));
 		}
 	
+		if (Bookmarkname!="")
+		{
 		ViewmoreBtt.setOnClickListener(new OnclickZ(Bookmarkname));
-		return ViewmoreBtt;
+		tableresultaddLayout.addView(ViewmoreBtt);
+		}
 	}
 	//--------------------------------
 	
@@ -167,27 +169,27 @@ public class ListResultDetailAct extends Activity {
 			ObjText.setText(mResult.getString(mResult.getColumnIndex("Object")));
 			MessText.setText(mResult.getString(mResult.getColumnIndex("Name")));
 			FineText.setText(mResult.getString(mResult.getColumnIndex("Fines")));
-			tableresultaddLayout.addView(MakeButtonViewMore(VioID, 1));
+			MakeButtonViewMore(VioID, 1);
 
 			String temp = mResult.getString(mResult
 					.getColumnIndex("Additional_Penalties"));
 			if (temp != null && Utils.ltrim(temp) !="" && temp != "null") {
 				tableresultaddLayout.addView(MakeTitle(getResources().getString(R.string.tv_hpbs)));
 				tableresultaddLayout.addView(MakeShowText(temp, 16, false, R.color.black, R.color.white, 10));
-				tableresultaddLayout.addView(MakeButtonViewMore(VioID, 2));
+				MakeButtonViewMore(VioID, 2);
 			}
 			temp = mResult.getString(mResult.getColumnIndex("Other_Penalties"));
 			if (temp != null && Utils.ltrim(temp) !="" && temp != "null") {
 				tableresultaddLayout.addView(MakeTitle(getResources().getString(R.string.tv_hpbskhac)));
 				tableresultaddLayout.addView(MakeShowText(temp, 16, false, R.color.black, R.color.white, 10));
-				tableresultaddLayout.addView(MakeButtonViewMore(VioID, 4));
+				MakeButtonViewMore(VioID, 4);
 			}
 			temp = mResult.getString(mResult
 					.getColumnIndex("Remedial_Measures"));
 			if (temp != null && Utils.ltrim(temp) !="" && temp != "null") {
 				tableresultaddLayout.addView(MakeTitle(getResources().getString(R.string.tv_hpbt)));
 				tableresultaddLayout.addView(MakeShowText(temp, 16, false, R.color.black, R.color.white, 10));
-				tableresultaddLayout.addView(MakeButtonViewMore(VioID, 3));
+				MakeButtonViewMore(VioID, 3);
 			}
 		}
 

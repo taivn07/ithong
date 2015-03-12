@@ -10,11 +10,13 @@ import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.RelativeLayout;
 
 import com.example.ithonge.R;
 
 public class HelpFragment extends Fragment {
 	WebView mWebview;
+	RelativeLayout relativeLayout;
 
 	public HelpFragment() {
 		// TODO Auto-generated constructor stub
@@ -25,7 +27,8 @@ public class HelpFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.activity_webview, container,
 				false);
-		mWebview = (WebView) rootView.findViewById(R.id.webview_view);
+		relativeLayout = (RelativeLayout) rootView.findViewById(R.id.web_view);
+		mWebview = new WebView(getActivity());
 
 		WebViewClient viewClient = new WebViewClient();
 		WebChromeClient chromeClient = new WebChromeClient();
@@ -36,6 +39,7 @@ public class HelpFragment extends Fragment {
 		mWebview.setPadding(0, 0, 0, 0);
 		mWebview.setInitialScale(getScale());
 		mWebview.loadUrl("file:///android_asset/help.html");
+		relativeLayout.addView(mWebview);
 		return rootView;
 	}
 
