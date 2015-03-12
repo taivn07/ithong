@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -162,6 +163,7 @@ public class SearchOnlineFragment extends Fragment {
 
 	// start home Fragment from another fragment
 	private void startHomeFragment() {
+		getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		Fragment homeFragment = new HomeFragment();
 		// consider using Java coding conventions (upper first char class
 		// names!!!)

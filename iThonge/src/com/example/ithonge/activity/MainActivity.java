@@ -201,10 +201,12 @@ public class MainActivity extends Activity {
 		default:
 			break;
 		}
+		
 		if (fragment != null) {
 			 FragmentManager fragmentManager = getFragmentManager();
 			    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			    fragmentTransaction.replace(R.id.frame_container, fragment);
+			    fragmentTransaction.addToBackStack(null);
 			    fragmentTransaction.commit();
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
@@ -216,10 +218,11 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		if (getFragmentManager().getBackStackEntryCount() ==0){
+		if (getFragmentManager().getBackStackEntryCount() ==1){
+			//Do nothing
 		  }
 		  else {
-			  if (getFragmentManager().getBackStackEntryCount() ==1)
+			  if (getFragmentManager().getBackStackEntryCount() ==2)
 				  setTitle(mDrawerTitles[0]);
 		    super.onBackPressed();
 		  }
