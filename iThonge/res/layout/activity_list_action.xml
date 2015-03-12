@@ -23,7 +23,9 @@
         android:id="@+id/lv_list_action"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_list_action">
+        android:background="@color/bg_list_action"
+        android:divider="@null"
+        android:dividerHeight="0dp" >
     </ListView>
 
 </LinearLayout>
