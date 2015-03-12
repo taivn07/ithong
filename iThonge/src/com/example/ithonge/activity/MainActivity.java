@@ -193,7 +193,7 @@ public class MainActivity extends Activity {
 
 			break;
 		case 2:
-			fragment = new SearchFragment();
+			fragment = new SearchOnlineFragment();
 
 			break;
 		case 3:

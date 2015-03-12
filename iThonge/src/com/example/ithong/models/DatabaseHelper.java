@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -27,8 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private String DATABASE_PATH;
 
-	public DatabaseHelper(Context context, String name, CursorFactory factory,
-			int version) {
+	public DatabaseHelper(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);
 		// TODO Auto-generated constructor stub
 	}
@@ -36,9 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public DatabaseHelper(Context context) throws IOException {
 		super(context, DATABASE_NAME, null, 1);
 		this.context = context;
-		DATABASE_PATH = "/data/data/"
-				+ context.getApplicationContext().getPackageName()
-				+ "/databases/";
+		DATABASE_PATH = "/data/data/" + context.getApplicationContext().getPackageName() + "/databases/";
 		if (checkDatabaseExist()) {
 			Log.e(LOG_TAG, "Database is exists.");
 		} else {
@@ -68,9 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			try {
 				copyDatabase();
 			} catch (Exception e) {
-				Log.e(LOG_TAG,
-						"Can't copy database. Check and try again. Error: "
-								+ e.getLocalizedMessage());
+				Log.e(LOG_TAG, "Can't copy database. Check and try again. Error: " + e.getLocalizedMessage());
 			}
 		}
 	}
@@ -82,9 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			File dbFile = new File(path);
 			check = dbFile.exists();
 		} catch (SQLiteException e) {
-			Log.e(LOG_TAG,
-					"Can't check this database. Please check again. Error: "
-							+ e.getLocalizedMessage());
+			Log.e(LOG_TAG, "Can't check this database. Please check again. Error: " + e.getLocalizedMessage());
 		}
 		return check;
 	}
@@ -109,8 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private void openDatabase() throws SQLException {
 		String path = DATABASE_PATH + DATABASE_NAME;
-		mDatabase = SQLiteDatabase.openDatabase(path, null,
-				SQLiteDatabase.OPEN_READWRITE);
+		mDatabase = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READWRITE);
 	}
 
 	public synchronized void close() {
@@ -128,8 +121,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public void insertintoTableLuuTru(long value) {
-		String sql = "INSERT INTO LuuTru (Violation_ID) Values " + "('" + value
-				+ "')";
+		String sql = "INSERT INTO LuuTru (Violation_ID) Values " + "('" + value + "')";
+		mDatabase.execSQL(sql);
+	}
+
+	public void insertIntoTableKeyword(ArrayList<TableKeyword> keys) {
+		for (TableKeyword item : keys) {
+			String sql = "INSERT INTO `Keywords` VALUES(" + item.getKeyword_ID() + ",'" + item.getKeyword_Name() + "','"
+					+ item.getKeyword_NameEN() + "'," + item.getSort() + ",'" + item.getLastUpdated() + "')";
+
+			Log.e(LOG_TAG, "Error: " + sql);
+			mDatabase.execSQL(sql);
+		}
+	}
+
+	public void deleteFromTableKeyword(long value) {
+		String sql = "DELETE FROM 'Keywords' WHERE Keyword_ID =" + value;
+		Log.e(LOG_TAG, "Delete: " + sql);
 		mDatabase.execSQL(sql);
 	}
 

@@ -42,7 +42,6 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 	private DatabaseHelper mDatabaseHelper;
 	private int optionPosition;
 	private int vehiclePosition;
-
 	private TextView tvResultCount;
 
 	// search menu
@@ -151,6 +150,11 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(ListResultAct.this, ListResultDetailAct.class);
 			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
+			// intent.putExtra(Variables.TAG_OBJECT,
+			// mListResultItems.get(position).get);
+			intent.putExtra(Variables.TAG_VIOLATION_NAME, mListResultItems.get(position).getVioName());
+			intent.putExtra(Variables.TAG_VIOLATION_NAME, mListResultItems.get(position).getVioName());
+			intent.putExtra(Variables.TAG_VIOLATION_NAME, mListResultItems.get(position).getVioName());
 			startActivity(intent);
 		}
 	}
@@ -221,7 +225,9 @@ public class ListResultAct extends Activity implements SearchView.OnQueryTextLis
 				AgroupID = mResult.getInt(mResult.getColumnIndex("Group_Value"));
 				AvehicleID = mResult.getInt(mResult.getColumnIndex("Type_Value"));
 				if (Check_Type(AvehicleID) && Check_Group(AgroupID)) {
-					ViolatioName = mResult.getString(mResult.getColumnIndex("Name"));
+					ViolatioName = mResult.getString(mResult.getColumnIndex("Name"))
+							+ mResult.getString(mResult.getColumnIndex("LastUpdated"));
+
 					violationNameEn = mResult.getString(mResult.getColumnIndex("NameEN"));
 					Fine = mResult.getString(mResult.getColumnIndex("Fines"));
 					strMessage = mResult.getString(mResult.getColumnIndex("Object"));

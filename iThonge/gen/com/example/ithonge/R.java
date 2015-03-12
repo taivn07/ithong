@@ -51,6 +51,7 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f060000;
         public static final int activity_vertical_margin=0x7f060001;
+        public static final int webview_text_size=0x7f060002;
     }
     public static final class drawable {
         public static final int bg_numofrow=0x7f020000;
@@ -108,35 +109,38 @@ public final class R {
         public static final int list_action_item_selector=0x7f020034;
         public static final int list_drawer_item_selector=0x7f020035;
         public static final int list_result_item_selector=0x7f020036;
-        public static final int loading=0x7f020037;
-        public static final int logo_menu=0x7f020038;
+        public static final int list_search_online_search_box_bg=0x7f020037;
+        public static final int loading=0x7f020038;
+        public static final int logo_menu=0x7f020039;
     }
     public static final class id {
-        public static final int action_bookmark=0x7f0b002d;
-        public static final int action_search=0x7f0b002f;
+        public static final int action_bookmark=0x7f0b0031;
+        public static final int action_search=0x7f0b0033;
         public static final int drawer_contentaaaa=0x7f0b001b;
         public static final int drawer_layout=0x7f0b0014;
         public static final int drawer_layoutaaaa=0x7f0b001a;
         public static final int draweraaaa=0x7f0b001c;
+        public static final int ed_search_online_query=0x7f0b001f;
         public static final int frame_container=0x7f0b0015;
         public static final int grid_transport=0x7f0b001e;
-        public static final int icon=0x7f0b0022;
+        public static final int icon=0x7f0b0026;
         public static final int imageView1=0x7f0b0017;
         public static final int list_sliding_menu=0x7f0b0016;
         public static final int lv_list_action=0x7f0b0001;
-        public static final int lv_list_action_icon=0x7f0b0020;
-        public static final int lv_list_action_title=0x7f0b0021;
+        public static final int lv_list_action_icon=0x7f0b0024;
+        public static final int lv_list_action_title=0x7f0b0025;
         public static final int lv_list_bookmark_result=0x7f0b001d;
         public static final int lv_list_hvlq=0x7f0b0010;
-        public static final int lv_list_info_icon=0x7f0b0025;
-        public static final int lv_list_info_pos=0x7f0b0024;
-        public static final int lv_list_info_title=0x7f0b0026;
+        public static final int lv_list_info_icon=0x7f0b0029;
+        public static final int lv_list_info_pos=0x7f0b0028;
+        public static final int lv_list_info_title=0x7f0b002a;
         public static final int lv_list_result=0x7f0b0003;
         public static final int lv_list_search=0x7f0b0004;
         public static final int lv_list_search_result=0x7f0b0012;
-        public static final int main_content=0x7f0b002c;
-        public static final int search=0x7f0b002e;
-        public static final int seard=0x7f0b001f;
+        public static final int lv_search_online_list_result=0x7f0b0021;
+        public static final int main_content=0x7f0b0030;
+        public static final int progbar_get_data=0x7f0b0022;
+        public static final int search=0x7f0b0032;
         public static final int show_additionP=0x7f0b000a;
         public static final int show_additionP2=0x7f0b000c;
         public static final int show_additionPtitle=0x7f0b0009;
@@ -149,14 +153,16 @@ public final class R {
         public static final int show_reme=0x7f0b000e;
         public static final int show_result=0x7f0b0005;
         public static final int textView1=0x7f0b0019;
-        public static final int title=0x7f0b0023;
+        public static final int title=0x7f0b0027;
+        public static final int tv_get_data=0x7f0b0023;
         public static final int tv_list_action_title=0x7f0b0000;
-        public static final int tv_list_result_fine=0x7f0b0029;
-        public static final int tv_list_result_icon=0x7f0b0027;
-        public static final int tv_list_result_message=0x7f0b002a;
-        public static final int tv_list_result_title=0x7f0b0028;
-        public static final int tv_list_search_item=0x7f0b002b;
+        public static final int tv_list_result_fine=0x7f0b002d;
+        public static final int tv_list_result_icon=0x7f0b002b;
+        public static final int tv_list_result_message=0x7f0b002e;
+        public static final int tv_list_result_title=0x7f0b002c;
+        public static final int tv_list_search_item=0x7f0b002f;
         public static final int tv_result_count=0x7f0b0002;
+        public static final int tv_search_online_result_count=0x7f0b0020;
         public static final int tv_search_result_count=0x7f0b0011;
         public static final int view=0x7f0b0013;
         public static final int webview_view=0x7f0b0018;
@@ -175,7 +181,7 @@ public final class R {
         public static final int fragment_bookmark=0x7f03000a;
         public static final int fragment_help=0x7f03000b;
         public static final int fragment_home=0x7f03000c;
-        public static final int fragment_search=0x7f03000d;
+        public static final int fragment_search_online=0x7f03000d;
         public static final int fragment_sync=0x7f03000e;
         public static final int list_action_item=0x7f03000f;
         public static final int list_drawer_item=0x7f030010;

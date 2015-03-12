@@ -1,8 +1,10 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=57341c21b942bb0d91392cfb2bea1d772d9b9417
 eclipse.preferences.version=1
 encoding//src/com/example/ithonge/activity/HomeFragment.java=UTF-8
 encoding//src/com/example/ithonge/activity/ListResultAct.java=UTF-8
-<<<<<<< HEAD
-encoding//src/com/example/ithonge/activity/SearchResultAct.java=UTF-8
-=======
 encoding//src/com/example/ithonge/activity/QTXPAct.java=UTF-8
->>>>>>> 57341c21b942bb0d91392cfb2bea1d772d9b9417
+encoding//src/com/example/ithonge/activity/SearchOnlineFragment.java=UTF-8
+encoding//src/com/example/ithonge/activity/SearchResultAct.java=UTF-8
+encoding//src/com/example/ithonge/activity/SyncFragment.java=UTF-8
