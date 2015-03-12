@@ -113,56 +113,51 @@ public final class R {
         public static final int logo_menu=0x7f020039;
     }
     public static final class id {
-        public static final int action_bookmark=0x7f0b002f;
-        public static final int action_search=0x7f0b0031;
-        public static final int drawer_contentaaaa=0x7f0b001d;
-        public static final int drawer_layout=0x7f0b0016;
-        public static final int drawer_layoutaaaa=0x7f0b001c;
-        public static final int draweraaaa=0x7f0b001e;
-        public static final int frame_container=0x7f0b0017;
-        public static final int grid_transport=0x7f0b0020;
-        public static final int icon=0x7f0b0024;
-        public static final int imageView1=0x7f0b0019;
-        public static final int list_sliding_menu=0x7f0b0018;
+        public static final int action_bookmark=0x7f0b002a;
+        public static final int action_search=0x7f0b002c;
+        public static final int drawer_contentaaaa=0x7f0b0018;
+        public static final int drawer_layout=0x7f0b0011;
+        public static final int drawer_layoutaaaa=0x7f0b0017;
+        public static final int draweraaaa=0x7f0b0019;
+        public static final int frame_container=0x7f0b0012;
+        public static final int grid_transport=0x7f0b001b;
+        public static final int icon=0x7f0b001f;
+        public static final int imageView1=0x7f0b0014;
+        public static final int list_sliding_menu=0x7f0b0013;
         public static final int lv_list_action=0x7f0b0001;
-        public static final int lv_list_action_icon=0x7f0b0022;
-        public static final int lv_list_action_title=0x7f0b0023;
-        public static final int lv_list_bookmark_result=0x7f0b001f;
-        public static final int lv_list_hvlq=0x7f0b0012;
-        public static final int lv_list_info_icon=0x7f0b0027;
-        public static final int lv_list_info_pos=0x7f0b0026;
-        public static final int lv_list_info_title=0x7f0b0028;
+        public static final int lv_list_action_icon=0x7f0b001d;
+        public static final int lv_list_action_title=0x7f0b001e;
+        public static final int lv_list_bookmark_result=0x7f0b001a;
+        public static final int lv_list_hvlq=0x7f0b000d;
+        public static final int lv_list_info_icon=0x7f0b0022;
+        public static final int lv_list_info_pos=0x7f0b0021;
+        public static final int lv_list_info_title=0x7f0b0023;
         public static final int lv_list_result=0x7f0b0003;
         public static final int lv_list_search=0x7f0b0004;
-        public static final int lv_list_search_result=0x7f0b0014;
-        public static final int main_content=0x7f0b002e;
-        public static final int progressBar1=0x7f0b0011;
-        public static final int search=0x7f0b0030;
-        public static final int seard=0x7f0b0021;
-        public static final int show_additionP=0x7f0b000b;
-        public static final int show_additionP2=0x7f0b000d;
-        public static final int show_additionPtitle=0x7f0b000a;
-        public static final int show_additionPtitle2=0x7f0b000c;
-        public static final int show_additionremretitle=0x7f0b000e;
+        public static final int lv_list_search_result=0x7f0b000f;
+        public static final int main_content=0x7f0b0029;
+        public static final int progressBar1=0x7f0b000c;
+        public static final int search=0x7f0b002b;
+        public static final int seard=0x7f0b001c;
         public static final int show_content=0x7f0b0006;
         public static final int show_fine=0x7f0b0009;
-        public static final int show_hanhvilienquan=0x7f0b0010;
+        public static final int show_hanhvilienquan=0x7f0b000b;
         public static final int show_mess=0x7f0b0008;
         public static final int show_object=0x7f0b0007;
-        public static final int show_reme=0x7f0b000f;
         public static final int show_result=0x7f0b0005;
-        public static final int textView1=0x7f0b001b;
-        public static final int title=0x7f0b0025;
+        public static final int table_resultadd=0x7f0b000a;
+        public static final int textView1=0x7f0b0016;
+        public static final int title=0x7f0b0020;
         public static final int tv_list_action_title=0x7f0b0000;
-        public static final int tv_list_result_fine=0x7f0b002b;
-        public static final int tv_list_result_icon=0x7f0b0029;
-        public static final int tv_list_result_message=0x7f0b002c;
-        public static final int tv_list_result_title=0x7f0b002a;
-        public static final int tv_list_search_item=0x7f0b002d;
+        public static final int tv_list_result_fine=0x7f0b0026;
+        public static final int tv_list_result_icon=0x7f0b0024;
+        public static final int tv_list_result_message=0x7f0b0027;
+        public static final int tv_list_result_title=0x7f0b0025;
+        public static final int tv_list_search_item=0x7f0b0028;
         public static final int tv_result_count=0x7f0b0002;
-        public static final int tv_search_result_count=0x7f0b0013;
-        public static final int view=0x7f0b0015;
-        public static final int webview_view=0x7f0b001a;
+        public static final int tv_search_result_count=0x7f0b000e;
+        public static final int view=0x7f0b0010;
+        public static final int webview_view=0x7f0b0015;
     }
     public static final class layout {
         public static final int activity_list_action=0x7f030000;
@@ -195,16 +190,16 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f070002;
-        public static final int action_websearch=0x7f070014;
+        public static final int action_websearch=0x7f070015;
         public static final int app_name=0x7f070000;
-        public static final int app_not_available=0x7f070015;
+        public static final int app_not_available=0x7f070016;
         public static final int bookmark_title=0x7f070006;
         public static final int choose=0x7f070007;
         /**  layout: list_action : 
          */
-        public static final int choose_action=0x7f070011;
-        public static final int drawer_close=0x7f070013;
-        public static final int drawer_open=0x7f070012;
+        public static final int choose_action=0x7f070012;
+        public static final int drawer_close=0x7f070014;
+        public static final int drawer_open=0x7f070013;
         public static final int hello_world=0x7f070001;
         public static final int search=0x7f070009;
         public static final int search_hint=0x7f070003;
@@ -220,6 +215,7 @@ public final class R {
         public static final int tv_hvlq=0x7f07000f;
         public static final int tv_muc=0x7f070008;
         public static final int tv_noidungchinh=0x7f070010;
+        public static final int tv_xemvanban=0x7f070011;
     }
     public static final class style {
         /**  the theme applied to the application or activity 

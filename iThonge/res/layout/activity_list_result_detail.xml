@@ -54,74 +54,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
+                android:paddingBottom="5dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/show_additionPtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:background="@color/blue"
-                android:gravity="center"
-                android:paddingLeft="15dp"
-                android:text="@string/tv_hpbs"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+            <LinearLayout 
+                android:id="@+id/table_resultadd"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+<!--         Show data o day -->
 
-            <TextView
-                android:id="@+id/show_additionP"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/show_additionPtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/blue"
-                android:gravity="center"
-                android:paddingLeft="15dp"
-                android:text="@string/tv_hpbskhac"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/show_additionP2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/show_additionremretitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/blue"
-                android:gravity="center"
-                android:paddingLeft="15dp"
-                android:text="@string/tv_hpbt"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/show_reme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+            </LinearLayout>
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >

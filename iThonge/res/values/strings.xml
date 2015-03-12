@@ -20,6 +20,7 @@
     <string name="tv_hpbt">Bồi thường</string>
     <string name="tv_hvlq">Hành vi liên quan</string>
     <string name="tv_noidungchinh">Nội dung chính </string>
+    <string name="tv_xemvanban">Xem văn bản quy định</string>
     
     <!-- layout: list_action : -->
     <string name="choose_action">Chọn hành vi</string>

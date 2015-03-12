@@ -14,6 +14,7 @@ public class Variables {
 	public static final String TAG_OPTION_POSITION = "option_position";
 	public static final String TAG_VIOLATIOID = "ViolationID";
 	// Tag for Database
+	public static final String TAG_BOOKMARKNAME = "Bookmarkname";
 	// Violation Table
 	public static final String TAG_ROW_ID = "rowid";
 	public static final String TAG_ID = "ID";

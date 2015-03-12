@@ -3,19 +3,32 @@ package com.example.ithonge.activity;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.ithong.models.DatabaseHelper;
 import com.example.ithonge.R;
+import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
 public class ListResultDetailAct extends Activity {
@@ -28,6 +41,9 @@ public class ListResultDetailAct extends Activity {
 	private TextView AddPtext;
 	private TextView AddP2text;
 	private TextView Remetext;
+	private TextView TestAddText;
+	private LinearLayout tableresultaddLayout;
+	private String Bookmarkname;
 	private boolean mainbookmarked, bookmarked;
 
 	@Override
@@ -44,12 +60,10 @@ public class ListResultDetailAct extends Activity {
 				getResources().getDrawable(R.color.actionbar_bg));
 		getActionBar().setTitle(R.string.tv_chitiet);
 
+		tableresultaddLayout = (LinearLayout) findViewById(R.id.table_resultadd);
 		ObjText = (TextView) findViewById(R.id.show_object);
 		MessText = (TextView) findViewById(R.id.show_mess);
-		FineText = (TextView) findViewById(R.id.show_fine);
-		AddPtext = (TextView) findViewById(R.id.show_additionP);
-		AddP2text = (TextView) findViewById(R.id.show_additionP2);
-		Remetext = (TextView) findViewById(R.id.show_reme);
+		FineText = (TextView) findViewById(R.id.show_fine);	
 
 		VioID = getIntent().getExtras().getLong(Variables.TAG_VIOLATIOID);
 
@@ -63,7 +77,84 @@ public class ListResultDetailAct extends Activity {
 		 SetView(VioID);
 
 	}
-
+	
+	// Tao title de show cac muc va cac muc
+	private TextView MakeTitle(String title)
+	{
+		TextView TitleMake;
+		TitleMake = new TextView(this);
+		TitleMake.setText(title);
+		TitleMake.setTypeface(null, Typeface.BOLD);
+		TitleMake.setTextColor(getResources().getColor(R.color.white));
+		TitleMake.setBackground(getResources().getDrawable(R.color.blue));
+		TitleMake.setGravity(Gravity.CENTER);
+		TitleMake.setTextSize(18);
+		return TitleMake;
+	}
+	
+	private TextView MakeShowText(String mess, int size, boolean isBold, int textColorID, int backgroundColorID, int paddingTop)
+	{
+		TextView TitleMake;
+		TitleMake = new TextView(this);
+		TitleMake.setText(mess);
+		if (isBold)
+		TitleMake.setTypeface(null, Typeface.BOLD);
+		TitleMake.setTextColor(getResources().getColor(textColorID));
+		TitleMake.setBackground(getResources().getDrawable(backgroundColorID));
+		TitleMake.setTextSize(size);
+		TitleMake.setPadding(15, paddingTop, 0, 5);
+		return TitleMake;
+	}
+	
+	private Button MakeButtonViewMore(long VioID, int Type)
+	{
+		Button ViewmoreBtt;
+		ViewmoreBtt = new Button(this);
+		ViewmoreBtt.setId(Type);
+		ViewmoreBtt.setText(getResources().getString(R.string.tv_xemvanban));
+		ViewmoreBtt.setTextColor(getResources().getColor(R.color.white));
+		ViewmoreBtt.setTextSize(14);
+		ViewmoreBtt.setBackground(getResources().getDrawable(R.color.green));
+		ViewmoreBtt.setGravity(Gravity.CENTER);
+		
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+		        LayoutParams.WRAP_CONTENT,      
+		        LayoutParams.WRAP_CONTENT
+		);
+		params.setMargins(30, 0, 0, 10);
+		ViewmoreBtt.setLayoutParams(params);
+		
+		String sql = "Select * From Bookmark_Detail Where Violation_ID = " + VioID+ " and Type_ID ="+ Type;
+		Cursor mResult = mDataBaseHelper.getResultFromSQL(sql);
+		mResult.moveToFirst();
+		if (mResult.getCount() != 0) {
+			Bookmarkname = mResult.getString(mResult.getColumnIndex("Bookmark_Code"));
+		}
+	
+		ViewmoreBtt.setOnClickListener(new OnclickZ(Bookmarkname));
+		return ViewmoreBtt;
+	}
+	//--------------------------------
+	
+	// Tao rieng click cho tung button-------------
+	private class OnclickZ implements OnClickListener{
+		private String bookmarkname;
+		public OnclickZ(String bookmarkname) {
+			// TODO Auto-generated constructor stub
+			this.bookmarkname = bookmarkname;
+		}
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(v.getContext(), MoreInfo_act.class);
+    		intent.putExtra(Variables.TAG_BOOKMARKNAME, bookmarkname);
+    		startActivity(intent);
+			
+		}
+		
+	}
+	
+	//------------------------------------------
+	
 	private void SetView(long VioID) {
 
 		String sql = "Select * From Violation Where ID = " + VioID;
@@ -76,20 +167,27 @@ public class ListResultDetailAct extends Activity {
 			ObjText.setText(mResult.getString(mResult.getColumnIndex("Object")));
 			MessText.setText(mResult.getString(mResult.getColumnIndex("Name")));
 			FineText.setText(mResult.getString(mResult.getColumnIndex("Fines")));
+			tableresultaddLayout.addView(MakeButtonViewMore(VioID, 1));
 
 			String temp = mResult.getString(mResult
 					.getColumnIndex("Additional_Penalties"));
-			if (temp != null && temp != "" && temp != "null") {
-				AddPtext.setText(temp);
+			if (temp != null && Utils.ltrim(temp) !="" && temp != "null") {
+				tableresultaddLayout.addView(MakeTitle(getResources().getString(R.string.tv_hpbs)));
+				tableresultaddLayout.addView(MakeShowText(temp, 16, false, R.color.black, R.color.white, 10));
+				tableresultaddLayout.addView(MakeButtonViewMore(VioID, 2));
 			}
 			temp = mResult.getString(mResult.getColumnIndex("Other_Penalties"));
-			if (temp != null && temp != "" && temp != "null") {
-				AddP2text.setText(temp);
+			if (temp != null && Utils.ltrim(temp) !="" && temp != "null") {
+				tableresultaddLayout.addView(MakeTitle(getResources().getString(R.string.tv_hpbskhac)));
+				tableresultaddLayout.addView(MakeShowText(temp, 16, false, R.color.black, R.color.white, 10));
+				tableresultaddLayout.addView(MakeButtonViewMore(VioID, 4));
 			}
 			temp = mResult.getString(mResult
 					.getColumnIndex("Remedial_Measures"));
-			if (temp != null && temp != "" && temp != "null") {
-				Remetext.setText(temp);
+			if (temp != null && Utils.ltrim(temp) !="" && temp != "null") {
+				tableresultaddLayout.addView(MakeTitle(getResources().getString(R.string.tv_hpbt)));
+				tableresultaddLayout.addView(MakeShowText(temp, 16, false, R.color.black, R.color.white, 10));
+				tableresultaddLayout.addView(MakeButtonViewMore(VioID, 3));
 			}
 		}
 

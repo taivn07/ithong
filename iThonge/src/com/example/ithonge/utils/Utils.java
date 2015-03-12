@@ -15,4 +15,12 @@ public class Utils {
 		return FName;
 	}
 	
+	public static String ltrim(String source)
+
+	{
+
+	  return source.replaceAll("^\\s+", "");
+
+	}
+	
 }

@@ -36,17 +36,10 @@
                 android:value=".activity.SearchResultAct" />
         </activity>
         <activity
-            android:name=".activity.ListActionAct"
+            android:name=".activity.MoreInfo_act"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.ListActionAct" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.ListResultAct"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.ListResultAct" />
+                <action android:name="android.intent.action.MoreInfo_act" />
             </intent-filter>
         </activity>
         <activity

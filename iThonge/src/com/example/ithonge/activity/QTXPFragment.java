@@ -41,26 +41,4 @@ public class QTXPFragment extends Fragment {
 		return rootView;
 	}
 	
-//	@Override
-//	protected void onCreateView(Bundle arg0) {
-//		super.onCreate(arg0);
-//		setContentView(R.layout.activity_webview);
-//		mWebview = (WebView) findViewById(R.id.webview_view);
-//		getActionBar().setBackgroundDrawable(
-//				getResources().getDrawable(R.color.actionbar_bg));
-//		getActionBar().setIcon(
-//				new ColorDrawable(getResources().getColor(
-//						android.R.color.transparent)));
-//		getActionBar().setTitle("Quy trình xử phạt");
-//
-//		WebViewClient viewClient = new WebViewClient();
-//		WebChromeClient chromeClient = new WebChromeClient();
-//		mWebview.setWebViewClient(viewClient);
-//		mWebview.setWebChromeClient(chromeClient);
-//		mWebview.loadUrl("file:///android_asset/qtxp.htm");
-//
-//	}
-
-	
-
 }
