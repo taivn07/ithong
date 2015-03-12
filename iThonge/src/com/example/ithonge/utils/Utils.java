@@ -180,4 +180,15 @@ public class Utils {
 		}
 		return null;
 	}
+
+	
+	public static String ltrim(String source)
+
+	{
+
+	  return source.replaceAll("^\\s+", "");
+
+	}
+	
+
 }

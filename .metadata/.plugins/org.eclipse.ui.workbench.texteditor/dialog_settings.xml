@@ -6,27 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="tvSOResultCount" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="mListResultAdapter"/>
-			<item value="visible"/>
 			<item value="tvResultCount"/>
-			<item value="User"/>
-			<item value="searchItemFilter"/>
-			<item value="mListViewSearchAdapter"/>
-			<item value="mSearchView"/>
-			<item value="mListSearch"/>
+			<item value="mListSOResultAdapter"/>
+			<item value="mListResult"/>
+			<item value="mListResultItems"/>
+			<item value="private "/>
+			<item value="TAG"/>
+			<item value="$Violation[&apos;"/>
+			<item value="synchronizeDataFromServer"/>
 		</list>
 		<list key="replacehistory">
+			<item value="tvSOResultCount"/>
+			<item value="mListSOAdapter"/>
+			<item value="mListSOResult"/>
+			<item value=""/>
+			<item value="TAG_VIOLATION"/>
+			<item value="private String "/>
+			<item value="private String"/>
 			<item value="ListKeyWordItem"/>
-			<item value="mListViewSearch"/>
-			<item value="context"/>
-			<item value="tvResultCount"/>
-			<item value="drawer"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

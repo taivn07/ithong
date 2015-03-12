@@ -1,27 +1,27 @@
 package com.example.ithonge.activity;
 
+import com.example.ithonge.R;
+
 import android.app.Fragment;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
-import com.example.ithonge.R;
-
-public class HelpFragment extends Fragment {
+public class QTXPFragment extends Fragment {
 	WebView mWebview;
 	RelativeLayout relativeLayout;
 
-	public HelpFragment() {
+	public QTXPFragment() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -29,26 +29,23 @@ public class HelpFragment extends Fragment {
 				false);
 		relativeLayout = (RelativeLayout) rootView.findViewById(R.id.web_view);
 		mWebview = new WebView(getActivity());
+		getActivity().getActionBar().setBackgroundDrawable(
+				getResources().getDrawable(R.color.actionbar_bg));
+		getActivity().getActionBar().setIcon(
+				new ColorDrawable(getResources().getColor(
+						android.R.color.transparent)));
+		getActivity().getActionBar().setTitle("Quy trình xử phạt");
 
 		WebViewClient viewClient = new WebViewClient();
 		WebChromeClient chromeClient = new WebChromeClient();
 		mWebview.setWebViewClient(viewClient);
 		mWebview.setWebChromeClient(chromeClient);
-		mWebview.getSettings().setBuiltInZoomControls(false);
-		mWebview.getSettings().setUseWideViewPort(true);
-		mWebview.setPadding(0, 0, 0, 0);
-		mWebview.setInitialScale(getScale());
-		mWebview.loadUrl("file:///android_asset/help.html");
+		mWebview.loadUrl("file:///android_asset/qtxp.htm");
+		mWebview.setLayoutParams(new ViewGroup.LayoutParams(
+		        ViewGroup.LayoutParams.FILL_PARENT,
+		        ViewGroup.LayoutParams.FILL_PARENT));
 		relativeLayout.addView(mWebview);
 		return rootView;
 	}
-
-	private int getScale() {
-		Display display = ((WindowManager) getActivity().getSystemService(
-				getActivity().WINDOW_SERVICE)).getDefaultDisplay();
-		int width = display.getWidth();
-		Double val = new Double(width) / new Double(651);
-		val = val * 100d;
-		return val.intValue();
-	}
+	
 }

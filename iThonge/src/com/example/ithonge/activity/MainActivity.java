@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,6 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,29 +45,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		/**
-		 * dungna.bka edit navigarion overlay on action bar Tuesday, March 03,
-		 * 2015
-		 */
-		// Inflate the "decor.xml"
-		/*
-		 * comment by dungna.bka LayoutInflater inflater = (LayoutInflater)
-		 * getSystemService(Context.LAYOUT_INFLATER_SERVICE); DrawerLayout
-		 * drawer = (DrawerLayout) inflater.inflate(R.layout.decor, null); //
-		 * "null" is important.
-		 * 
-		 * // HACK: "steal" the first child of decor view ViewGroup decor =
-		 * (ViewGroup) getWindow().getDecorView(); View child =
-		 * decor.getChildAt(0); decor.removeView(child); FrameLayout container =
-		 * (FrameLayout) drawer.findViewById(R.id.drawer_content); // This is
-		 * the container we defined just now. container.addView(child);
-		 * 
-		 * // Make the drawer replace the first child decor.addView(drawer);
-		 */// endcoment
-		/**
-		 * end edit-----------------------------------------------------
-		 */
-
+	
 		try {
 			mDatabaseHelper = new DatabaseHelper(this);
 		} catch (IOException e) {
@@ -80,7 +60,7 @@ public class MainActivity extends Activity {
 		mDrawerIcons = new int[] { R.drawable.ic_action_main,
 				R.drawable.ico_synchronize, R.drawable.ico_search,
 				R.drawable.ico_tutorial, R.drawable.ico_about,
-				R.drawable.ico_bookmark };
+				R.drawable.ico_bookmark, R.drawable.ic_action_exit };
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_sliding_menu);
 
@@ -99,14 +79,13 @@ public class MainActivity extends Activity {
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
 		// enable ActionBar app icon to behave as action to toggle nav drawer
-		getActionBar().setDisplayHomeAsUpEnabled(false);
-		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setHomeButtonEnabled(false);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setIcon(
 				new ColorDrawable(getResources().getColor(
 						android.R.color.transparent)));
 		getActionBar().setBackgroundDrawable(
 				getResources().getDrawable(R.color.actionbar_bg));
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// ActionBarDrawerToggle ties together the the proper interactions
 		// between the sliding drawer and the action bar app icon
@@ -144,7 +123,7 @@ public class MainActivity extends Activity {
 		// menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// The action bar home/up action should open or close the drawer.
@@ -185,27 +164,37 @@ public class MainActivity extends Activity {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
+			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new HomeFragment();
 
 			break;
 		case 1:
+			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new SyncFragment();
 
 			break;
 		case 2:
 			fragment = new SearchOnlineFragment();
+			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 			break;
 		case 3:
+			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new HelpFragment();
 
 			break;
 		case 4:
+			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new AboutFragment();
 
 			break;
 		case 5:
+			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new BookmarkFragment(mDatabaseHelper);
+
+			break;
+		case 6:
+			finish();
 
 			break;
 
@@ -213,9 +202,10 @@ public class MainActivity extends Activity {
 			break;
 		}
 		if (fragment != null) {
-			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, fragment).commit();
+			 FragmentManager fragmentManager = getFragmentManager();
+			    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+			    fragmentTransaction.replace(R.id.frame_container, fragment);
+			    fragmentTransaction.commit();
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
 			setTitle(mDrawerTitles[position]);
@@ -223,11 +213,27 @@ public class MainActivity extends Activity {
 
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		if (getFragmentManager().getBackStackEntryCount() ==0){
+		  }
+		  else {
+			  if (getFragmentManager().getBackStackEntryCount() ==1)
+				  setTitle(mDrawerTitles[0]);
+		    super.onBackPressed();
+		  }
+	}
 
 	@Override
 	public void setTitle(CharSequence title) {
 		mTitle = title;
 		getActionBar().setTitle(mTitle);
+	}
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
 	}
 
 	/**

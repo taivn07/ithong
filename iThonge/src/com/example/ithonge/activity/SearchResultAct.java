@@ -1,6 +1,5 @@
 package com.example.ithonge.activity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -8,22 +7,16 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.example.ithong.models.DatabaseHelper;
-import com.example.ithong.models.ListKeyWordItem;
 import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListResultAdapter;
-import com.example.ithonge.adapter.ListSearchAdapter;
 import com.example.ithonge.utils.Variables;
 
 public class SearchResultAct extends Activity {
@@ -34,20 +27,8 @@ public class SearchResultAct extends Activity {
 	private ArrayList<ListResultItem> mListSearchResultItems;
 	// Database/LogTag
 	public static final String LOG_TAG = "ListResultAct";
-	private DatabaseHelper mDatabaseHelper;
-	private int optionPosition;
-	private int vehiclePosition;
-	private TextView tvResultCount;
 
-	// search menu
-	private String[] items;
-	private Menu menu;
-	private SearchView mSearchView;
-	private MenuItem searchMenuItem;
-	private ListView mListViewSearch;
-	private ArrayList<ListKeyWordItem> mListKeyWordItems;
-	private ListSearchAdapter mListViewSearchAdapter;
-	private TextView txtQuery;
+	private TextView tvResultCount;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,26 +37,14 @@ public class SearchResultAct extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
-		// Variables.currentTitle = getActionBar().getTitle().toString();
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		// init local variables
+		getActionBar().setDisplayHomeAsUpEnabled(false);
 		tvResultCount = (TextView) findViewById(R.id.tv_search_result_count);
 		mListSearchResultItems = new ArrayList<ListResultItem>();
-		try {
-			mDatabaseHelper = new DatabaseHelper(this);
-		} catch (IOException e) {
-			Log.e(LOG_TAG, "Can't Create Database. Please check and try again. Error: " + e.getMessage());
-		}
 
-		// create listview
-		// mListSearchResultItems = getResultFromGroupId(optionPosition,
-		// vehiclePosition);
+
 		mListSearchResult = (ListView) findViewById(R.id.lv_list_search_result);
 		mListSearchResult.setOnItemClickListener(new ListResutlItemOnClickListener());
-		// mListResultAdapter = new ListResultAdapter(this, mListResultItems);
-		// mListResult.setAdapter(mListResultAdapter);
-		// tvResultCount.setText("Có " + mListResultItems.size() +
-		// " kết quả được tìm thấy.");
+	
 		handleIntent(getIntent());
 	}
 
@@ -116,7 +85,6 @@ public class SearchResultAct extends Activity {
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			getActionBar().setTitle(Variables.currentTitle + " >> " + query);
-			Variables.currentTitle = getActionBar().getTitle().toString();
 			Log.e("Dungna", "2not null");
 			ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
 			temp = getResultByTextInput(query);

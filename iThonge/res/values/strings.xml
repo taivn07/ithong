@@ -15,10 +15,12 @@
  <!-- layout: list_action : -->
     <string name="tv_apdung">Áp dụng với: </string>
     <string name="tv_chitiet">Chi tiết</string>
-    <string name="tv_hpbs">Hình phạt bổ sung: </string>
-    <string name="tv_hpbskhac">Bổ sung khác: </string>
-    <string name="tv_hpbt">Bồi thường: </string>
-    <string name="tv_hvlq">Hành vi liên quan: </string>
+    <string name="tv_hpbs">Hình phạt bổ sung</string>
+    <string name="tv_hpbskhac">Bổ sung khác</string>
+    <string name="tv_hpbt">Bồi thường</string>
+    <string name="tv_hvlq">Hành vi liên quan</string>
+    <string name="tv_noidungchinh">Nội dung chính </string>
+    <string name="tv_xemvanban">Xem văn bản quy định</string>
     
     <!-- layout: list_action : -->
     <string name="choose_action">Chọn hành vi</string>
@@ -30,6 +32,7 @@
         <item>Hướng dẫn sử dụng</item>
         <item>Giới thiệu</item>
         <item>Lưu trữ</item>
+        <item>Thoát</item>
     </string-array>
     <string-array name="list_vehicles">
         <item>Ô tô</item>
