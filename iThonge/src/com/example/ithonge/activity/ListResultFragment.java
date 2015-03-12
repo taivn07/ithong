@@ -72,7 +72,6 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 		View rootView = inflater.inflate(R.layout.activity_list_result, container,
 				false);
 		
-		
 		getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		Bundle bundle = this.getArguments();
@@ -92,6 +91,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
 		}
 		
+		Variables.currentTitle = getActivity().getActionBar().getTitle().toString();
 		// init local variables
 		tvResultCount = (TextView) rootView.findViewById(R.id.tv_result_count);
 
@@ -250,6 +250,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater = getActivity().getMenuInflater();
 		inflater.inflate(R.menu.main_activity_action, menu);
+		mListViewSearch.setVisibility(View.INVISIBLE);
 
 		SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
 		searchMenuItem = menu.findItem(R.id.action_search);
@@ -269,6 +270,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 
 			@Override
 			public boolean onMenuItemActionExpand(MenuItem item) {
+				mListViewSearch.setVisibility(View.VISIBLE);
 				// TODO Auto-generated method stub
 				return true;
 			}
@@ -280,16 +282,15 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		mListViewSearch.setVisibility(View.INVISIBLE);
+		searchMenuItem.collapseActionView();
 		return false;
 	}
 
 	@Override
 	public boolean onQueryTextChange(String newText) {
-		mListViewSearch.setVisibility(View.VISIBLE);
 		mListViewSearchAdapter.getFilter().filter(newText);
 		Variables.currentListResultItems.clear();
 		Variables.currentListResultItems.addAll(mListResultItems);
-		Log.e("dungna", "1onQueryTextChange");
 		return false;
 	}
 
@@ -301,6 +302,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 			return true;
 
 		default:
+			mListViewSearch.setVisibility(View.INVISIBLE);
 			return super.onOptionsItemSelected(item);
 		}
 	}

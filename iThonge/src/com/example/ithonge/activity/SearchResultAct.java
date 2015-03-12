@@ -85,7 +85,6 @@ public class SearchResultAct extends Activity {
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			getActionBar().setTitle(Variables.currentTitle + " >> " + query);
-			Variables.currentTitle = getActionBar().getTitle().toString();
 			Log.e("Dungna", "2not null");
 			ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
 			temp = getResultByTextInput(query);

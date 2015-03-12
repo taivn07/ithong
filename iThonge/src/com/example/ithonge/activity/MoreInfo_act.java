@@ -3,6 +3,7 @@ package com.example.ithonge.activity;
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,6 +22,8 @@ public class MoreInfo_act extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_webview);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		relativeLayout = (RelativeLayout) findViewById(R.id.web_view);
 		bookmarkname = getIntent().getExtras().getString(Variables.TAG_BOOKMARKNAME);
 		// mWebview = (WebView) findViewById(R.id.webview_view);
