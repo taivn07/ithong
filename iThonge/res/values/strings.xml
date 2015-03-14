@@ -20,7 +20,8 @@
     <string name="tv_hpbt">Bồi thường</string>
     <string name="tv_hvlq">Hành vi liên quan</string>
     <string name="tv_noidungchinh">Nội dung chính </string>
-    <string name="tv_xemvanban">Xem văn bản quy định</string>
+    <string name="tv_xemvanban">XEM VĂN BẢN QUY ĐỊNH</string>
+    <string name="tv_apdungnull">Áp dụng chung</string>
     
     <!-- layout: list_action : -->
     <string name="choose_action">Chọn hành vi</string>
@@ -28,7 +29,7 @@
     <string-array name="drawer_titles">
         <item>Chức năng chính</item>
         <item>Đồng bộ dữ liệu</item>
-        <item>Tìm kiếm online</item>
+        <item>Tìm kiếm</item>
         <item>Hướng dẫn sử dụng</item>
         <item>Giới thiệu</item>
         <item>Lưu trữ</item>

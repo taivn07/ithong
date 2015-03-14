@@ -143,7 +143,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(getActivity(), ListResultDetailAct.class);
+			Intent intent = new Intent(getActivity(), ResultDetailAct.class);
 			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
 			// intent.putExtra(Variables.TAG_OBJECT,
 			// mListResultItems.get(position).get);
@@ -166,7 +166,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 			int tvid = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
 			TextView textView = (TextView) mSearchView.findViewById(tvid);
 			ListKeyWordItem tempKey = (ListKeyWordItem) mListViewSearchAdapter.getItem(position);
-			textView.setText(tempKey.getNameEN().toString());
+			textView.setText(tempKey.getName().toString());
 		}
 
 	}
@@ -223,7 +223,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 					ViolatioName = mResult.getString(mResult.getColumnIndex("Name"))
 							+ mResult.getString(mResult.getColumnIndex("LastUpdated"));
 					ViolatioName = Utils.ReNameFilter(mResult.getString(mResult.getColumnIndex("Name")));
-					violationNameEn = mResult.getString(mResult.getColumnIndex("NameEN"));
+					violationNameEn = (String) Utils.unAccent(ViolatioName);
 					Fine = mResult.getString(mResult.getColumnIndex("Fines"));
 					strMessage = mResult.getString(mResult.getColumnIndex("Object"));
 					ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));

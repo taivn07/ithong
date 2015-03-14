@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
 
 			break;
 		case 2:
-			fragment = new SearchOnlineFragment();
+			fragment = new SearchAllFragment();
 			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 			break;

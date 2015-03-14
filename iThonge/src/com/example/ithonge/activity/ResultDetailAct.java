@@ -15,33 +15,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.ithong.models.DatabaseHelper;
 import com.example.ithonge.R;
 import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
-public class ListResultDetailAct extends Activity {
+public class ResultDetailAct extends Activity {
 	private DatabaseHelper mDataBaseHelper;
 	private long VioID;
 	private ScrollView mScrollView;
 	private TextView ObjText;
 	private TextView MessText;
 	private TextView FineText;
-	private TextView AddPtext;
-	private TextView AddP2text;
-	private TextView Remetext;
-	private TextView TestAddText;
+
 	private LinearLayout tableresultaddLayout;
 	private boolean mainbookmarked, bookmarked;
 
@@ -166,7 +159,14 @@ public class ListResultDetailAct extends Activity {
 		Log.e("cc", ""+mResult.getCount());
 
 		if (mResult.getCount() != 0) {
+			String tempObj = mResult.getString(mResult.getColumnIndex("Object"));
+			if (tempObj != null && !tempObj.equals("null"))
+			{
 			ObjText.setText(mResult.getString(mResult.getColumnIndex("Object")));
+			}
+			else {
+				ObjText.setText(getResources().getString(R.string.tv_apdungnull));	
+			}
 			MessText.setText(mResult.getString(mResult.getColumnIndex("Name")));
 			FineText.setText(mResult.getString(mResult.getColumnIndex("Fines")));
 			MakeButtonViewMore(VioID, 1);

@@ -1,5 +1,6 @@
 package com.example.ithonge.utils;
-
+import java.text.Normalizer;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -10,12 +11,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
 import com.example.ithong.models.TableKeyword;
 import com.example.ithong.models.TableViolation;
+import com.example.ithonge.R;
 
 public class Utils {
 	public static final String LOG_TAG = "Utils";
@@ -181,14 +188,69 @@ public class Utils {
 		return null;
 	}
 
-	
+// Bo khoang trang o 2 ben String	
 	public static String ltrim(String source)
 
 	{
 
-	  return source.replaceAll("^\\s+", "");
+	  return source.replaceAll("^\\s+", "").replaceAll("\\s+$", "");
 
 	}
+	
+	// Bo khoang trang ben phai String		
+	public static String righttrim(String source)
+
+	{
+
+	return source.replaceAll("\\s+$", "");
+	
+	// Bo khoang trang ben trai String	
+	}
+	
+	public static String lefttrim(String source)
+
+	{
+
+	return source.replaceAll("^\\s+", "");
+
+	}
+
+// Chuyen chu co dau sang chu khong dau	
+public static CharSequence unAccent(CharSequence s) {
+    CharSequence temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+    Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+    return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replaceAll("đ", "d");
+}
+
+// highlight search
+public static CharSequence highlight(CharSequence search, CharSequence originalText, CharSequence originalTextEn) {
+    // ignore case and accents
+    // the same thing should have been done for the search text
+    CharSequence normalizedText = originalTextEn.toString().toLowerCase();
+
+    int start = normalizedText.toString().indexOf(search.toString());
+    Spannable highlighted = new SpannableString(originalText);
+    highlighted.setSpan(new ForegroundColorSpan(Color.BLACK), 0, originalText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    if (start<0)
+    {
+    	// not found, nothing to to
+        return originalText;
+    } else {
+        // highlight each appearance in the original text
+        // while searching in normalized text
+    	
+        while (start >= 0) {
+            int spanStart = Math.min(start, originalText.length());
+            int spanEnd = Math.min(start + search.length(), originalText.length());
+
+            highlighted.setSpan(new ForegroundColorSpan(Color.GREEN), spanStart, spanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            start = normalizedText.toString().indexOf(search.toString(), spanEnd);
+        }
+
+        return highlighted;
+    }
+}
 	
 
 }

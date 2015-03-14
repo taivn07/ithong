@@ -110,7 +110,7 @@ public class MakeListViewTask extends AsyncTask<Void, Void, Void> {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(context, ListResultDetailAct.class);
+			Intent intent = new Intent(context, ResultDetailAct.class);
 			intent.putExtra(Variables.TAG_VIOLATIOID, mkListResultItems.get(position).getVioID());	
 			context.startActivity(intent);
 			context.finish();

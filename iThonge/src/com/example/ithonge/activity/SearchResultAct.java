@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.ListResultAdapter;
+import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
 public class SearchResultAct extends Activity {
@@ -54,18 +55,20 @@ public class SearchResultAct extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(SearchResultAct.this, ListResultDetailAct.class);
-			intent.putExtra(Variables.TAG_VIOLATIOID, Variables.currentListResultItems.get(position).getVioID());
+			Intent intent = new Intent(SearchResultAct.this, ResultDetailAct.class);
+			intent.putExtra(Variables.TAG_VIOLATIOID, mListSearchResultItems.get(position).getVioID());
 			startActivity(intent);
 		}
 	}
 
 	// input text and search result from mListResult item
-	private ArrayList<ListResultItem> getResultByTextInput(String textInput) {
+	private ArrayList<ListResultItem> getResultByTextInput(String textInput,ArrayList<ListResultItem> ListResult) {
 		Log.e("Dungna", "11");
+		String TextInputUnAccent = (String) Utils.unAccent(textInput.toLowerCase());
 		ArrayList<ListResultItem> tempList = new ArrayList<ListResultItem>();
-		for (ListResultItem item : Variables.currentListResultItems) {
-			if (item.getVioNameEn().toLowerCase().contains(textInput.toString().toLowerCase())) {
+		for (ListResultItem item : ListResult) {
+			if (item.getVioNameEn().toString().toLowerCase().contains(TextInputUnAccent)) {
+				item.setVioName(Utils.highlight(TextInputUnAccent, item.getVioName(),item.getVioNameEn())); 
 				tempList.add(item);
 			}
 		}
@@ -87,7 +90,7 @@ public class SearchResultAct extends Activity {
 			getActionBar().setTitle(Variables.currentTitle + " >> " + query);
 			Log.e("Dungna", "2not null");
 			ArrayList<ListResultItem> temp = new ArrayList<ListResultItem>();
-			temp = getResultByTextInput(query);
+			temp = getResultByTextInput(query, Variables.currentListResultItems);
 			if ((temp != null) && (temp.size() != 0)) {
 				mListSearchResultItems = temp;
 				mListSearchResultAdapter = new ListResultAdapter(this, mListSearchResultItems);
