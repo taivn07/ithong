@@ -2,14 +2,15 @@
 <resources>
 
     <!-- my custom colors -->
-    <item name="actionbar_bg" type="color">#ff6d01</item>
-    <item name="listdrawer_bg" type="color">#242524</item>
+    <item name="actionbar_bg" type="color">#00aff0</item>
+    <item name="listdrawer_bg" type="color">#00a8e6</item>
     <item name="fragment_home_bg" type="color">#f8f9f9</item>
     <item name="bg_choose_action" type="color">#f9fafb</item>
     <item name="bg_choose_action_2" type="color">#f3f6f8</item>
     <item name="bg_list_action" type="color">#ffffff</item>
-    <item name="bg_list_key_search" type="color">#f2832f</item>
-    <item name="bg_actionbar" type="color">#ff6d01</item>
+    <item name="bg_list_key_search" type="color">#00a8e6</item>
+<!--     <item name="bg_actionbar" type="color">#ff6d01</item> -->
+    <item name="bg_actionbar" type="color">#00aff0</item>
 
     <!-- gfd -->
     <item name="blue" type="color">#FF33B5E5</item>

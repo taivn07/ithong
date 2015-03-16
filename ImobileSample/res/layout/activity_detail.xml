@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".DetailActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/txtAdTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="バナー広告" />
+
+        <TextView
+            android:id="@+id/txtAdTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:text="ビッグバナー広告" />
+
+        <RelativeLayout
+            android:id="@+id/adBigBannerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txtAdTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="アイコン広告" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/adIconLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+            </RelativeLayout>
+            <!-- 《インライン広告》 組み込み方法 【レイアウトファイル(XML)に対するタグによる組み込み】 サンプル-->
+            <jp.co.imobile.sdkads.android.ImobileInlineView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                pid="34816"
+                mid="135179"
+                sid="342417"
+                iconNumber="1"
+                iconTitleFontColor="#0000FF" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

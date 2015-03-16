@@ -24,7 +24,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.MenuItem.OnActionExpandListener;
@@ -34,7 +36,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class ListResultFragment extends Fragment implements SearchView.OnQueryTextListener{
+public class ListResultFragment extends Fragment implements SearchView.OnQueryTextListener, OnTouchListener {
 	// ListView Result
 	private ListView mListResult;
 	private ListResultAdapter mListResultAdapter;
@@ -57,20 +59,17 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 	private int[] Mahoa_Type = new int[] { 64, 32, 16, 8, 4, 2, 1 };
 	private int[] Mahoa_Group = new int[] { 128, 64, 32, 16, 8, 4, 2, 1 };
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 	}
-	
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.activity_list_result, container,
-				false);
-		
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.activity_list_result, container, false);
+
 		getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		Bundle bundle = this.getArguments();
@@ -78,18 +77,14 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 		vehiclePosition = bundle.getInt(Variables.TAG_VEHICLE_POSITION);
 		getActivity().getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 		getActivity().getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.actionbar_bg));
-		if (vehiclePosition<6)
-		{
-		getActivity().setTitle(
-				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "
-						+ getResources().getStringArray(R.array.list_action_item)[optionPosition]);
+		if (vehiclePosition < 6) {
+			getActivity().setTitle(
+					getResources().getStringArray(R.array.list_vehicles)[vehiclePosition] + "  >>  "
+							+ getResources().getStringArray(R.array.list_action_item)[optionPosition]);
+		} else {
+			getActivity().setTitle(getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
 		}
-		else
-		{
-		getActivity().setTitle(
-				getResources().getStringArray(R.array.list_vehicles)[vehiclePosition]);
-		}
-		
+
 		Variables.currentTitle = getActivity().getActionBar().getTitle().toString();
 		// init local variables
 		tvResultCount = (TextView) rootView.findViewById(R.id.tv_result_count);
@@ -118,11 +113,11 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 		mListViewSearch.setAdapter(mListViewSearchAdapter);
 		mListViewSearch.setTextFilterEnabled(true);
 		mListViewSearch.setOnItemClickListener(new ListKeyWordOnItemClickListener());
-		
-		
+
+		rootView.setOnTouchListener(this);
 		return rootView;
 	}
-	
+
 	// Lua chon tim kiem tu co so du lieu
 	private void SetData(int groupId, int vehicleID) {
 		switch (vehicleID) {
@@ -256,7 +251,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater = getActivity().getMenuInflater();
 		inflater.inflate(R.menu.main_activity_action, menu);
-		mListViewSearch.setVisibility(View.INVISIBLE);
+		// mListViewSearch.setVisibility(View.INVISIBLE);
 
 		SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
 		searchMenuItem = menu.findItem(R.id.action_search);
@@ -282,7 +277,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 			}
 		});
 
-	super.onCreateOptionsMenu(menu, inflater);
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	@Override
@@ -311,5 +306,22 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 			mListViewSearch.setVisibility(View.INVISIBLE);
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	// dungna 03/15/2015
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		int action = event.getAction();
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+			Variables.tapCount++;
+			Log.e("dungna: Count", "" + Variables.tapCount);
+			break;
+		}
+		// dungna 03/13/2015
+		if (Variables.tapCount % 10 == 0) {
+			Utils.showFullAds(getActivity());
+		}
+		return true;
 	}
 }

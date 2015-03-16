@@ -2,6 +2,8 @@ package com.example.ithonge.utils;
 
 import java.util.ArrayList;
 
+import jp.co.imobile.sdkads.android.ImobileSdkAd;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -175,20 +177,22 @@ public class Utils {
 			result = result.replace(":", "");
 			result = result.replace("/", "");
 			result = result.replace("Z", "");
-
 			return result;
 		}
 		return null;
 	}
 
-	
-	public static String ltrim(String source)
-
-	{
-
-	  return source.replaceAll("^\\s+", "");
-
+	public static String ltrim(String source) {
+		return source.replaceAll("^\\s+", "");
 	}
-	
+
+	// check and show full screen ads
+	public static void showFullAds(Activity activity) {
+		if (!(("".equals(Variables.FULL_PUBLISHER_ID)) || ("".equals(Variables.FULL_MEDIA_ID))) || ("".equals(Variables.FULL_SPOT_ID))) {
+			ImobileSdkAd.registerSpotFullScreen(activity, Variables.FULL_PUBLISHER_ID, Variables.FULL_MEDIA_ID, Variables.FULL_SPOT_ID);
+			ImobileSdkAd.start(Variables.FULL_SPOT_ID);
+			ImobileSdkAd.showAd(activity, Variables.FULL_SPOT_ID);
+		}
+	}
 
 }

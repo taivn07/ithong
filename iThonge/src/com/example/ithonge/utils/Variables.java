@@ -5,9 +5,19 @@ import java.util.ArrayList;
 import com.example.ithong.models.ListResultItem;
 
 public class Variables {
+	// For mobile Ad test
+	public static final String BANNER_PUBLISHER_ID = "35067";
+	public static final String BANNER_MEDIA_ID = "144083";
+	public static final String BANNER_SPOT_ID = "370041";
+
+	// For mobile Ad test
+	public static final String FULL_PUBLISHER_ID = "35067";
+	public static final String FULL_MEDIA_ID = "144083";
+	public static final String FULL_SPOT_ID = "370043";
 	// Global variables
 	public static String currentTitle = "";
 	public static ArrayList<ListResultItem> currentListResultItems = new ArrayList<ListResultItem>();
+	public static int tapCount = 1;
 	// for Activity
 	// Main
 	public static final String TAG_VEHICLE_POSITION = "vehicle_position";
