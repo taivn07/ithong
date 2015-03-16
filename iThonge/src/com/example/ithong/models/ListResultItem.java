@@ -9,13 +9,13 @@ package com.example.ithong.models;
 // An------------------------------------------------
 
 public class ListResultItem {
-	private String violationName;
-	private String violationNameEn;
+	private CharSequence violationName;
+	private CharSequence violationNameEn;
 	private String fine;
 	private String message;
 	private long ViolationID;
 
-	public ListResultItem(String violationName, String violationNameEn, String fine, String message, long ViolationID) {
+	public ListResultItem(CharSequence violationName, CharSequence violationNameEn, String fine, String message, long ViolationID) {
 		this.violationName = violationName;
 		this.violationNameEn = violationNameEn;
 		this.fine = fine;
@@ -31,23 +31,19 @@ public class ListResultItem {
 		this.ViolationID = violationID;
 	}
 
-	public String getVioName() {
+	public CharSequence getVioName() {
 		return violationName;
 	}
 
-	public void setVioName(String violation) {
+	public void setVioName(CharSequence violation) {
 		this.violationName = violation;
 	}
 
-	public String getTitle() {
-		return violationName;
-	}
-
-	public String getVioNameEn() {
+	public CharSequence getVioNameEn() {
 		return violationNameEn;
 	}
 
-	public void setVioNameEn(String violation) {
+	public void setVioNameEn(CharSequence violation) {
 		this.violationNameEn = violation;
 	}
 

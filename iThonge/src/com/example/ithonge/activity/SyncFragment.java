@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -63,6 +64,7 @@ public class SyncFragment extends Fragment {
 	}
 
 	private void startHomeFragment() {
+		getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		Fragment homeFragment = new HomeFragment();
 		// consider using Java coding conventions (upper first char class
 		// names!!!)

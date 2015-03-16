@@ -62,7 +62,7 @@ public class BookmarkFragment extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(getActivity(), ListResultDetailAct.class);
+			Intent intent = new Intent(getActivity(), ResultDetailAct.class);
 			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
 			getActivity().startActivity(intent);
 		}

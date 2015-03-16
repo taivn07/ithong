@@ -3,8 +3,6 @@ package com.example.ithonge.activity;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import jp.co.imobile.sdkads.android.ImobileIconParams;
-import jp.co.imobile.sdkads.android.ImobileSdkAd;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -16,12 +14,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -31,7 +26,6 @@ import com.example.ithong.models.DatabaseHelper;
 import com.example.ithong.models.NavDrawerItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.NavDrawerListAdapter;
-import com.example.ithonge.utils.Variables;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
@@ -173,7 +167,10 @@ public class MainActivity extends Activity {
 		case 2:
 			// getFragmentManager().popBackStack(null,
 			// FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			fragment = new SearchOnlineFragment();
+			// fragment = new SearchOnlineFragment();
+
+			fragment = new SearchAllFragment();
+			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 			break;
 		case 3:
@@ -202,11 +199,21 @@ public class MainActivity extends Activity {
 		default:
 			break;
 		}
+
 		if (fragment != null) {
+			// comment 16/03/2015 by dungna
+			// FragmentManager fragmentManager = getFragmentManager();
+			// FragmentTransaction fragmentTransaction =
+			// fragmentManager.beginTransaction();
+			// fragmentTransaction.replace(R.id.frame_container, fragment);
+			// fragmentTransaction.commit();
+
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);
+			fragmentTransaction.addToBackStack(null);
 			fragmentTransaction.commit();
+
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
 			setTitle(mDrawerTitles[position]);
@@ -217,9 +224,18 @@ public class MainActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		if (getFragmentManager().getBackStackEntryCount() == 0) {
+		// comment 16/03/2015 by dungna
+		// if (getFragmentManager().getBackStackEntryCount() == 0) {
+		// } else {
+		// if (getFragmentManager().getBackStackEntryCount() == 1)
+		// setTitle(mDrawerTitles[0]);
+		// super.onBackPressed();
+		// }
+
+		if (getFragmentManager().getBackStackEntryCount() == 1) {
+			// Do nothing
 		} else {
-			if (getFragmentManager().getBackStackEntryCount() == 1)
+			if (getFragmentManager().getBackStackEntryCount() == 2)
 				setTitle(mDrawerTitles[0]);
 			super.onBackPressed();
 		}

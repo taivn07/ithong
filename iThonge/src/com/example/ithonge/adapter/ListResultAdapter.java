@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.ithong.models.ListResultItem;
 import com.example.ithonge.R;
+import com.example.ithonge.utils.Utils;
 
 public class ListResultAdapter extends BaseAdapter {
 	private ArrayList<ListResultItem> mListResultItems;
@@ -50,7 +51,6 @@ public class ListResultAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.list_result_item, null);
 		}
-		// <<<<<<< HEAD
 		TextView btt = (TextView) convertView.findViewById(R.id.tv_list_result_icon);
 		btt.setText("" + (position + 1));
 		TextView tvTitle = (TextView) convertView.findViewById(R.id.tv_list_result_title);
@@ -58,27 +58,12 @@ public class ListResultAdapter extends BaseAdapter {
 		TextView tvFine = (TextView) convertView.findViewById(R.id.tv_list_result_fine);
 		tvFine.setText(mListResultItems.get(position).getfine());
 		TextView tvMessage = (TextView) convertView.findViewById(R.id.tv_list_result_message);
-		if (mListResultItems.get(position).getMessage() != "") {
-			tvMessage.setText(context.getResources().getString(R.string.tv_apdung) + mListResultItems.get(position).getMessage());
-			// =======
-			// TextView btt = (TextView) convertView
-			// .findViewById(R.id.tv_list_result_icon);
-			// btt.setText("" + (position + 1));
-			// TextView tvTitle = (TextView) convertView
-			// .findViewById(R.id.tv_list_result_title);
-			// tvTitle.setText(mListResultItems.get(position).getTitle());
-			// TextView tvFine = (TextView) convertView
-			// .findViewById(R.id.tv_list_result_fine);
-			// tvFine.setText(mListResultItems.get(position).getfine());
-			// TextView tvMessage = (TextView) convertView
-			// .findViewById(R.id.tv_list_result_message);
-			// if (mListResultItems.get(position).getMessage() != "") {
-			// tvMessage.setText(context.getResources().getString(
-			// R.string.tv_apdung)
-			// + mListResultItems.get(position).getMessage());
-			// >>>>>>> 57341c21b942bb0d91392cfb2bea1d772d9b9417
+		if (mListResultItems.get(position).getMessage() != null 
+				&& Utils.ltrim(mListResultItems.get(position).getMessage()) != "" 
+				&& !Utils.ltrim(mListResultItems.get(position).getMessage()).equals("null")) {
+			tvMessage.setText(context.getResources().getString(R.string.tv_apdung) + " "+ mListResultItems.get(position).getMessage());
 		} else {
-			tvMessage.setText(null);
+			tvMessage.setText(context.getResources().getString(R.string.tv_apdungnull));
 		}
 
 		return convertView;

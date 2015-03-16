@@ -499,8 +499,8 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f02005a;
     }
     public static final class id {
-        public static final int action_bookmark=0x7f080043;
-        public static final int action_search=0x7f080045;
+        public static final int action_bookmark=0x7f080044;
+        public static final int action_search=0x7f080046;
         public static final int book_now=0x7f080010;
         public static final int buyButton=0x7f08000a;
         public static final int buy_now=0x7f08000f;
@@ -510,40 +510,41 @@ containing a value of this type.
         public static final int drawer_layout=0x7f080025;
         public static final int drawer_layoutaaaa=0x7f08002c;
         public static final int draweraaaa=0x7f08002e;
-        public static final int ed_search_online_query=0x7f080031;
         public static final int frame_container=0x7f080026;
         public static final int grayscale=0x7f080012;
         public static final int grid_transport=0x7f080030;
         public static final int holo_dark=0x7f080005;
         public static final int holo_light=0x7f080006;
         public static final int hybrid=0x7f080004;
-        public static final int icon=0x7f080038;
+        public static final int icon=0x7f080039;
         public static final int imageView1=0x7f080028;
         public static final int list_sliding_menu=0x7f080027;
         public static final int lv_list_action=0x7f080015;
-        public static final int lv_list_action_icon=0x7f080036;
-        public static final int lv_list_action_title=0x7f080037;
+        public static final int lv_list_action_icon=0x7f080037;
+        public static final int lv_list_action_title=0x7f080038;
         public static final int lv_list_bookmark_result=0x7f08002f;
         public static final int lv_list_hvlq=0x7f080021;
-        public static final int lv_list_info_icon=0x7f08003b;
-        public static final int lv_list_info_pos=0x7f08003a;
-        public static final int lv_list_info_title=0x7f08003c;
+        public static final int lv_list_info_icon=0x7f08003c;
+        public static final int lv_list_info_pos=0x7f08003b;
+        public static final int lv_list_info_title=0x7f08003d;
         public static final int lv_list_result=0x7f080017;
+        public static final int lv_list_result_search_all=0x7f080033;
         public static final int lv_list_search=0x7f080018;
         public static final int lv_list_search_result=0x7f080023;
-        public static final int lv_search_online_list_result=0x7f080033;
-        public static final int main_content=0x7f080042;
+        public static final int main_content=0x7f080043;
         public static final int match_parent=0x7f08000c;
         public static final int monochrome=0x7f080013;
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
         public static final int production=0x7f080007;
-        public static final int progbar_get_data=0x7f080034;
+        public static final int progbar_get_data=0x7f080035;
         public static final int progressBar1=0x7f080020;
+        public static final int progressBarSearch=0x7f080034;
         public static final int progressBar_webview=0x7f08002a;
         public static final int sandbox=0x7f080008;
         public static final int satellite=0x7f080002;
-        public static final int search=0x7f080044;
+        public static final int search=0x7f080045;
+        public static final int search_all_View=0x7f080031;
         public static final int selectionDetails=0x7f08000b;
         public static final int show_content=0x7f08001a;
         public static final int show_fine=0x7f08001d;
@@ -555,16 +556,16 @@ containing a value of this type.
         public static final int table_resultadd=0x7f08001e;
         public static final int terrain=0x7f080003;
         public static final int textView1=0x7f08002b;
-        public static final int title=0x7f080039;
-        public static final int tv_get_data=0x7f080035;
+        public static final int title=0x7f08003a;
+        public static final int tv_get_data=0x7f080036;
         public static final int tv_list_action_title=0x7f080014;
-        public static final int tv_list_result_fine=0x7f08003f;
-        public static final int tv_list_result_icon=0x7f08003d;
-        public static final int tv_list_result_message=0x7f080040;
-        public static final int tv_list_result_title=0x7f08003e;
-        public static final int tv_list_search_item=0x7f080041;
+        public static final int tv_list_result_fine=0x7f080040;
+        public static final int tv_list_result_icon=0x7f08003e;
+        public static final int tv_list_result_message=0x7f080041;
+        public static final int tv_list_result_title=0x7f08003f;
+        public static final int tv_list_search_item=0x7f080042;
         public static final int tv_result_count=0x7f080016;
-        public static final int tv_search_online_result_count=0x7f080032;
+        public static final int tv_search_all_result_count=0x7f080032;
         public static final int tv_search_result_count=0x7f080022;
         public static final int view=0x7f080024;
         public static final int web_view=0x7f080029;
@@ -587,7 +588,7 @@ containing a value of this type.
         public static final int fragment_bookmark=0x7f03000a;
         public static final int fragment_help=0x7f03000b;
         public static final int fragment_home=0x7f03000c;
-        public static final int fragment_search_online=0x7f03000d;
+        public static final int fragment_search_all=0x7f03000d;
         public static final int fragment_sync=0x7f03000e;
         public static final int list_action_item=0x7f03000f;
         public static final int list_drawer_item=0x7f030010;
@@ -605,14 +606,14 @@ containing a value of this type.
     public static final class string {
         public static final int accept=0x7f060002;
         public static final int action_settings=0x7f060025;
-        public static final int action_websearch=0x7f060038;
+        public static final int action_websearch=0x7f060039;
         public static final int app_name=0x7f060023;
-        public static final int app_not_available=0x7f060039;
+        public static final int app_not_available=0x7f06003a;
         public static final int bookmark_title=0x7f060029;
         public static final int choose=0x7f06002a;
         /**  layout: list_action : 
          */
-        public static final int choose_action=0x7f060035;
+        public static final int choose_action=0x7f060036;
         /**   Text for notification shown when the Android Wear apps needs to be updated. Only shown on the wearable. [CHAR LIMIT=NONE] 
          */
         public static final int common_android_wear_notification_needs_update_text=0x7f060009;
@@ -715,8 +716,8 @@ containing a value of this type.
         public static final int create_calendar_message=0x7f060005;
         public static final int create_calendar_title=0x7f060004;
         public static final int decline=0x7f060003;
-        public static final int drawer_close=0x7f060037;
-        public static final int drawer_open=0x7f060036;
+        public static final int drawer_close=0x7f060038;
+        public static final int drawer_open=0x7f060037;
         public static final int hello_world=0x7f060024;
         public static final int search=0x7f06002c;
         public static final int search_hint=0x7f060026;
@@ -727,6 +728,7 @@ containing a value of this type.
         /**  layout: list_action : 
          */
         public static final int tv_apdung=0x7f06002d;
+        public static final int tv_apdungnull=0x7f060035;
         public static final int tv_chitiet=0x7f06002e;
         public static final int tv_hpbs=0x7f06002f;
         public static final int tv_hpbskhac=0x7f060030;
