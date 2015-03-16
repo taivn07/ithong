@@ -241,7 +241,7 @@ public class Utils {
 				int spanStart = Math.min(start, originalText.length());
 				int spanEnd = Math.min(start + search.length(), originalText.length());
 
-				highlighted.setSpan(new ForegroundColorSpan(Color.GREEN), spanStart, spanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				highlighted.setSpan(new ForegroundColorSpan(Color.RED), spanStart, spanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 				start = normalizedText.toString().indexOf(search.toString(), spanEnd);
 			}

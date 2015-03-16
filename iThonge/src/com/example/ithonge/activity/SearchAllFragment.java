@@ -97,7 +97,6 @@ public class SearchAllFragment extends Fragment{
 			
 			@Override
 			public boolean onQueryTextChange(String newText) {
-				
 				return false;
 			}
 		});

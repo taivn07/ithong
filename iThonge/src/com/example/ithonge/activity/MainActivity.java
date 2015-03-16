@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		mTitle = getTitle();
 		mDrawerTitles = getResources().getStringArray(R.array.drawer_titles);
-		mDrawerIcons = new int[] { R.drawable.ic_action_main, R.drawable.ico_synchronize, R.drawable.ico_search, R.drawable.ico_tutorial,
+		mDrawerIcons = new int[] { R.drawable.ic_action_main, R.drawable.ico_synchronize, R.drawable.ic_action_search, R.drawable.ico_tutorial,
 				R.drawable.ico_about, R.drawable.ico_bookmark, R.drawable.ic_action_exit };
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_sliding_menu);
@@ -153,41 +153,38 @@ public class MainActivity extends Activity {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
-			// getFragmentManager().popBackStack(null,
-			// FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			 getFragmentManager().popBackStack(null,
+			 FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new HomeFragment();
 
 			break;
 		case 1:
-			// getFragmentManager().popBackStack(null,
-			// FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			 getFragmentManager().popBackStack(null,
+			 FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new SyncFragment();
 
 			break;
 		case 2:
-			// getFragmentManager().popBackStack(null,
-			// FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			// fragment = new SearchOnlineFragment();
 
 			fragment = new SearchAllFragment();
 			getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 			break;
 		case 3:
-			// getFragmentManager().popBackStack(null,
-			// FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			 getFragmentManager().popBackStack(null,
+			 FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new HelpFragment();
 
 			break;
 		case 4:
-			// getFragmentManager().popBackStack(null,
-			// FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			 getFragmentManager().popBackStack(null,
+			 FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new AboutFragment();
 
 			break;
 		case 5:
-			// getFragmentManager().popBackStack(null,
-			// FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			 getFragmentManager().popBackStack(null,
+			 FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			fragment = new BookmarkFragment(mDatabaseHelper);
 
 			break;
@@ -201,12 +198,6 @@ public class MainActivity extends Activity {
 		}
 
 		if (fragment != null) {
-			// comment 16/03/2015 by dungna
-			// FragmentManager fragmentManager = getFragmentManager();
-			// FragmentTransaction fragmentTransaction =
-			// fragmentManager.beginTransaction();
-			// fragmentTransaction.replace(R.id.frame_container, fragment);
-			// fragmentTransaction.commit();
 
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -224,14 +215,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		// comment 16/03/2015 by dungna
-		// if (getFragmentManager().getBackStackEntryCount() == 0) {
-		// } else {
-		// if (getFragmentManager().getBackStackEntryCount() == 1)
-		// setTitle(mDrawerTitles[0]);
-		// super.onBackPressed();
-		// }
-
 		if (getFragmentManager().getBackStackEntryCount() == 1) {
 			// Do nothing
 		} else {

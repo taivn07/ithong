@@ -95,14 +95,16 @@ public class ResultDetailAct extends Activity implements OnTouchListener {
 	}
 
 	private void MakeButtonViewMore(long VioID, int Type) {
-		Button ViewmoreBtt;
-		ViewmoreBtt = new Button(this);
+		TextView ViewmoreBtt;
+		ViewmoreBtt = new TextView(this);
 		ViewmoreBtt.setId(Type);
 		ViewmoreBtt.setText(getResources().getString(R.string.tv_xemvanban));
 		ViewmoreBtt.setTextColor(getResources().getColor(R.color.white));
 		ViewmoreBtt.setTextSize(14);
 		ViewmoreBtt.setBackground(getResources().getDrawable(R.color.green));
 		ViewmoreBtt.setGravity(Gravity.CENTER);
+		ViewmoreBtt.setPadding(10, 3, 10, 3);
+		ViewmoreBtt.setClickable(true);
 
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.setMargins(30, 0, 0, 10);

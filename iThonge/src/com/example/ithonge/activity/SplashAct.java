@@ -16,7 +16,7 @@ public class SplashAct extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 		// pgbarLoadingData = (ProgressBar) findViewById(R.id.pgbar_load_data);
-		new CountDownTimer(2000, 1000) {
+		new CountDownTimer(1400, 1000) {
 
 			@Override
 			public void onTick(long millisUntilFinished) {
