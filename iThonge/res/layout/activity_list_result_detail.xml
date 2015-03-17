@@ -26,7 +26,6 @@
                 android:background="@color/green"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:text="@string/tv_noidungchinh"
@@ -110,7 +109,7 @@
                     android:layout_centerVertical="true" />
             </RelativeLayout>
 
-            <com.example.ithonge.utils.ExpandableHeightListView
+            <com.paditech.atgt.utils.ExpandableHeightListView
                 android:id="@+id/lv_list_hvlq"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -121,7 +120,19 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:visibility="visible" >
-            </com.example.ithonge.utils.ExpandableHeightListView>
+            </com.paditech.atgt.utils.ExpandableHeightListView>
+            <!-- <com.paditech.atgt.utils.ExpandableHeightListView -->
+            <!-- android:id="@+id/lv_list_hvlq" -->
+            <!-- android:layout_width="fill_parent" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:background="@color/bg_list_key_search" -->
+            <!-- android:clickable="true" -->
+            <!-- android:divider="@null" -->
+            <!-- android:dividerHeight="0dp" -->
+            <!-- android:focusable="true" -->
+            <!-- android:focusableInTouchMode="true" -->
+            <!-- android:visibility="visible" > -->
+            <!-- </com.example.ithonge.utils.ExpandableHeightListView> -->
         </TableLayout>
     </ScrollView>
 

@@ -6,12 +6,13 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="katana" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="onback"/>
 			<item value="katana"/>
 			<item value="picFile"/>
 			<item value="*"/>
@@ -19,7 +20,6 @@
 			<item value="action_bookmark"/>
 			<item value="AdTit"/>
 			<item value="txtAdT"/>
-			<item value="AdTitle"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

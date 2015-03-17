@@ -39,9 +39,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.example.ithong.models.ListResultItem"/>
 <fullyQualifiedTypeName name="android.view.MotionEvent"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="com.example.ithonge.utils.Variables"/>
-<fullyQualifiedTypeName name="com.example.ithonge.utils.Utils"/>
 <fullyQualifiedTypeName name="android.app.FragmentManager"/>
 <fullyQualifiedTypeName name="android.app.FragmentTransaction"/>
 <fullyQualifiedTypeName name="java.io.File"/>
@@ -52,7 +49,6 @@
 <fullyQualifiedTypeName name="com.facebook.internal.Utility"/>
 <fullyQualifiedTypeName name="com.google.android.gms.internal.fi"/>
 <fullyQualifiedTypeName name="android.gesture.GestureOverlayView.OnGestureListener"/>
-<fullyQualifiedTypeName name="com.example.ithonge.activity.ResultDetailAct"/>
 <fullyQualifiedTypeName name="android.view.GestureDetector"/>
 <fullyQualifiedTypeName name="android.view.View.OnTouchListener"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
@@ -60,4 +56,8 @@
 <fullyQualifiedTypeName name="com.example.ithonge.R.id"/>
 <fullyQualifiedTypeName name="java.security.Timestamp"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="com.example.ithonge.utils.Utils"/>
+<fullyQualifiedTypeName name="com.example.ithonge.utils.Variables"/>
+<fullyQualifiedTypeName name="com.example.ithonge.activity.ResultDetailAct"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 </qualifiedTypeNameHistroy>
