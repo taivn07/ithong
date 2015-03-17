@@ -36,7 +36,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class ListResultFragment extends Fragment implements SearchView.OnQueryTextListener, OnTouchListener {
+public class ListResultFragment extends Fragment implements SearchView.OnQueryTextListener {
 	// ListView Result
 	private ListView mListResult;
 	private ListResultAdapter mListResultAdapter;
@@ -114,7 +114,7 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 		mListViewSearch.setTextFilterEnabled(true);
 		mListViewSearch.setOnItemClickListener(new ListKeyWordOnItemClickListener());
 
-		rootView.setOnTouchListener(this);
+		// rootView.setOnTouchListener(this);
 		return rootView;
 	}
 
@@ -138,6 +138,13 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
+			// check to show ads
+			if (Variables.CLICK_TO_SHOW_ADS_COUNT == Variables.CLICK_TO_SHOW_ADS) {
+				Utils.showFullAds(getActivity());
+				Variables.CLICK_TO_SHOW_ADS_COUNT = 0;
+			} else {
+				Variables.CLICK_TO_SHOW_ADS_COUNT++;
+			}
 			Intent intent = new Intent(getActivity(), ResultDetailAct.class);
 			intent.putExtra(Variables.TAG_VIOLATIOID, mListResultItems.get(position).getVioID());
 			// intent.putExtra(Variables.TAG_OBJECT,
@@ -306,22 +313,5 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 			mListViewSearch.setVisibility(View.INVISIBLE);
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	// dungna 03/15/2015
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		int action = event.getAction();
-		switch (action) {
-		case MotionEvent.ACTION_DOWN:
-			Variables.tapCount++;
-			Log.e("dungna: Count", "" + Variables.tapCount);
-			break;
-		}
-		// dungna 03/13/2015
-		if (Variables.tapCount % 10 == 0) {
-			Utils.showFullAds(getActivity());
-		}
-		return true;
 	}
 }

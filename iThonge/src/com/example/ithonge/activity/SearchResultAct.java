@@ -42,10 +42,9 @@ public class SearchResultAct extends Activity {
 		tvResultCount = (TextView) findViewById(R.id.tv_search_result_count);
 		mListSearchResultItems = new ArrayList<ListResultItem>();
 
-
 		mListSearchResult = (ListView) findViewById(R.id.lv_list_search_result);
 		mListSearchResult.setOnItemClickListener(new ListResutlItemOnClickListener());
-	
+
 		handleIntent(getIntent());
 	}
 
@@ -62,13 +61,13 @@ public class SearchResultAct extends Activity {
 	}
 
 	// input text and search result from mListResult item
-	private ArrayList<ListResultItem> getResultByTextInput(String textInput,ArrayList<ListResultItem> ListResult) {
+	private ArrayList<ListResultItem> getResultByTextInput(String textInput, ArrayList<ListResultItem> ListResult) {
 		Log.e("Dungna", "11");
 		String TextInputUnAccent = (String) Utils.unAccent(textInput.toLowerCase());
 		ArrayList<ListResultItem> tempList = new ArrayList<ListResultItem>();
 		for (ListResultItem item : ListResult) {
 			if (item.getVioNameEn().toString().toLowerCase().contains(TextInputUnAccent)) {
-				item.setVioName(Utils.highlight(TextInputUnAccent, item.getVioName(),item.getVioNameEn())); 
+				item.setVioName(Utils.highlight(TextInputUnAccent, item.getVioName(), item.getVioNameEn()));
 				tempList.add(item);
 			}
 		}
@@ -100,6 +99,17 @@ public class SearchResultAct extends Activity {
 				tvResultCount.setText("Không tìm thấy kết quả nào.");
 			}
 		}
+	}
 
+	@Override
+	public void onBackPressed() {
+		Log.e("backpress", "" + Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT);
+		if (Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT == Variables.CLICK_BACK_PRESS_TO_SHOW_ADS) {
+			Utils.showFullAds(this);
+			Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT = 0;
+		} else {
+			Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT++;
+			super.onBackPressed();
+		}
 	}
 }

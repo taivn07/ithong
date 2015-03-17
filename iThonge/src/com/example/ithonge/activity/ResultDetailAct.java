@@ -1,14 +1,29 @@
 package com.example.ithonge.activity;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,20 +31,20 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ithong.models.DatabaseHelper;
 import com.example.ithonge.R;
 import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
-public class ResultDetailAct extends Activity implements OnTouchListener {
+public class ResultDetailAct extends Activity {
 	private DatabaseHelper mDataBaseHelper;
 	private long VioID;
 	private ScrollView mScrollView;
@@ -39,6 +54,12 @@ public class ResultDetailAct extends Activity implements OnTouchListener {
 
 	private LinearLayout tableresultaddLayout;
 	private boolean mainbookmarked, bookmarked;
+
+	// Facebook connect
+	// private Facebook mFacebook;
+	// AsyncFacebookRunner mAsyncRunner;
+	// private GestureDetector gestureDetector;
+	// View.OnTouchListener gestureListener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +81,9 @@ public class ResultDetailAct extends Activity implements OnTouchListener {
 		try {
 			mDataBaseHelper = new DatabaseHelper(this);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.e("VioID", "" + VioID);
+		// Log.e("VioID", "" + VioID);
 		SetView(VioID);
 
 	}
@@ -134,6 +154,13 @@ public class ResultDetailAct extends Activity implements OnTouchListener {
 
 		@Override
 		public void onClick(View v) {
+			// check to show ads
+			if (Variables.CLICK_TO_SHOW_ADS_COUNT == Variables.CLICK_TO_SHOW_ADS) {
+				Utils.showFullAds(ResultDetailAct.this);
+				Variables.CLICK_TO_SHOW_ADS_COUNT = 0;
+			} else {
+				Variables.CLICK_TO_SHOW_ADS_COUNT++;
+			}
 			Intent intent = new Intent(v.getContext(), MoreInfo_act.class);
 			intent.putExtra(Variables.TAG_BOOKMARKNAME, bookmarkname);
 			startActivity(intent);
@@ -227,7 +254,14 @@ public class ResultDetailAct extends Activity implements OnTouchListener {
 			if (!mainbookmarked)
 				mDataBaseHelper.insertintoTableLuuTru(VioID);
 		}
-		super.onBackPressed();
+		Log.e("backpress", "" + Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT);
+		if (Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT == Variables.CLICK_BACK_PRESS_TO_SHOW_ADS) {
+			Utils.showFullAds(this);
+			Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT = 0;
+		} else {
+			Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT++;
+			super.onBackPressed();
+		}
 	}
 
 	@Override
@@ -242,25 +276,119 @@ public class ResultDetailAct extends Activity implements OnTouchListener {
 				item.setIcon(R.drawable.ico_bookmarked);
 			}
 			return true;
+			// dungna: 16/03/2015
+		case R.id.action_fb_share:
+			share_facebook();
+			return true;
+
+		case R.id.action_twitter_share:
+			share_twitter();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
-	// dungna 03/15/2015
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		int action = event.getAction();
-		switch (action) {
-		case MotionEvent.ACTION_DOWN:
-			Variables.tapCount++;
-			Log.e("dungna: Count", "" + Variables.tapCount);
-			break;
+	public void share_facebook() {
+		Bitmap bitmapToShare = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+
+		File pictureStorage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+		File noMedia = new File(pictureStorage, ".nomedia");
+		if (!noMedia.exists())
+			noMedia.mkdirs();
+		SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
+		String fileName = s.format(new Date(0));
+		// String fileName = tsTemp.toString();
+		File file = new File(noMedia, fileName + ".jpg");
+		View view = findViewById(R.id.show_result);// your layout id
+		view.getRootView();
+		view.setDrawingCacheEnabled(true);
+		view.buildDrawingCache(true);
+		Bitmap bitmap = view.getDrawingCache();
+		saveBitmapAsFile(bitmap, file);
+
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+		shareIntent.setType("image/jpeg");
+		List<ResolveInfo> resInfos = getPackageManager().queryIntentActivities(shareIntent, 0);
+		if (!resInfos.isEmpty()) {
+			for (ResolveInfo resInfo : resInfos) {
+				String packageName = resInfo.activityInfo.packageName;
+				if (packageName.contains("com.facebook.katana")) {
+
+					final ActivityInfo activity = resInfo.activityInfo;
+					final ComponentName name = new ComponentName(activity.applicationInfo.packageName, activity.name);
+					shareIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+					shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					shareIntent.setComponent(name);
+					// Log.e("Dungna", "after dhsdhfsdkf");
+					startActivity(shareIntent);
+					break;
+				}
+			}
 		}
-		// dungna 03/13/2015
-		if (Variables.tapCount % 10 == 0) {
-			Utils.showFullAds(this);
+
+	}
+
+	public void share_twitter() {
+		Bitmap bitmapToShare = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+
+		File pictureStorage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+		File noMedia = new File(pictureStorage, ".nomedia");
+		if (!noMedia.exists())
+			noMedia.mkdirs();
+		SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
+		String fileName = s.format(new Date(0));
+		// String fileName = tsTemp.toString();
+		File file = new File(noMedia, fileName + ".jpg");
+		View view = findViewById(R.id.show_result);// your layout id
+		view.getRootView();
+		view.setDrawingCacheEnabled(true);
+		view.buildDrawingCache(true);
+		Bitmap bitmap = view.getDrawingCache();
+		saveBitmapAsFile(bitmap, file);
+
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+		shareIntent.setType("image/jpeg");
+		List<ResolveInfo> resInfos = getPackageManager().queryIntentActivities(shareIntent, 0);
+		if (!resInfos.isEmpty()) {
+			for (ResolveInfo resInfo : resInfos) {
+				String packageName = resInfo.activityInfo.packageName;
+				if (packageName.contains("com.twitter.android")) {
+
+					final ActivityInfo activity = resInfo.activityInfo;
+					final ComponentName name = new ComponentName(activity.applicationInfo.packageName, activity.name);
+					shareIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+					shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					shareIntent.setComponent(name);
+					// Log.e("Dungna", "after dhsdhfsdkf");
+					startActivity(shareIntent);
+					break;
+				}
+			}
 		}
-		return true;
+
+	}
+
+	public void saveBitmapAsFile(Bitmap bitmap, File file) {
+		try {
+			file.createNewFile();
+			FileOutputStream picOut = new FileOutputStream(file);
+			bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), (int) (bitmap.getHeight() / 1.2));
+			boolean saved = bitmap.compress(CompressFormat.JPEG, 100, picOut);
+			if (saved) {
+				// Toast.makeText(getApplicationContext(),
+				// "Image saved to your device Pictures " + "directory!",
+				// Toast.LENGTH_SHORT).show();
+			} else {
+				Log.e("ResultDetail", "Images not to save!");
+			}
+			picOut.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

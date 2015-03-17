@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="AdTit" key="selection"/>
+		<item value="katana" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="katana"/>
+			<item value="picFile"/>
+			<item value="*"/>
+			<item value="bookmarked"/>
+			<item value="action_bookmark"/>
 			<item value="AdTit"/>
 			<item value="txtAdT"/>
 			<item value="AdTitle"/>
-			<item value="AdTitle1"/>
-			<item value="MEDIA_ID"/>
-			<item value="tvResultCount"/>
-			<item value="mListSOResultAdapter"/>
-			<item value="mListResult"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="FULL_MEDIA_ID"/>
 			<item value="tvSOResultCount"/>
 			<item value="mListSOAdapter"/>
 			<item value="mListSOResult"/>
-			<item value=""/>
 			<item value="TAG_VIOLATION"/>
 			<item value="private String "/>
 			<item value="private String"/>

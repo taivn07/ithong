@@ -1,12 +1,9 @@
 package com.example.ithonge.activity;
 
-import jp.co.imobile.sdkads.android.ImobileIconParams;
-import jp.co.imobile.sdkads.android.ImobileSdkAd;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,11 +15,10 @@ import android.widget.GridView;
 
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.CustomGridViewAdapter;
-import com.example.ithonge.utils.SpotParams;
 import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
-public class HomeFragment extends Fragment implements OnTouchListener {
+public class HomeFragment extends Fragment {
 	private GridView mGridView;
 	private int[] mThumn;
 
@@ -45,11 +41,19 @@ public class HomeFragment extends Fragment implements OnTouchListener {
 			}
 		});
 
-		rootView.setOnTouchListener(this);
+		// rootView.setOnTouchListener(this);
+		// dungna
 		return rootView;
 	}
 
 	private void startListItemAct(int position) {
+		// check to show ads
+		if (Variables.CLICK_TO_SHOW_ADS_COUNT == Variables.CLICK_TO_SHOW_ADS) {
+			Utils.showFullAds(getActivity());
+			Variables.CLICK_TO_SHOW_ADS_COUNT = 0;
+		} else {
+			Variables.CLICK_TO_SHOW_ADS_COUNT++;
+		}
 		if (position == 7) {
 			QTXPFragment fragment2 = new QTXPFragment();
 			FragmentManager fragmentManager = getFragmentManager();
@@ -80,23 +84,6 @@ public class HomeFragment extends Fragment implements OnTouchListener {
 			fragmentTransaction.commit();
 		}
 
-	}
-
-	// dungna 03/15/2015
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		int action = event.getAction();
-		switch (action) {
-		case MotionEvent.ACTION_DOWN:
-			Variables.tapCount++;
-			Log.e("dungna: Count", "" + Variables.tapCount);
-			break;
-		}
-		// dungna 03/13/2015
-		if (Variables.tapCount % 10 == 0) {
-			Utils.showFullAds(getActivity());
-		}
-		return true;
 	}
 
 }

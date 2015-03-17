@@ -14,6 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,8 @@ import com.example.ithong.models.DatabaseHelper;
 import com.example.ithong.models.NavDrawerItem;
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.NavDrawerListAdapter;
+import com.example.ithonge.utils.Utils;
+import com.example.ithonge.utils.Variables;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
@@ -133,7 +136,8 @@ public class MainActivity extends Activity {
 			if (intent.resolveActivity(getPackageManager()) != null) {
 				startActivity(intent);
 			} else {
-				Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
+				// Toast.makeText(this, R.string.app_not_available,
+				// Toast.LENGTH_LONG).show();
 			}
 			return true;
 		default:
@@ -150,6 +154,13 @@ public class MainActivity extends Activity {
 	}
 
 	private void selectItem(int position) {
+		// check to show ads
+		if (Variables.CLICK_TO_SHOW_ADS_COUNT == Variables.CLICK_TO_SHOW_ADS) {
+			Utils.showFullAds(this);
+			Variables.CLICK_TO_SHOW_ADS_COUNT = 0;
+		} else {
+			Variables.CLICK_TO_SHOW_ADS_COUNT++;
+		}
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
@@ -225,20 +236,29 @@ public class MainActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		// comment 16/03/2015 by dungna
-		// if (getFragmentManager().getBackStackEntryCount() == 0) {
+		// if (getFragmentManager().getBackStackEntryCount() == 1) {
+		// // Do nothing
 		// } else {
-		// if (getFragmentManager().getBackStackEntryCount() == 1)
+		// if (getFragmentManager().getBackStackEntryCount() == 2)
 		// setTitle(mDrawerTitles[0]);
 		// super.onBackPressed();
 		// }
 
-		if (getFragmentManager().getBackStackEntryCount() == 1) {
-			// Do nothing
+		if (Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT == Variables.CLICK_BACK_PRESS_TO_SHOW_ADS) {
+			Utils.showFullAds(this);
+			Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT = 0;
 		} else {
-			if (getFragmentManager().getBackStackEntryCount() == 2)
-				setTitle(mDrawerTitles[0]);
-			super.onBackPressed();
+			Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT++;
+			Log.e("backpress", "" + Variables.CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT);
+			if (getFragmentManager().getBackStackEntryCount() == 1) {
+				// Do nothing
+			} else {
+				if (getFragmentManager().getBackStackEntryCount() == 2)
+					setTitle(mDrawerTitles[0]);
+				super.onBackPressed();
+			}
 		}
+
 	}
 
 	@Override

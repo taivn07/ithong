@@ -29,7 +29,7 @@ import com.example.ithonge.adapter.ListActionAdapter;
 import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
-public class ListActionFragment extends Fragment implements OnTouchListener {
+public class ListActionFragment extends Fragment {
 	private ListView mListAct;
 	private ListActionAdapter mListActAdapter;
 	private ArrayList<ListActionItem> mListActItems;
@@ -70,11 +70,6 @@ public class ListActionFragment extends Fragment implements OnTouchListener {
 		mListActAdapter = new ListActionAdapter(getActivity(), mListActItems);
 		mListAct.setAdapter(mListActAdapter);
 
-		// dungna 03/13/2015
-		if (Variables.tapCount % 10 == 0) {
-			Utils.showFullAds(getActivity());
-		}
-		rootView.setOnTouchListener(this);
 		return rootView;
 	}
 
@@ -101,6 +96,13 @@ public class ListActionFragment extends Fragment implements OnTouchListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			// check to show ads
+			if (Variables.CLICK_TO_SHOW_ADS_COUNT == Variables.CLICK_TO_SHOW_ADS) {
+				Utils.showFullAds(getActivity());
+				Variables.CLICK_TO_SHOW_ADS_COUNT = 0;
+			} else {
+				Variables.CLICK_TO_SHOW_ADS_COUNT++;
+			}
 			ListResultFragment fragment2 = new ListResultFragment();
 			Bundle bundle = new Bundle();
 			bundle.putInt(Variables.TAG_VEHICLE_POSITION, vehiclePosition);
@@ -114,20 +116,4 @@ public class ListActionFragment extends Fragment implements OnTouchListener {
 		}
 	}
 
-	// dungna 03/15/2015
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		int action = event.getAction();
-		switch (action) {
-		case MotionEvent.ACTION_DOWN:
-			Variables.tapCount++;
-			Log.e("dungna: Count", "" + Variables.tapCount);
-			break;
-		}
-		// dungna 03/13/2015
-		if (Variables.tapCount % 10 == 0) {
-			Utils.showFullAds(getActivity());
-		}
-		return true;
-	}
 }

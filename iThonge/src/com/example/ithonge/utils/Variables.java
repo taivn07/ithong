@@ -17,7 +17,11 @@ public class Variables {
 	// Global variables
 	public static String currentTitle = "";
 	public static ArrayList<ListResultItem> currentListResultItems = new ArrayList<ListResultItem>();
-	public static int tapCount = 1;
+	// public static int tapCount = 1;
+	public static int CLICK_TO_SHOW_ADS_COUNT = 0;
+	public static int CLICK_BACK_PRESS_TO_SHOW_ADS_COUNT = 0;
+	public static final int CLICK_TO_SHOW_ADS = 1000;
+	public static final int CLICK_BACK_PRESS_TO_SHOW_ADS = 5;
 	// for Activity
 	// Main
 	public static final String TAG_VEHICLE_POSITION = "vehicle_position";
