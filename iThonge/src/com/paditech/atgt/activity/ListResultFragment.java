@@ -169,7 +169,6 @@ public class ListResultFragment extends Fragment implements SearchView.OnQueryTe
 			ListKeyWordItem tempKey = (ListKeyWordItem) mListViewSearchAdapter.getItem(position);
 			textView.setText(tempKey.getName().toString());
 		}
-
 	}
 
 	private boolean Check_Group(int AgroupId) {

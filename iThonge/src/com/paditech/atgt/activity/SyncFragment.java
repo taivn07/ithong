@@ -1,6 +1,7 @@
 package com.paditech.atgt.activity;
 
 import java.io.IOException;
+import java.sql.SQLClientInfoException;
 import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import com.paditech.atgt.R;
 import com.paditech.atgt.models.DatabaseHelper;
 import com.paditech.atgt.models.TableKeyword;
+import com.paditech.atgt.models.TableViolation;
 import com.paditech.atgt.utils.Utils;
 import com.paditech.atgt.utils.Variables;
 
@@ -86,7 +88,6 @@ public class SyncFragment extends Fragment {
 		Cursor mResult = mDatabaseHelper.getResultFromSQL(sql2);
 		int count = mResult.getCount();
 		return count;
-
 	}
 
 	// get LastUpdate from local database and synchronize with server (using
@@ -97,17 +98,18 @@ public class SyncFragment extends Fragment {
 		public synchronizeDataFromServerTask() {
 			mPgbarGetData.setVisibility(View.VISIBLE);
 			mTvGetData.setVisibility(View.VISIBLE);
-			mAlertDialog = createAlertDialog(getActivity(), "�?ồng bộ hoàn tất.", "�?ồng bộ hoàn tất. Nhấn Cancel để thoát.");
+			mAlertDialog = createAlertDialog(getActivity(), "Đồng bộ hoàn tất.", "Đồng bộ hoàn tất. Nhấn Cancel để thoát.");
 		}
 
 		@Override
 		protected String doInBackground(String... params) {
-			String lastUpdated = getLastUpdateFromKeywordTable();
+			String lastUpdated = getLastUpdateFromViolationTable();
 			if (lastUpdated != null) {
 				// check lastUpdate and send request to server, get response
 				// (json)
 				HttpClient client = new DefaultHttpClient();
 				String url = Variables.SERVER_HOST + "sync=true&last_update=" + lastUpdated;
+				// Log.e(LOG_TAG, url);
 				// Log.e(LOG_TAG, url);
 				HttpGet httpGet = new HttpGet(url);
 				HttpResponse response;
@@ -116,13 +118,20 @@ public class SyncFragment extends Fragment {
 					response = client.execute(httpGet);
 					HttpEntity entity = response.getEntity();
 					result = EntityUtils.toString(entity);
-					Log.e(LOG_TAG, result);
+					// Log.e(LOG_TAG, result);
 					if (Utils.CheckResultFromServer(result)) {
 						ArrayList<TableKeyword> listKeyUpdate = new ArrayList<TableKeyword>();
 						listKeyUpdate = Utils.getListKeywordFromJsonResponse(result);
-						// update local database: Keyword table
-						mDatabaseHelper.insertIntoTableKeyword(listKeyUpdate);
-						publishProgress(Integer.toString(listKeyUpdate.size()));
+						ArrayList<TableViolation> listViolationUpdate = new ArrayList<TableViolation>();
+						listViolationUpdate = Utils.getListViolationFromJsonResponse(result);
+						// update local database: Keyword table, Violation table
+						if (listKeyUpdate.size() > 0) {
+							mDatabaseHelper.insertIntoTableKeyword(listKeyUpdate);
+						}
+						if (listViolationUpdate.size() > 0) {
+							mDatabaseHelper.insertIntoTableViolation(listViolationUpdate);
+						}
+						publishProgress(Integer.toString(listKeyUpdate.size() + listViolationUpdate.size()));
 						return null;
 					}
 				} catch (Exception e) {
@@ -141,7 +150,7 @@ public class SyncFragment extends Fragment {
 			if (values == null) {
 				mAlertDialog.setMessage("Không có dữ liệu để cập nhật. Nhấn Cancel để thoát.");
 			} else {
-				mAlertDialog.setMessage("�?ã cập nhật " + values[0] + " trư�?ng vào cơ sở dữ liệu. Nhấn Cancel để thoát.");
+				mAlertDialog.setMessage("Đã cập nhật " + values[0] + " trường vào cơ sở dữ liệu. Nhấn Cancel để thoát.");
 			}
 			mAlertDialog.show();
 			super.onProgressUpdate(values);
@@ -157,6 +166,18 @@ public class SyncFragment extends Fragment {
 		private String getLastUpdateFromKeywordTable() {
 			String lastUpdated = null;
 			String sql = "SELECT  max(LastUpdated), Keyword_ID, Keyword_Name from Keywords";
+			Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
+			if (mResult != null && mResult.getCount() != 0) {
+				Log.e(LOG_TAG, "" + mResult.getCount());
+				mResult.moveToFirst();
+				lastUpdated = mResult.getString(0);
+			}
+			return lastUpdated;
+		}
+
+		private String getLastUpdateFromViolationTable() {
+			String lastUpdated = null;
+			String sql = "SELECT  max(LastUpdated), ID from Violation";
 			Cursor mResult = mDatabaseHelper.getResultFromSQL(sql);
 			if (mResult != null && mResult.getCount() != 0) {
 				Log.e(LOG_TAG, "" + mResult.getCount());

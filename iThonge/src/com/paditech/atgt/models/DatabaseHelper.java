@@ -135,6 +135,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 	}
 
+	public void insertIntoTableViolation(ArrayList<TableViolation> violations) {
+		for (TableViolation item : violations) {
+			String sql = "INSERT INTO `Violation` VALUES(" + item.getViolation_ID() + ",'" + item.getObject() + "','" + item.getName()
+					+ "'," + item.getNameEN() + ",'" + item.getLawID() + item.getBookmark_ID() + "'," + item.getMainContent() + ",'"
+					+ item.getFines() + item.getIsWarning() + ",'" + item.getIsPoppular() + "','" + item.getAdditional_Penalties() + "',"
+					+ item.getRemedial_Measures() + ",'" + item.getOther_Penalties() + item.getGroup_Value() + "'," + item.getType_Value()
+					+ ",'" + item.getDisabled() + item.getLawTitle() + ",'" + item.getLastUpdated() + "')";
+
+			Log.e(LOG_TAG, "Error: " + sql);
+			mDatabase.execSQL(sql);
+		}
+	}
+
 	public void deleteFromTableKeyword(long value) {
 		String sql = "DELETE FROM 'Keywords' WHERE Keyword_ID =" + value;
 		Log.e(LOG_TAG, "Delete: " + sql);

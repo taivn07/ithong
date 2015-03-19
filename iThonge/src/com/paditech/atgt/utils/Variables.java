@@ -6,7 +6,8 @@ import com.paditech.atgt.models.ListResultItem;
 
 public class Variables {
 	// For server online
-	public static final String SERVER_HOST = "http://paditech.com/atgt_server/ithongtest.php";
+	public static final String SERVER_HOST = "http://paditech.com/atgt_server/ithongtest.php?";
+	public static final String SERVER_HOST2 = "http://paditech.com/atgt_server/ithongtest.php?";
 	// For mobile Ad test
 	public static final String BANNER_PUBLISHER_ID = "35067";
 	public static final String BANNER_MEDIA_ID = "144083";
@@ -55,6 +56,7 @@ public class Variables {
 	public static final String TAG_VIOLATION_LAW_TITLE = "LawTitle";
 	public static final String TAG_VIOLATION_DISABLED = "Disabled";
 	public static final String TAG_VIOLATION_LAST_UPDATED = "LastUpdated";
+	public static final String TAG_VIOLATION_ALL = "violation_all";
 
 	// Group Table
 	public static final String TAG_GROUP_ID = "Group_ID";
@@ -71,5 +73,6 @@ public class Variables {
 	public static final String TAG_KEYWORD_LAST_UPDATE = "LastUpdated";
 	public static final String TAG_KEYWORD_CODE = "code";
 	public static final String TAG_KEYWORD_MESSAGE = "message";
+	public static final String TAG_KEYWORD_ALL = "keyword_all";
 
 }

@@ -22,6 +22,7 @@ import android.net.NetworkInfo;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.JsonReader;
 import android.util.Log;
 
 import com.paditech.atgt.models.TableKeyword;
@@ -81,9 +82,15 @@ public class Utils {
 		ArrayList<TableKeyword> listKeywords = new ArrayList<TableKeyword>();
 		if (response != null) {
 			try {
-				JSONObject keyObject = new JSONObject(response);
+				JSONObject keyObjectRoot = new JSONObject(response);
+				// JSONArray keyArrayRoot =
+				// keyObjectRoot.getJSONArray(Variables.TAG_KEYWORD_ALL);
+				// JSONObject keyObject = keyArrayRoot.getJSONObject(0);
+				JSONObject keyObject = keyObjectRoot.getJSONObject(Variables.TAG_KEYWORD_ALL);
 				int code = keyObject.getInt(Variables.TAG_KEYWORD_CODE);
-				Log.e(LOG_TAG, "Code: " + code + ".  Count: " + listKeywords.size());
+				Log.e(LOG_TAG, "Code: " + code + ".  Count: ");
+				// Log.e(LOG_TAG, "Code: " + code + ".  Count: " +
+				// keyArrayRoot.toString());
 				if (code == 1) {
 					JSONArray keyArray = keyObject.getJSONArray(Variables.TAG_KEYWORD);
 					for (int i = 0; i < keyArray.length(); i++) {
@@ -113,7 +120,9 @@ public class Utils {
 		ArrayList<TableViolation> listViolations = new ArrayList<TableViolation>();
 		if (response != null) {
 			try {
-				JSONObject violationObject = new JSONObject(response);
+
+				JSONObject violationObjectRoot = new JSONObject(response);
+				JSONObject violationObject = violationObjectRoot.getJSONObject(Variables.TAG_VIOLATION_ALL);
 				int code = violationObject.getInt(Variables.TAG_KEYWORD_CODE);
 				Log.e(LOG_TAG, "Code: " + code + ".  Count: " + listViolations.size());
 				if (code == 1) {
@@ -233,7 +242,7 @@ public class Utils {
 	public static CharSequence unAccent(CharSequence s) {
 		CharSequence temp = Normalizer.normalize(s, Normalizer.Form.NFD);
 		Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-		return pattern.matcher(temp).replaceAll("").replaceAll("�?", "D").replaceAll("đ", "d");
+		return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replaceAll("đ", "d");
 	}
 
 	// highlight search

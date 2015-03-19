@@ -28,7 +28,7 @@ import com.paditech.atgt.models.ListResultItem;
 import com.paditech.atgt.utils.Utils;
 import com.paditech.atgt.utils.Variables;
 
-public class SearchAllFragment extends Fragment{
+public class SearchAllFragment extends Fragment {
 	private SearchView searchView;
 	private ArrayList<ListResultItem> listResultItems;
 	private ArrayList<ListResultItem> searchlistResultItems;
@@ -41,10 +41,10 @@ public class SearchAllFragment extends Fragment{
 	public SearchAllFragment() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
+
 		try {
 			databaseHelper = new DatabaseHelper(getActivity());
 		} catch (IOException e) {
@@ -54,83 +54,80 @@ public class SearchAllFragment extends Fragment{
 		listResultItems = null;
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	private ArrayList<ListResultItem> getListItemformDatabase() {
 		ArrayList<ListResultItem> tempList = new ArrayList<ListResultItem>();
 		String sql = "Select * From Violation Where Type_Value <>0 or Group_Value <>0";
 		Cursor mResult = databaseHelper.getResultFromSQL(sql);
 		mResult.moveToFirst();
-		
+
 		String ViolatioName = null;
 		String Fine = null;
 		String strMessage = null;
 		long ViolationID = 0;
-		Log.e("Annn",""+mResult.getCount());
+		Log.e("Annn", "" + mResult.getCount());
 		if (mResult.getCount() != 0)
-			while (!mResult.isAfterLast()) {				
-					ViolatioName = Utils.ReNameFilter(mResult.getString(mResult.getColumnIndex("Name")));
-					Fine = mResult.getString(mResult.getColumnIndex("Fines"));
-					strMessage = mResult.getString(mResult.getColumnIndex("Object"));
-					ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
-					tempList.add(new ListResultItem(ViolatioName, Utils.unAccent(ViolatioName), Fine, strMessage, ViolationID));
+			while (!mResult.isAfterLast()) {
+				ViolatioName = Utils.ReNameFilter(mResult.getString(mResult.getColumnIndex("Name")));
+				Fine = mResult.getString(mResult.getColumnIndex("Fines"));
+				strMessage = mResult.getString(mResult.getColumnIndex("Object"));
+				ViolationID = mResult.getInt(mResult.getColumnIndex("ID"));
+				tempList.add(new ListResultItem(ViolatioName, Utils.unAccent(ViolatioName), Fine, strMessage, ViolationID));
 				mResult.moveToNext();
 			}
 		return tempList;
-	}	
-	
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_search_all, container, false);
-	
+
 		searchView = (SearchView) rootView.findViewById(R.id.search_all_View);
 		searchView.setQueryHint("Search...");
 		searchView.setEnabled(false);
-		
+
 		searchView.setOnQueryTextListener(new OnQueryTextListener() {
-			
+
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				getAllViolationFromDatabase gf= new getAllViolationFromDatabase(getActivity());
+				getAllViolationFromDatabase gf = new getAllViolationFromDatabase(getActivity());
 				gf.execute(query);
 				return false;
 			}
-			
+
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				return false;
 			}
 		});
-		resultListView = (ListView)  rootView.findViewById(R.id.lv_list_result_search_all);
+		resultListView = (ListView) rootView.findViewById(R.id.lv_list_result_search_all);
 		progressSearch = (ProgressBar) rootView.findViewById(R.id.progressBarSearch);
 		tvResultCount = (TextView) rootView.findViewById(R.id.tv_search_all_result_count);
-		getAllViolationFromDatabase gf= new getAllViolationFromDatabase(getActivity());
+		getAllViolationFromDatabase gf = new getAllViolationFromDatabase(getActivity());
 		gf.execute("");
-		
-		
+
 		return rootView;
 	}
-	
+
 	private class ListResutlItemOnClickListener implements OnItemClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			 Intent intent = new Intent(getActivity(),
-			 ResultDetailAct.class);
-			 intent.putExtra(Variables.TAG_VIOLATIOID,
-			 searchlistResultItems.get(position).getVioID());
-			 startActivity(intent);
+			Intent intent = new Intent(getActivity(), ResultDetailAct.class);
+			intent.putExtra(Variables.TAG_VIOLATIOID, searchlistResultItems.get(position).getVioID());
+			startActivity(intent);
 		}
 	}
 
 	// get all violation from database
 
-	private class getAllViolationFromDatabase extends AsyncTask<String, Void, Void> {	
+	private class getAllViolationFromDatabase extends AsyncTask<String, Void, Void> {
 		private Activity context;
-		
+
 		public getAllViolationFromDatabase(Activity context) {
 			this.context = context;
 		}
-		
+
 		@Override
 		protected void onPreExecute() {
 			progressSearch.setVisibility(View.VISIBLE);
@@ -140,18 +137,16 @@ public class SearchAllFragment extends Fragment{
 		@Override
 		protected Void doInBackground(String... params) {
 			String searchtext = params[0];
-			if (listResultItems != null)
-			{
-			searchlistResultItems = getListItemAfterSearch(searchtext);
-			}
-			else {
+			if (listResultItems != null) {
+				searchlistResultItems = getListItemAfterSearch(searchtext);
+			} else {
 				listResultItems = getListItemformDatabase();
 				searchlistResultItems = listResultItems;
 			}
 
 			return null;
 		}
-		
+
 		@Override
 		protected void onProgressUpdate(Void... values) {
 			// TODO Auto-generated method stub
@@ -168,21 +163,22 @@ public class SearchAllFragment extends Fragment{
 			searchView.setEnabled(true);
 			super.onPostExecute(result);
 		}
-		
+
 		private ArrayList<ListResultItem> getListItemAfterSearch(String searchtext) {
 			ArrayList<ListResultItem> tempList = new ArrayList<ListResultItem>();
 			String unAccentsearchtext = (String) Utils.unAccent(searchtext.toLowerCase());
 			int i = 0;
-			if (listResultItems.size()!=0)
-				while (i<listResultItems.size()) {
-					if (listResultItems.get(i).getVioNameEn().toString().toLowerCase().contains(unAccentsearchtext))
-					{
-						listResultItems.get(i).setVioName(Utils.highlight(unAccentsearchtext,listResultItems.get(i).getVioName(),listResultItems.get(i).getVioNameEn()));
+			if (listResultItems.size() != 0)
+				while (i < listResultItems.size()) {
+					if (listResultItems.get(i).getVioNameEn().toString().toLowerCase().contains(unAccentsearchtext)) {
+						listResultItems.get(i).setVioName(
+								Utils.highlight(unAccentsearchtext, listResultItems.get(i).getVioName(), listResultItems.get(i)
+										.getVioNameEn()));
 						tempList.add(listResultItems.get(i));
 					}
 					i++;
 				}
 			return tempList;
-		}	
+		}
 	}
 }

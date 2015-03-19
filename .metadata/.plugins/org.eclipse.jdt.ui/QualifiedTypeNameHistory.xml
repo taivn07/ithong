@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.example.models.ListResultItem"/>
-<fullyQualifiedTypeName name="android.webkit.WebSettings.TextSize"/>
-<fullyQualifiedTypeName name="android.widget.ProgressBar"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
-<fullyQualifiedTypeName name="org.apache.http.impl.client.DefaultHttpClient"/>
-<fullyQualifiedTypeName name="org.apache.http.client.methods.HttpGet"/>
-<fullyQualifiedTypeName name="org.apache.http.HttpResponse"/>
 <fullyQualifiedTypeName name="org.apache.http.client.HttpClient"/>
 <fullyQualifiedTypeName name="org.apache.http.HttpEntity"/>
 <fullyQualifiedTypeName name="org.apache.http.util.EntityUtils"/>
 <fullyQualifiedTypeName name="android.renderscript.Sampler.Value"/>
-<fullyQualifiedTypeName name="org.json.JSONArray"/>
-<fullyQualifiedTypeName name="org.json.JSONObject"/>
 <fullyQualifiedTypeName name="com.example.ithong.models.TableKeyword"/>
 <fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="com.example.ithonge.R"/>
@@ -36,7 +27,6 @@
 <fullyQualifiedTypeName name="android.widget.TextView.OnEditorActionListener"/>
 <fullyQualifiedTypeName name="android.view.View.OnKeyListener"/>
 <fullyQualifiedTypeName name="android.view.KeyEvent"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.example.ithong.models.ListResultItem"/>
 <fullyQualifiedTypeName name="android.view.MotionEvent"/>
 <fullyQualifiedTypeName name="android.app.FragmentManager"/>
@@ -57,7 +47,17 @@
 <fullyQualifiedTypeName name="java.security.Timestamp"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="com.example.ithonge.utils.Utils"/>
-<fullyQualifiedTypeName name="com.example.ithonge.utils.Variables"/>
 <fullyQualifiedTypeName name="com.example.ithonge.activity.ResultDetailAct"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="jp.co.imobile.sdkads.android.ImobileSdkAd"/>
+<fullyQualifiedTypeName name="jp.co.imobile.sdkads.android.ImobileSdkAdListener"/>
+<fullyQualifiedTypeName name="com.example.ithonge.utils.Variables"/>
+<fullyQualifiedTypeName name="com.paditech.atgt.R"/>
+<fullyQualifiedTypeName name="com.paditech.atgt.models.TableViolation"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="android.util.JsonReader"/>
+<fullyQualifiedTypeName name="org.json.JSONArray"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="java.sql.SQLClientInfoException"/>
+<fullyQualifiedTypeName name="com.paditech.atgt.utils.Variables"/>
 </qualifiedTypeNameHistroy>
