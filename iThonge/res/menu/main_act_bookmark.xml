@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-<item
+
+    <item
         android:id="@+id/action_bookmark"
         android:icon="@drawable/ico_bookmark"
         android:showAsAction="always"
         android:title="@string/bookmark_title"/>
+    <item
+        android:id="@+id/action_fb_share"
+        android:icon="@drawable/btn_fb_share"
+        android:showAsAction="always"
+        android:title="@string/no_title"/>
+    
+    <item
+        android:id="@+id/action_twitter_share"
+        android:icon="@drawable/btn_twitter_share"
+        android:showAsAction="always"
+        android:title="@string/no_title"/>
 
 </menu>

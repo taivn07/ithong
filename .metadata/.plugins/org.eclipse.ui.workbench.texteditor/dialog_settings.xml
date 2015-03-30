@@ -6,30 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="AdTit" key="selection"/>
+		<item value="mSearchView" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="AdTit"/>
-			<item value="txtAdT"/>
-			<item value="AdTitle"/>
-			<item value="AdTitle1"/>
-			<item value="MEDIA_ID"/>
-			<item value="tvResultCount"/>
-			<item value="mListSOResultAdapter"/>
-			<item value="mListResult"/>
+			<item value="mSearchView"/>
+			<item value="getKeywordTableNumRow"/>
+			<item value="Name"/>
+			<item value="&lt;div&gt;"/>
+			<item value="LawID"/>
+			<item value="NameEN"/>
+			<item value="NameEn"/>
+			<item value="lv_list_hvlq"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Fines"/>
+			<item value="Bookmark_ID"/>
+			<item value="LawID"/>
+			<item value=""/>
 			<item value="FULL_MEDIA_ID"/>
 			<item value="tvSOResultCount"/>
 			<item value="mListSOAdapter"/>
 			<item value="mListSOResult"/>
-			<item value=""/>
-			<item value="TAG_VIOLATION"/>
-			<item value="private String "/>
-			<item value="private String"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

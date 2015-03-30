@@ -24,6 +24,7 @@
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="darkred" type="color">#FFCC0000</item>
     <item name="white" type="color">#FFFFFF</item>
+     <item name="white2" type="color">#FFFFF2</item>
     <item name="black" type="color">#000000</item>
 
 </resources>
