@@ -1,7 +1,5 @@
 package com.example.ithonge.activity;
 
-import jp.co.imobile.sdkads.android.ImobileIconParams;
-import jp.co.imobile.sdkads.android.ImobileSdkAd;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -18,7 +16,6 @@ import android.widget.GridView;
 
 import com.example.ithonge.R;
 import com.example.ithonge.adapter.CustomGridViewAdapter;
-import com.example.ithonge.utils.SpotParams;
 import com.example.ithonge.utils.Utils;
 import com.example.ithonge.utils.Variables;
 
